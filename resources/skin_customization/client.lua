@@ -235,8 +235,8 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     if (IsNearStore() == true) then
-      drawTxt('Appuyer sur ~g~F2~s~ pour accéder au magasin',0,1,0.5,0.8,0.6,255,255,255,255)
-    if (IsControlJustPressed(1, 289) and IsNearStore() == true) then
+      drawTxt('Appuyer sur ~g~F5~s~ pour accéder au magasin',0,1,0.5,0.8,0.6,255,255,255,255)
+    if (IsControlJustPressed(1, 166) and IsNearStore() == true) then
       InitMenu()
       Menu.hidden = not Menu.hidden 
     end
