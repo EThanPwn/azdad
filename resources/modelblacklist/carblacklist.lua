@@ -15,10 +15,10 @@ Citizen.CreateThread(function()
 
 		playerPed = GetPlayerPed(-1)
 		if playerPed then
-			playerCar = GetVehiclePedIsIn(playerPed, true)
+			playerCar = GetVehiclePedIsIn(playerPed, false)
 			if playerCar then
 				playerCarModel = GetEntityModel(playerCar)
-				playerCarName = GetDisplayNameFromVehicleModel(playerCarModel)
+				playerCarName = GetDisplayNameFromVehicleModel(playerCar)
 
 				if isCarBlacklisted(playerCarName) then
 					_DeleteEntity(playerCar)
