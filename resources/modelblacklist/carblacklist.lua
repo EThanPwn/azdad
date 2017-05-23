@@ -7,7 +7,7 @@ carblacklist = {
 	"BARRACKS"
 }
 
--- CODE --
+-- CODE ---
 
 Citizen.CreateThread(function()
 	while true do
@@ -20,7 +20,7 @@ Citizen.CreateThread(function()
 				playerCarModel = GetEntityModel(playerCar)
 				playerCarName = GetDisplayNameFromVehicleModel(playerCarModel)
 
-				if isCarBlacklisted(playerCarName) then
+				if isCarBlacklisted(playerCar) then
 					_DeleteEntity(playerCar)
 					sendForbiddenMessage("This vehicle is blacklisted!")
 				end
@@ -29,9 +29,9 @@ Citizen.CreateThread(function()
 	end
 end)
 
-function isCarBlacklisted(name)
+function isCarBlacklisted(model)
 	for _, blacklistedCar in pairs(carblacklist) do
-		if string.upper(name) == blacklistedCar then
+		if string.upper(model) == blacklistedCar then
 			return true
 		end
 	end
