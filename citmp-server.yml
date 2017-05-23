@@ -13,7 +13,7 @@ AutoStartResources:
     - hardcap # prevents too many players from joining
     - scoreboard
     - es_carshop
-    - es_customization
+    - skin_customization #es_customization
     - es_jobs
     - es_miscstores
     - msq-directions-hud  # boussole compas
