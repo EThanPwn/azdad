@@ -1,5 +1,5 @@
 require "resources/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202")
 
 RegisterServerEvent("item:getItems")
 RegisterServerEvent("item:updateQuantity")
