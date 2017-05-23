@@ -3,7 +3,8 @@
 -- Blacklisted vehicle models
 carblacklist = {
 	"RHINO",
-	"CRUSADER"
+	"CRUSADER",
+	"BARRACKS"
 }
 
 -- CODE --
@@ -14,8 +15,7 @@ Citizen.CreateThread(function()
 
 		playerPed = GetPlayerPed(-1)
 		if playerPed then
-			playerCar = GetVehiclePedIsIn(playerPed, false)
-			playerCar = GetVehiclePedIsTryingToEnter(playerPed, false)
+			playerCar = GetVehiclePedIsIn(playerPed, true)
 			if playerCar then
 				playerCarModel = GetEntityModel(playerCar)
 				playerCarName = GetDisplayNameFromVehicleModel(playerCarModel)
