@@ -20,10 +20,10 @@ end)
 AddEventHandler('playerConnecting', function(name, setReason)
   print('Connecting: ' .. name)
 
-  if playerCount >= 30 then
+  if playerCount >= 24 then
     print('Full. :(')
 
-    setReason('Le serveur est plein.')
+    setReason('This server is full (past 24 players).')
     CancelEvent()
   end
 end)

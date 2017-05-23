@@ -1,3 +1,3 @@
-resource_type 'map' { gameTypes = { es_roleplay = true } }
+resource_type 'map' { gameTypes = { fivem = true } }
 
 map 'map.lua'
