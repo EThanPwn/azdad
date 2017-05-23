@@ -14,11 +14,52 @@ local isSpawnedInHospitalOnDeath = true
 RegisterNetEvent("skin_customization:Customization")
 RegisterNetEvent("skin_customization:OnDeath")
 
+
+local changeYourSkin = {
+  {name="magasin", colour=15, id=73, x=1864.44, y=3747.34, z=33.0318},
+  {name="magasin", colour=15, id=73, x=1693.26, y=4822.27, z=42.0630},
+  {name="magasin", colour=15, id=73, x=125.83, y=-223.16, z=54.5578},
+  {name="magasin", colour=15, id=73, x=-710.16, y=-153.26, z=37.4151},
+  {name="magasin", colour=15, id=73, x=-821.69, y=-1073.90, z=11.3280},
+  {name="magasin", colour=15, id=73, x=-1192.81, y=-768.24, z=17.3193},
+  {name="magasin", colour=15, id=73, x=4.25, y=6512.88, z=31.8778},
+}
+
+
+
+function IsNearStore()
+  local ply = GetPlayerPed(-1)
+  local plyCoords = GetEntityCoords(ply, 0)
+  for _, item in pairs(changeYourSkin) do
+    local distance = GetDistanceBetweenCoords(item.x, item.y, item.z,  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
+    if(distance <= 5) then
+      return true
+    end
+  end
+end
+
+
+
 function InitMenu()
 	ClearMenu()
 	Menu.addTitle("Choisissez un skin");
    	Menu.addButton(skins[2].display, "SendSkin", skins[2].name);
 	--Menu.addButton(skins[1].display, "SendSkin", skins[1].name);
+end
+
+function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(scale, scale)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  SetTextCentre(centre)
+  SetTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawText(x , y)
 end
 
 function SendSkin(skin)
@@ -34,7 +75,7 @@ end
 
 AddEventHandler("skin_customization:Customization",function(skin)
     ChangeSkin(skin,nil)
-	Notify("Skin chargé")
+	--Notify("Skin chargé")
 	InitDrawMenu()
 end)
 
@@ -66,6 +107,22 @@ function InitDrawMenu()
 	Menu.addButton("T-shirt","DrawableChoice",{8,0})
 	Menu.addButton("Pantalon","DrawableChoice",{4,0})
 	Menu.addButton("Chaussures","DrawableChoice",{6,0})
+end
+
+
+function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(scale, scale)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  SetTextCentre(centre)
+  SetTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawText(x , y)
 end
 
 function DrawableChoice(args)
@@ -161,13 +218,29 @@ function ChangeSkin(skin,components)
 	SetModelAsNoLongerNeeded(modelhashed)
 end
 
+
 Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		if IsControlJustPressed(1, 289) then -- INPUT_CELLPHONE_DOWN
-			InitMenu()                       
-			Menu.hidden = not Menu.hidden    
-		end
-		Menu.renderGUI()
-	end
+    for _, item in pairs(changeYourSkin) do
+      item.blip = AddBlipForCoord(item.x, item.y, item.z)
+      SetBlipSprite(item.blip, item.id)
+      SetBlipAsShortRange(item.blip, true)
+      BeginTextCommandSetBlipName("STRING")
+      AddTextComponentString(item.name)
+      EndTextCommandSetBlipName(item.blip)
+    end
+end)
+
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if (IsNearStore() == true) then
+      drawTxt('Appuyer sur ~g~F2~s~ pour accéder au magasin',0,1,0.5,0.8,0.6,255,255,255,255)
+    if (IsControlJustPressed(1, 289) and IsNearStore() == true) then
+      InitMenu()
+      Menu.hidden = not Menu.hidden 
+    end
+  end
+    Menu.renderGUI()
+  end
 end)

@@ -1,5 +1,6 @@
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "fivem", "")
+﻿require "resources/essentialmode/lib/MySQL"
+-- copy of essentialmode
+MySQL:open("127.0.0.1", "gta5_script_customization", "root", "1202")
 
 outfits = {"face","","hair","","pants","","shoes","","shirt","","","torso"}
 
