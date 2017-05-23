@@ -15,6 +15,7 @@ Citizen.CreateThread(function()
 		playerPed = GetPlayerPed(-1)
 		if playerPed then
 			playerCar = GetVehiclePedIsIn(playerPed, false)
+			playerCar = GetVehiclePedIsTryingToEnter(playerPed, false)
 			if playerCar then
 				playerCarModel = GetEntityModel(playerCar)
 				playerCarName = GetDisplayNameFromVehicleModel(playerCarModel)
