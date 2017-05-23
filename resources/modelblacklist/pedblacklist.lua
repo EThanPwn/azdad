@@ -2,7 +2,8 @@
 
 -- Blacklisted ped models
 pedblacklist = {
-	"CSB_BallasOG"
+	"CSB_BallasOG",
+	"s_m_y_cop_01"
 }
 
 -- Defaults to this ped model if an error happened
