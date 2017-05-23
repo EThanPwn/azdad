@@ -34,7 +34,7 @@ end
 
 AddEventHandler("skin_customization:Customization",function(skin)
     ChangeSkin(skin,nil)
-	--Notify("Skin chargé")
+	Notify("Skin chargé")
 	InitDrawMenu()
 end)
 
