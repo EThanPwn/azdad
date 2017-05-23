@@ -44,7 +44,7 @@ function InitMenu()
 	ClearMenu()
 	Menu.addTitle("Choisissez un skin");
    	Menu.addButton(skins[2].display, "SendSkin", skins[2].name);
-	Menu.addButton(skins[1].display, "SendSkin", skins[1].name);
+--	Menu.addButton(skins[1].display, "SendSkin", skins[1].name);
 end
 
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
