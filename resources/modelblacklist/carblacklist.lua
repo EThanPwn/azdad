@@ -2,7 +2,8 @@
 
 -- Blacklisted vehicle models
 carblacklist = {
-	"RHINO"
+	"RHINO",
+	"CRUSADER"
 }
 
 -- CODE --
