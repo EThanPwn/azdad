@@ -1,4 +1,4 @@
-ListenPort: 30121
+ListenPort: 30122
 
 PreParseResources:
     - mapmanager
@@ -63,6 +63,7 @@ AutoStartResources:
     - watermark #nom serveur
     - nocops
     - modelblacklist
+    - personnal_menu
     
     
     
@@ -72,7 +73,7 @@ AutoStartResources:
 RconPassword: Labite2
 
 # configure this, please
-Hostname: cdvk test 1
+Hostname: cdvk test ethan
 
 # don't change this, it'll cause your server to be unlisted
 Game: GTA5
