@@ -1,6 +1,6 @@
 local policeveh = {
 	opened = false,
-	title = "Garage de police",
+	title = "Garage de la police",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,
@@ -20,11 +20,11 @@ local policeveh = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				{name = "Peugeot Banalisée", costs = 0, description = {}, model = "fbi"},
-				{name = "Ford Cruiser", costs = 0, description = {}, model = "police3"},
-				{name = "Mitsubishi Lancer", costs = 0, description = {}, model = "police2"},
-				{name = "BMW Patrouille", costs = 0, description = {}, model = "police"},
-				{name = "BMW Police", costs = 0, description = {}, model = "jones1"},
+				--{name = "Peugeot Banalisée", costs = 0, description = {}, model = "fbi"},
+				{name = "Patrouille 1", costs = 0, description = {}, model = "police3"},
+				{name = "Patrouille 2", costs = 0, description = {}, model = "police2"},
+				{name = "Patrouille 3", costs = 0, description = {}, model = "police"},
+				{name = "Voiture banalisée", costs = 0, description = {}, model = "police4"},
 				{name = "Moto de police", costs = 0, description = {}, model = "policeb"},			
 			}
 		},
