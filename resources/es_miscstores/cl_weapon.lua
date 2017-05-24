@@ -29,12 +29,12 @@ local weapons = {}
 RegisterNetEvent('es_roleplay:giveWeapon')
 AddEventHandler('es_roleplay:giveWeapon', function(v)
 	GiveDelayedWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 0, false)
-
 	table.insert(weapons, v)
 end)
 
 RegisterNetEvent('es_roleplay:giveAmmo')
 AddEventHandler('es_roleplay:giveAmmo', function(v, numAmmo)
+	Citizen.Trace("Add ammo: " .. v .. "\n")
 	AddAmmoToPed(GetPlayerPed(-1), GetHashKey(v), numAmmo) 
 end)
 
