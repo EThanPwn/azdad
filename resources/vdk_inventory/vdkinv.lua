@@ -110,24 +110,24 @@ function ItemMenu(itemId)
     MenuTitle = "Details:"
     ClearMenu()
     Menu.addButton("Supprimer 1", "delete", { itemId, 1 })
-    Menu.addButton("Ajouter 1", "add", { itemId, 1 })
+    --Menu.addButton("Ajouter 1", "add", { itemId, 1 })
 end
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        if IsControlJustPressed(1, 311) then
-            InventoryMenu() -- Menu to draw
-            Menu.hidden = not Menu.hidden -- Hide/Show the menu
-        end
-        Menu.renderGUI() -- Draw menu on each tick if Menu.hidden = false
-        if IsEntityDead(PlayerPedId()) then
-            PlayerIsDead()
+--Citizen.CreateThread(function()
+  --  while true do
+    --    Citizen.Wait(0)
+      --  if IsControlJustPressed(1, 311) then
+        --    InventoryMenu() -- Menu to draw
+          --  Menu.hidden = not Menu.hidden -- Hide/Show the menu
+        --end
+        --Menu.renderGUI() -- Draw menu on each tick if Menu.hidden = false
+        --if IsEntityDead(PlayerPedId()) then
+            --PlayerIsDead()
             -- prevent the death check from overloading the server
-            playerdead = true
-        end
-    end
-end)
+            --playerdead = true
+        --end
+    --end
+--end)
 
 function PlayerIsDead()
     -- do not run if already ran

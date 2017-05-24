@@ -1,4 +1,4 @@
-ListenPort: 30120  
+ListenPort: 30122
 
 PreParseResources:
     - mapmanager
@@ -12,7 +12,7 @@ AutoStartResources:
     - rconlog
     - hardcap # prevents too many players from joining
     - scoreboard
-    #- es_carshop
+    - es_carshop
     - skin_customization #es_customization
     - es_jobs
     - es_miscstores
@@ -63,7 +63,7 @@ AutoStartResources:
     - watermark #nom serveur
     - nocops
     - modelblacklist
-    - vehshop
+    - personnal_menu
     
     
     
@@ -73,7 +73,7 @@ AutoStartResources:
 RconPassword: Labite2
 
 # configure this, please
-Hostname: cdvk test 1
+Hostname: cdvk test ethan
 
 # don't change this, it'll cause your server to be unlisted
 Game: GTA5
@@ -94,4 +94,4 @@ DisableAuth: false
 DisableScriptHook: false
 
 # set to the path of an icon to use in the server browser. it should be square.
-ServerIcon: hello.png
+#ServerIcon: hello.png

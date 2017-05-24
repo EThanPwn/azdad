@@ -20,7 +20,6 @@ Citizen.CreateThread(function()
 
 				if isCarBlacklisted(playerCarName) then
 					_DeleteEntity(playerCar)
-					SetEntityHealth(GetPlayerPed(-1), 0)
 					sendForbiddenMessage("This vehicle is blacklisted!")
 				end
 			end
