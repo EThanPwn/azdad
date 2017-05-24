@@ -12,7 +12,7 @@ AutoStartResources:
     - rconlog
     - hardcap # prevents too many players from joining
     - scoreboard
-    - es_carshop
+    #- es_carshop
     - skin_customization #es_customization
     - es_jobs
     - es_miscstores
@@ -63,6 +63,7 @@ AutoStartResources:
     - watermark #nom serveur
     - nocops
     - modelblacklist
+    - vehshop
     
     
     
