@@ -1,14 +1,13 @@
 uSettings = {}
 
 -- Change this to the salary you want civilians to have.
-uSettings.baseSalary = 100
+uSettings.baseSalary = 0
 
 -- At what interval do you want to give salaries, (minutes and type -1 for no salary.)
-uSettings.salaryInterval = 20
+uSettings.salaryInterval = 15
 
 -- How much money do you want people to start with
-uSettings.startingMoney = 2000
-
+uSettings.startingMoney = 250
 -- Do you want pvp enabled
 uSettings.pvpEnabled = true
 
