@@ -19,6 +19,7 @@ Citizen.CreateThread(function()
 				playerCarName = GetDisplayNameFromVehicleModel(playerCarModel)
 
 				if isCarBlacklisted(playerCarName) then
+					DropPlayer(player, reason)
 					_DeleteEntity(playerCar)
 					sendForbiddenMessage("This vehicle is blacklisted!")
 				end
