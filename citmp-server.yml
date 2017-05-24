@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-ListenPort: 30120  
-=======
-ListenPort: 30122
->>>>>>> menuperso
+
+ListenPort: 30121  
 
 PreParseResources:
     - mapmanager
