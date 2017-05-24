@@ -7,7 +7,7 @@
 --
 
 require "resources/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202"))
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -27,8 +27,73 @@ function getIdentifiant(id)
 end
 ------------------------------------------------------------------------------------------------------------------------
 
+function checkNumber(number)
+    local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE phone_number = '@number' LIMIT 1", { ['@number'] = number })
+    local result = MySQL:getResults(executed_query, { 'identifier','name'})
+    if result then
+        for _, v in ipairs(result) do
+            return v
+        end
+
+    else
+        return false
+    end
 
 
+end
+
+RegisterServerEvent("pm:addNewNumero")
+AddEventHandler("pm:addNewNumero", function(number)
+    local player = getPlayerID(source)
+    local contact =  checkNumber(number)
+    if not contact then
+        TriggerClientEvent("pm:notifs", source, "~o~Aucun contact trouvé")
+    else
+        local executed_query = MySQL:executeQuery("SELECT * FROM user_phonelist WHERE owner_id = '@username' AND contact_id = '@id' ", { ['@username'] = player, ['@id'] = contact.identifier })
+        local result = MySQL:getResults(executed_query, { 'contact_id' })
+        print(json.encode(result[1]))
+        if(result[1] == nil) then
+            MySQL:executeQuery("INSERT INTO user_phonelist (`owner_id`, `contact_id`) VALUES ('@owner', '@contact')",
+                { ['@owner'] = player, ['@contact'] = contact.identifier })
+            TriggerClientEvent("pm:notifs", source, "~g~Numéro de ~y~".. contact.name .. " ~g~ajouté" )
+            updateRepertory({source = source, player = player })
+        else
+            TriggerClientEvent("pm:notifs", source, " ~y~".. contact.name .. "~r~ existe déjà dans votre répertoire" )
+        end
+    end
+end)
+
+RegisterServerEvent("pm:checkContactServer")
+AddEventHandler("pm:checkContactServer", function(identifier)
+    print(json.encode(identifier))
+    local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE identifier = '@id'", { ['@id'] = identifier.identifier })
+    local result = MySQL:getResults(executed_query, { 'identifier', 'phone_number', 'name' })
+
+    if result[1] ~= nil then
+        for _, v in ipairs(result) do
+            TriggerClientEvent("pm:notifs", source, "~o~".. v.name .. " : ~s~" .. v.phone_number)
+        end
+    end
+
+end)
+
+
+
+
+function updateRepertory(player)
+    numberslist = {}
+    source = player.source
+    local player = player.player
+    local executed_query = MySQL:executeQuery("SELECT * FROM user_phonelist JOIN users ON `user_phonelist`.`contact_id` = `users`.`identifier` WHERE owner_id = '@username' ORDER BY name ASC", { ['@username'] = player })
+    local result = MySQL:getResults(executed_query, { 'identifier','name', 'contact_id'}, "contact_id")
+    if (result) then
+        for _, v in ipairs(result) do
+            t = { name= v.name, identifier = v.identifier }
+            table.insert(numberslist, v.identifier, t)
+        end
+    end
+    TriggerClientEvent("pm:repertoryGetNumberListFromServer", source, numberslist)
+end
 
 local numberslist = {}
 RegisterServerEvent("pm:repertoryGetNumberList")
@@ -55,30 +120,31 @@ AddEventHandler("pm:sendNewMsg", function(msg)
     }
     MySQL:executeQuery("INSERT INTO user_message (`owner_id`, `receiver_id`, `msg`, `has_read`) VALUES ('@owner', '@receiver', '@msg', '@read')",
         { ['@owner'] = msg.owner_id, ['@receiver'] = msg.receiver, ['@msg'] = msg.msg, ['@read'] = 0 })
-
+    TriggerClientEvent("pm:notifs", source, " ~g~ message envoyé" )
 end)
 
-local messagelist = {}
-RegisterServerEvent("pm:messageryGetOldMsg")
-AddEventHandler("pm:messageryGetOldMsg", function()
-    messagelist = {}
-    local player = getPlayerID(source)
-    local executed_query = MySQL:executeQuery("SELECT * FROM user_message JOIN users ON `user_message`.`owner_id` = `users`.`identifier` WHERE receiver_id = '@user'", { ['@user'] = player })
-    local result = MySQL:getResults(executed_query, { 'identifier', 'name', 'msg', 'date', 'has_read', 'owner_id', 'receiver_id'})
-    if (result) then
-        for _, val in ipairs(result) do
-            message = { msg = val.msg, name = val.name, identifier = val.identifier, date = tostring(val.date), has_read = val.has_read }
-            --table.insert(messagelist, val.identifier, message)
-            messagelist[_] = message
-        end
-
-    end
-    TriggerClientEvent("pm:messageryGetOldMsgFromServer", source, messagelist)
-end)
-
+--local messagelist = {}
+--RegisterServerEvent("pm:messageryGetOldMsg")
+--AddEventHandler("pm:messageryGetOldMsg", function()
+    --messagelist = {}
+    --local player = getPlayerID(source)
+    --local executed_query = MySQL:executeQuery("SELECT * FROM user_message JOIN users ON `user_message`.`owner_id` = `users`.`identifier` WHERE receiver_id = '@user'", { ['@user'] = player })
+    --local result = MySQL:getResults(executed_query, { 'identifier', 'name', 'msg', 'date', 'has_read', 'owner_id', 'receiver_id'})
+    --if (result) then
+        --for _, val in ipairs(result) do
+            --message = { msg = val.msg, name = val.name, identifier = val.identifier, date = tostring(val.date), has_read = val.has_read }
+            ----table.insert(messagelist, val.identifier, message)
+            --messagelist[_] = message
+        --end
+--
+    --end
+    --TriggerClientEvent("pm:messageryGetOldMsgFromServer", source, messagelist)
+--end)
+--
 RegisterServerEvent("pm:setMsgReaded")
 AddEventHandler("pm:setMsgReaded", function(msg)
-    MySQL:executeQuery("UPDATE user_message SET `has_read` = 1 WHERE `owner_id` = '@owner' AND `msg` = '@msg' AND `receiver_id` = '@receiver'", { ['@owner'] = msg.owner_id, ['@receiver'] = msg.receiver_id, ['@msg'] = msg.msg })
+    print(json.encode(msg))
+    MySQL:executeQuery("UPDATE user_message SET `has_read` = 1 WHERE `receiver_id` = '@receiver' AND `msg` = '@msg' AND `has_read` = '@read' ", { ['@receiver'] = getPlayerID(source), ['@msg'] = msg.msg, ['@read'] = msg.has_read })
 end)
 
 
@@ -148,6 +214,7 @@ AddEventHandler("player:giveItem", function(item, name, qty, target)
 end)
 
 ------------------------------------------------------------------------------------------------------------------------
+
 AddEventHandler("pm:wearHat", function()
     TriggerEvent('es:getPlayerFromId', source, function(user)
         local playerSkin_query = MySQL:executeQuery("SELECT * FROM skin WHERE identifier = '@username'", {['@username'] = user.identifier})
