@@ -77,12 +77,6 @@ TriggerEvent('es:addCommand', 'discord', function(source, args, user)
 	TriggerClientEvent("chatMessage", source, "Discord", {255, 0, 0}, "https://discord.gg/Hq6tWdu")
 end)
 
--- Default commands
-TriggerEvent('es:addAdminCommand', 'delveh', 3, function(source, args, user)
-	TriggerClientEvent("es_roleplay:deleteVehicle", source)
-end, function(source, args, user)
-
-end)
 
 -- Default commands
 TriggerEvent('es:addCommand', 'pay', function(source, args, user)
