@@ -14,7 +14,7 @@ end
 
 -- /help général
 TriggerEvent('es:addCommand', 'help', function(source, args, user)
-	TriggerClientEvent("chatMessage", source, "Aides générale", {255, 0, 0}, "^5/discord /forum ^1/report (message aux admins) ^0/help1 /help2")
+	TriggerClientEvent("chatMessage", source, "Aides générale", {255, 0, 0}, "^5/discord /forum ^0/help1 /help2 /help3")
 	TriggerClientEvent("chatMessage", source, "Métiers/Factions", {255, 0, 0}, "/metiers /sysmetiers /factions")
 	TriggerClientEvent("chatMessage", source, "Règles HRP du serveur", {255, 0, 0}, "^5/regles /metagame")
 end)
@@ -45,6 +45,7 @@ end)
 -- /help1
 TriggerEvent('es:addCommand', 'help1', function(source, args, user)
 	TriggerClientEvent("chatMessage", source, "Appeler la police", {255, 0, 0}, "^4/911 MESSAGE^0 pour signaler un crime")
+	TriggerClientEvent("chatMessage", source, "SMS", {255, 0, 0}, "^4/sms ID MESSAGE^0 pour envoyer un message privé")
 	TriggerClientEvent("chatMessage", source, "Roleplay (RP)", {255, 0, 0}, "^4/me ^0pour ^1signaler ^0une action -seule- RP par écrit")
 	TriggerClientEvent("chatMessage", source, ">", {255, 0, 0}, "^3Exemple: ^1/me ^0fouille dans son nez")
 end)
