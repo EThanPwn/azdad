@@ -1,5 +1,5 @@
 require "resources/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202")
 
 RegisterServerEvent('CheckMoneyForVeh')
 RegisterServerEvent('BuyForVeh')
@@ -18,24 +18,25 @@ AddEventHandler('CheckMoneyForVeh', function(name, vehicle, price)
       for _ in pairs(result) do
         count = count + 1
       end
-      if count == 5 then
-        TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
+	  if count == 10 then
+      -- if count == 5 then
+        TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
       else
         if (tonumber(user.money) >= tonumber(price)) then
           user:removeMoney((price))
           TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
+          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
         else
-          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
+          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
        end
       end
    else
       if (tonumber(user.money) >= tonumber(price)) then
         user:removeMoney((price))
         TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-        TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
+        TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
       else
-          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
+          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
       end 
     end
   end)
@@ -49,7 +50,7 @@ AddEventHandler('BuyForVeh', function(name, vehicle, price, plate, primarycolor,
     local price = price
     local vehicle = vehicle
     local plate = plate
-    local state = "Sortit"
+    local state = "Sorti"
     local primarycolor = primarycolor
     local secondarycolor = secondarycolor
     local pearlescentcolor = pearlescentcolor
