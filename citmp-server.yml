@@ -93,4 +93,4 @@ DisableAuth: false
 DisableScriptHook: false
 
 # set to the path of an icon to use in the server browser. it should be square.
-#ServerIcon: hello.png
+ServerIcon: hello.png
