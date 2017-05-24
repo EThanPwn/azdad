@@ -72,13 +72,13 @@ end
 
 
 function Menu.updateSelection()
-	if IsControlJustPressed(1, 175)  then -- INPUT_CELLPHONE_RIGHT
+	if IsControlJustPressed(1, 173)  then -- INPUT_CELLPHONE_RIGHT
 		if(Menu.selection < Menu.buttonCount -1  )then
 			Menu.selection = Menu.selection +1
 		else
 			Menu.selection = 0
 		end
-	elseif IsControlJustPressed(1, 174) then -- INPUT_CELLPHONE_LEFT
+	elseif IsControlJustPressed(1, 27) then -- INPUT_CELLPHONE_LEFT
 		if(Menu.selection > 0)then
 			Menu.selection = Menu.selection -1
 		else
