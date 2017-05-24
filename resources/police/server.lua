@@ -78,7 +78,7 @@ end)
 AddEventHandler('es:playerDropped', function(player)
 		local isCop = s_checkIsCop(player.identifier)
 		if(isCop ~= "nil") then
-			TriggerEvent("jobssystem:disconnectReset", player, 1)
+			TriggerEvent("jobssystem:disconnectReset", player, 2)
 		end
 end)
 
