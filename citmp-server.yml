@@ -15,7 +15,7 @@ AutoStartResources:
     - es_carshop
     - skin_customization #es_customization
     - es_jobs
-    - es_miscstores
+    - es_weashop #- es_miscstores
     - msq-directions-hud  # boussole compas
     - es_robberies
     - es_roleplay
