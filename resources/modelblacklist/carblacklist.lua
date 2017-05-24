@@ -2,9 +2,7 @@
 
 -- Blacklisted vehicle models
 carblacklist = {
-	"RHINO",
-	"CRUSADER",
-	"BARRACKS"
+	"RHINO"
 }
 
 -- CODE --
@@ -15,31 +13,24 @@ Citizen.CreateThread(function()
 
 		playerPed = GetPlayerPed(-1)
 		if playerPed then
-			checkCar(GetVehiclePedIsIn(playerPed, false))
+			playerCar = GetVehiclePedIsIn(playerPed, false)
+			if playerCar then
+				playerCarModel = GetEntityModel(playerCar)
+				playerCarName = GetDisplayNameFromVehicleModel(playerCarModel)
 
-			x, y, z = table.unpack(GetEntityCoords(playerPed, true))
-			for _, blacklistedCar in pairs(carblacklist) do
-				checkCar(GetClosestVehicle(x, y, z, 100.0, GetHashKey(blacklistedCar), 70))
+				if isCarBlacklisted(playerCarName) then
+					_DeleteEntity(playerCar)
+					SetEntityHealth(GetPlayerPed(-1), 0)
+					sendForbiddenMessage("This vehicle is blacklisted!")
+				end
 			end
 		end
 	end
 end)
 
-function checkCar(car)
-	if car then
-		carModel = GetEntityModel(car)
-		carName = GetDisplayNameFromVehicleModel(carModel)
-
-		if isCarBlacklisted(carModel) then
-			_DeleteEntity(car)
-			sendForbiddenMessage("This vehicle is blacklisted!")
-		end
-	end
-end
-
 function isCarBlacklisted(model)
 	for _, blacklistedCar in pairs(carblacklist) do
-		if model == GetHashKey(blacklistedCar) then
+		if string.upper(model) == blacklistedCar then
 			return true
 		end
 	end
