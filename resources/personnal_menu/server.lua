@@ -26,7 +26,7 @@ function getIdentifiant(id)
     end
 end
 ------------------------------------------------------------------------------------------------------------------------
-
+--[[
 function checkNumber(number)
     local executed_query = MySQL:executeQuery("SELECT * FROM users WHERE phone_number = '@number' LIMIT 1", { ['@number'] = number })
     local result = MySQL:getResults(executed_query, { 'identifier','name'})
@@ -147,7 +147,7 @@ AddEventHandler("pm:setMsgReaded", function(msg)
     MySQL:executeQuery("UPDATE user_message SET `has_read` = 1 WHERE `receiver_id` = '@receiver' AND `msg` = '@msg' AND `has_read` = '@read' ", { ['@receiver'] = getPlayerID(source), ['@msg'] = msg.msg, ['@read'] = msg.has_read })
 end)
 
-
+--]]
 ------------------------------------------------------------------------------------------------------------------------
 
 RegisterServerEvent("item:getItems")
