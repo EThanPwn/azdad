@@ -19,23 +19,23 @@ AddEventHandler('CheckMoneyForVeh', function(name, vehicle, price)
         count = count + 1
       end
       if count == 5 then
-        TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
+        TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
       else
         if (tonumber(user.money) >= tonumber(price)) then
           user:removeMoney((price))
           TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
+          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
         else
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
+          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
        end
       end
    else
       if (tonumber(user.money) >= tonumber(price)) then
         user:removeMoney((price))
         TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-        TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
+        TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
       else
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
+          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
       end 
     end
   end)
