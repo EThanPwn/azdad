@@ -3,7 +3,6 @@
 -- Blacklisted weapons
 weaponblacklist = {
 	"WEAPON_MINIGUN",
-	"WEAPON_STUNGUN"
 }
 
 -- Don't allow any weapons at all (overrides the blacklist)
