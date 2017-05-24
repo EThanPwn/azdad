@@ -82,7 +82,7 @@ end
 --end)
 
 -- Menu du téléphone
-
+--[[
 function phoneMenu()
     options.menu_subtitle = "Telephone"
     ClearMenu()
@@ -185,7 +185,7 @@ function takePhoto()
         TaskPlayAnim( PlayerPedId(), "cellphone@" , "cellphone_photo_idle" ,8.0, -8.0, -1, 0, 0, false, false, false )
     end
 end
-
+]]
 ------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
