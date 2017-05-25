@@ -65,7 +65,7 @@ local menupolice = {
 				{name = "$6000", description = ''},
 				{name = "$8000", description = ''},
 				{name = "$10000", description = ''},
-				{name = "$11000", description = ''},
+				--[[{name = "$11000", description = ''},
 				{name = "$15000", description = ''},
 				{name = "$25000", description = ''},
 				{name = "$30000", description = ''},
@@ -74,7 +74,7 @@ local menupolice = {
 				{name = "$45000", description = ''},
 				{name = "$50000", description = ''},
 				{name = "$60000", description = ''},
-				{name = "$80000", description = ''},
+				{name = "$80000", description = ''},]]
 			}
 		},
 	}
@@ -135,7 +135,7 @@ function ButtonSelectedPolice(button)
 			Fines(8000)
 		elseif btn == "$10000" then
 			Fines(10000)
-		elseif btn == "$11000" then
+		--[[elseif btn == "$11000" then
 			Fines(11000)
 		elseif btn == "$15000" then
 			Fines(15000)
@@ -154,7 +154,7 @@ function ButtonSelectedPolice(button)
 		elseif btn == "$60000" then
 			Fines(60000)
 		elseif btn == "$80000" then
-			Fines(80000)
+			Fines(80000)]]
 		end
 	end
 end
