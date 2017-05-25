@@ -36,9 +36,9 @@ end,function(source, args, user)
     TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Qu'est-ce que t'as essayé là ? SAGOUIN !")
 end)
 
--- Default commands
-TriggerEvent('es:addGroupCommand', 'delveh', 'mod', 3, function(source, args, user)
-	TriggerClientEvent("es_roleplay:deleteVehicle", source)
+-- delv
+TriggerEvent('es:addGroupCommand', 'akgb', 'mod', 3, function(source, args, user)
+	TriggerClientEvent( 'deleteVehicle', source )
 end, function(source, args, user)
 
 end)
