@@ -38,7 +38,7 @@ end)
 
 -- delv
 TriggerEvent('es:addGroupCommand', 'delv', 'mod', 3, function(source, args, user)
-	TriggerClientEvent("es_roleplay:deleteVehicle", source)
+	TriggerClientEvent( 'deleteVehicle', source )
 end, function(source, args, user)
 
 end)
