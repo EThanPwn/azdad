@@ -14,7 +14,7 @@ AutoStartResources:
     - hardcap # prevents too many players from joining
     - scoreboard
     #- es_carshop
-    - skin_customization #es_customization
+    #- skin_customization #es_customization
     - es_jobs
     - es_weashop #- es_miscstores
     - msq-directions-hud  # boussole compas
@@ -69,9 +69,11 @@ AutoStartResources:
     - garages
     - indicators
     - divers
-    - gb_foodshops
-    - gb_needs
+    #- gb_foodshops
+    #- gb_needs
     - lscustoms
+    #- es_weaponstore
+    - clothingshop
     
     
 
