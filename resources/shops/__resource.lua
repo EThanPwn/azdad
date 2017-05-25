@@ -1,8 +1,9 @@
+
 client_script {
 	"keysControl.lua"
-	"menuClass.lua"
-	"menuc.lua"
-	"menub.lua"
+	"lib/menuClass.lua"
+	"clothes/menu.lua"
+	"barbers/menu.lua"
 }
 
 server_script {
