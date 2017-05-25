@@ -65,7 +65,8 @@ AutoStartResources:
     - nocops
     - modelblacklist
     - personnal_menu
-    
+    - vehshop
+    - garages
     
     
 
