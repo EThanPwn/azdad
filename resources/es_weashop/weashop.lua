@@ -156,7 +156,7 @@ local weashop = {
 
 local fakeWeapon = ''
 local weashop_locations = {
-{entering = {1693.609,3757.787,34.705}, inside = {1697.609,3752.787,34.705}, outside = {1693.609,3757.787,34.705}},
+{entering = {251.904,-48.181,69.941}, inside = {247.904,-53.181,69.941}, outside = {251.904,-48.181,69.941}},
 }
 
 local weashop_blips ={}
