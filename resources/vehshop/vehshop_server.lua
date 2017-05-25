@@ -2,60 +2,83 @@ require "resources/essentialmode/lib/MySQL"
 MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202")
 
 RegisterServerEvent('CheckMoneyForVeh')
-RegisterServerEvent('BuyForVeh')
-
-AddEventHandler('CheckMoneyForVeh', function(name, vehicle, price)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-    local player = user.identifier
-    local vehicle = vehicle
-    local name = name
-    local price = tonumber(price)
-    local executed_query = MySQL:executeQuery("SELECT * FROM user_vehicle WHERE identifier = '@username'",{['@username'] = player})
-    local result = MySQL:getResults(executed_query, {'vehicle_model'})
-
-    if (result) then
-      count = 0
-      for _ in pairs(result) do
-        count = count + 1
-      end
-      if count == 5 then
-        TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Garage plein!\n")
-      else
-        if (tonumber(user.money) >= tonumber(price)) then
-          user:removeMoney((price))
-          TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
-        else
-          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
-       end
-      end
-   else
-      if (tonumber(user.money) >= tonumber(price)) then
-        user:removeMoney((price))
-        TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-        TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
-      else
-          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
-      end 
-    end
-  end)
+AddEventHandler('CheckMoneyForVeh', function(vehicle,price)
+	if (tonumber(Users[GetPlayerName(source)]['money']) >= tonumber(price)) then
+		if(Users[GetPlayerName(source)]['personalvehicle'] == nil or Users[GetPlayerName(source)]['personalvehicle'] == "")then
+			Users[GetPlayerName(source)]['money'] = Users[GetPlayerName(source)]['money'] - price
+			saveMoney(source)
+			Users[GetPlayerName(source)]['personalvehicle'] = vehicle
+			Users[GetPlayerName(source)]['pv_price'] = price
+			savePersonalVehicle(source)
+			TriggerClientEvent('FinishMoneyCheckForVeh',source)
+			TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1You just bought the vehicle for ^2??"..price)
+		else
+			TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1Please sell your current vehicle first using: /pv sell")
+		end
+	else
+		TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1You do not have enough money to buy this. You need: ^2??"..price)
+	end
 end)
 
-AddEventHandler('BuyForVeh', function(name, vehicle, price, plate, primarycolor, secondarycolor, pearlescentcolor, wheelcolor)
-  TriggerEvent('es:getPlayerFromId', source, function(user)
-
-    local player = user.identifier
-    local name = name
-    local price = price
-    local vehicle = vehicle
-    local plate = plate
-    local state = "Sortit"
-    local primarycolor = primarycolor
-    local secondarycolor = secondarycolor
-    local pearlescentcolor = pearlescentcolor
-    local wheelcolor = wheelcolor
-    local executed_query = MySQL:executeQuery("INSERT INTO user_vehicle (`identifier`, `vehicle_name`, `vehicle_model`, `vehicle_price`, `vehicle_plate`, `vehicle_state`, `vehicle_colorprimary`, `vehicle_colorsecondary`, `vehicle_pearlescentcolor`, `vehicle_wheelcolor`) VALUES ('@username', '@name', '@vehicle', '@price', '@plate', '@state', '@primarycolor', '@secondarycolor', '@pearlescentcolor', '@wheelcolor')",
-    {['@username'] = player, ['@name'] = name, ['@vehicle'] = vehicle, ['@price'] = price, ['@plate'] = plate, ['@state'] = state, ['@primarycolor'] = primarycolor, ['@secondarycolor'] = secondarycolor, ['@pearlescentcolor'] = pearlescentcolor, ['@wheelcolor'] = wheelcolor})
-
-  end)
-end)
+function personalVehicleChatCommands(source, command)
+	if(command[1] == "/pv") then	
+		if(command[2] ~= nil)then			
+			if(command[2] == "customize")then
+				if(command[3] == nil)then
+					TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1Available options")
+					TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "color [Red] [Green] [Blue]")
+					TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "upgrade")
+				else
+					if(Users[GetPlayerName(source)]['personalvehicle'] ~= nil or Users[GetPlayerName(source)]['personalvehicle'] ~= "")then
+						if(command[3] == "upgrade")then
+							TriggerClientEvent("upgradePlayerVehicle", source)
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^2Upgraded personal vehicle.")
+						elseif(command[3] == "color")then
+							TriggerClientEvent("personalVehicleColor", source, command[4], command[5], command[6])
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^2Set personal vehicle colour succesfully.")
+						elseif(command[3] == "colorp")then
+							TriggerClientEvent("personalVehicleColorPrimary", source, command[4], command[5], command[6])
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^2Set personal vehicle colour primary succesfully.")
+						elseif(command[3] == "colors")then
+							TriggerClientEvent("personalVehicleColorSecondary", source, command[4], command[5], command[6])
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^2Set personal vehicle colour secondary succesfully.")
+						elseif(command[3] == "fix")then
+							TriggerClientEvent("fixPersonalVehicle", source)
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^2Fixed personal vehicle succesfully.")
+						else
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1Available options")
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "color [Red] [Green] [Blue]")
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "upgrade")
+							TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "fix")
+						end
+					else
+					TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1You currently do not have a personal vehicle.")
+					end
+				end
+			elseif(command[2] == "sell")then
+				if(Users[GetPlayerName(source)]['personalvehicle'] ~= nil or Users[GetPlayerName(source)]['personalvehicle'] ~= "")then
+					Users[GetPlayerName(source)]['money'] = Users[GetPlayerName(source)]['money'] + (tonumber(Users[GetPlayerName(source)]['pv_price'])/2)
+					saveMoney(source)
+					TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1You sold your vehicle for: ^2$"..(tonumber(Users[GetPlayerName(source)]['pv_price'])/2))
+					Users[GetPlayerName(source)]['personalvehicle'] = ""
+					Users[GetPlayerName(source)]['pv_price'] = 0
+					savePersonalVehicle(source)
+				else
+					TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1You currently do not have a personal vehicle.")
+				end
+			else
+				TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1Not a valid parameter these are valid: sell")
+			end
+			
+		else
+			if(Users[GetPlayerName(source)]['personalvehicle'] ~= nil)then
+				TriggerClientEvent("createCarAtPlayerPos", source, Users[GetPlayerName(source)]['personalvehicle'], true)
+				TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^2You spawned your personal vehicle! To customize: /pv customize")
+			else
+				TriggerClientEvent("chatMessage", source, '', { 0, 0x99, 255}, "^1You do not have a personal vehicle.")
+			end
+		end
+		
+		return true
+	end
+end

@@ -1,12 +1,3 @@
---[[Register]]--
-
-RegisterNetEvent('FinishMoneyCheckForVeh')
-RegisterNetEvent('vehshop:spawnVehicle')
-
-
-
---[[Local/Global]]--
-
 local vehshop = {
 	opened = false,
 	title = "Vehicle Shop",
@@ -25,18 +16,18 @@ local vehshop = {
 		to = 10,
 		scale = 0.4,
 		font = 0,
-		["main"] = {
-			title = "CATEGORIES",
+		["main"] = { 
+			title = "CATEGORIES", 
 			name = "main",
-			buttons = {
+			buttons = { 
 				{name = "Vehicles", description = ""},
 				{name = "Motorcycles", description = ""},
 			}
 		},
-		["vehicles"] = {
-			title = "VEHICLES",
+		["vehicles"] = { 
+			title = "VEHICLES", 
 			name = "vehicles",
-			buttons = {
+			buttons = { 
 				{name = "Compacts", description = ''},
 				{name = "Coupes", description = ''},
 				{name = "Sedans", description = ''},
@@ -50,10 +41,10 @@ local vehshop = {
 				{name = "Cycles", description = ''},
 			}
 		},
-		["compacts"] = {
-			title = "compacts",
+		["compacts"] = { 
+			title = "compacts", 
 			name = "compacts",
-			buttons = {
+			buttons = { 
 				{name = "Blista", costs = 15000, description = {}, model = "blista"},
 				{name = "Brioso R/A", costs = 155000, description = {}, model = "brioso"},
 				{name = "Dilettante", costs = 25000, description = {}, model = "Dilettante"},
@@ -63,10 +54,10 @@ local vehshop = {
 				{name = "Rhapsody", costs = 120000, description = {}, model = "rhapsody"},
 			}
 		},
-		["coupes"] = {
-			title = "coupes",
+		["coupes"] = { 
+			title = "coupes", 
 			name = "coupes",
-			buttons = {
+			buttons = { 
 				{name = "Cognoscenti Cabrio", costs = 180000, description = {}, model = "cogcabrio"},
 				{name = "Exemplar", costs = 200000, description = {}, model = "exemplar"},
 				{name = "F620", costs = 80000, description = {}, model = "f620"},
@@ -83,10 +74,10 @@ local vehshop = {
 				{name = "Zion Cabrio", costs = 65000, description = {}, model = "zion2"},
 			}
 		},
-		["sports"] = {
-			title = "sports",
+		["sports"] = { 
+			title = "sports", 
 			name = "sports",
-			buttons = {
+			buttons = { 
 				{name = "9F", costs = 120000, description = {}, model = "ninef"},
 				{name = "9F Cabrio", costs = 130000, description = {}, model = "ninef2"},
 				{name = "Alpha", costs = 150000, description = {}, model = "alpha"},
@@ -119,10 +110,10 @@ local vehshop = {
 				{name = "Verkierer", costs = 695000, description = {}, model = "verlierer2"},
 			}
 		},
-		["sportsclassics"] = {
-			title = "sports classics",
+		["sportsclassics"] = { 
+			title = "sports classics", 
 			name = "sportsclassics",
-			buttons = {
+			buttons = { 
 				{name = "Casco", costs = 680000, description = {}, model = "casco"},
 				{name = "Coquette Classic", costs = 665000, description = {}, model = "coquette2"},
 				{name = "JB 700", costs = 350000, description = {}, model = "jb700"},
@@ -133,11 +124,11 @@ local vehshop = {
 				{name = "Z-Type", costs = 950000, description = {}, model = "ztype"},
 			}
 		},
-		["super"] = {
-			title = "super",
+		["super"] = { 
+			title = "super", 
 			name = "super",
-			buttons = {
-				{name = "BUGATTI VEYRON", costs = 1000000, description = {}, model = "adder"},
+			buttons = { 
+				{name = "Adder", costs = 1000000, description = {}, model = "adder"},
 				{name = "Banshee 900R", costs = 565000, description = {}, model = "banshee2"},
 				{name = "Bullet", costs = 155000, description = {}, model = "bullet"},
 				{name = "Cheetah", costs = 650000, description = {}, model = "cheetah"},
@@ -158,10 +149,10 @@ local vehshop = {
 				{name = "Zentorno", costs = 725000, description = {}, model = "zentorno"},
 			}
 		},
-		["muscle"] = {
-			title = "muscle",
+		["muscle"] = { 
+			title = "muscle", 
 			name = "muscle",
-			buttons = {
+			buttons = { 
 				{name = "Blade", costs = 160000, description = {}, model = "blade"},
 				{name = "Buccaneer", costs = 29000, description = {}, model = "buccaneer"},
 				{name = "Chino", costs = 225000, description = {}, model = "chino"},
@@ -179,10 +170,10 @@ local vehshop = {
 				{name = "Vigero", costs = 21000, description = {}, model = "vigero"},
 			}
 		},
-		["offroad"] = {
-			title = "off-road",
+		["offroad"] = { 
+			title = "off-road", 
 			name = "off-road",
-			buttons = {
+			buttons = { 
 				{name = "Bifta", costs = 75000, description = {}, model = "bifta"},
 				{name = "Blazer", costs = 8000, description = {}, model = "blazer"},
 				{name = "Brawler", costs = 715000, description = {}, model = "brawler"},
@@ -194,10 +185,10 @@ local vehshop = {
 				{name = "Trophy Truck", costs = 550000, description = {}, model = "trophytruck"},
 			}
 		},
-		["suvs"] = {
-			title = "suvs",
+		["suvs"] = { 
+			title = "suvs", 
 			name = "suvs",
-			buttons = {
+			buttons = { 
 				{name = "Baller", costs = 90000, description = {}, model = "baller"},
 				{name = "Cavalcade", costs = 60000, description = {}, model = "cavalcade"},
 				{name = "Grabger", costs = 35000, description = {}, model = "granger"},
@@ -209,10 +200,10 @@ local vehshop = {
 				{name = "XLS", costs = 253000, description = {}, model = "xls"},
 			}
 		},
-		["vans"] = {
-			title = "vans",
+		["vans"] = { 
+			title = "vans", 
 			name = "vans",
-			buttons = {
+			buttons = { 
 				{name = "Bison", costs = 30000, description = {}, model = "bison"},
 				{name = "Bobcat XL", costs = 23000, description = {}, model = "bobcatxl"},
 				{name = "Gang Burrito", costs = 65000, description = {}, model = "gburrito"},
@@ -224,12 +215,16 @@ local vehshop = {
 				{name = "Youga", costs = 16000, description = {}, model = "youga"},
 			}
 		},
-		["sedans"] = {
-			title = "sedans",
+		["sedans"] = { 
+			title = "sedans", 
 			name = "sedans",
-			buttons = {
+			buttons = { 
 				{name = "Asea", costs = 1000000, description = {}, model = "asea"},
 				{name = "Asterope", costs = 1000000, description = {}, model = "asterope"},
+				--{name = "Cognoscenti", costs = 1000000, description = {}, model = "cognoscenti"},
+				--{name = "Cognoscenti(Armored)", costs = 1000000, description = {}, model = "cognoscenti2"},
+				--{name = "Cognoscenti 55", costs = 1000000, description = {}, model = "cognoscenti3"},
+				--{name = "Cognoscenti 55(Armored", costs = 1500000, description = {}, model = "ZENTORNO"},
 				{name = "Fugitive", costs = 24000, description = {}, model = "fugitive"},
 				{name = "Glendale", costs = 200000, description = {}, model = "glendale"},
 				{name = "Ingot", costs = 9000, description = {}, model = "ingot"},
@@ -249,10 +244,10 @@ local vehshop = {
 				{name = "Washington", costs = 15000, description = {}, model = "washington"},
 			}
 		},
-		["motorcycles"] = {
-			title = "MOTORCYCLES",
+		["motorcycles"] = { 
+			title = "MOTORCYCLES", 
 			name = "motorcycles",
-			buttons = {
+			buttons = { 
 				{name = "Akuma", costs = 9000, description = {}, model = "AKUMA"},
 				{name = "Bagger", costs = 5000, description = {}, model = "bagger"},
 				{name = "Bati 801", costs = 15000, description = {}, model = "bati"},
@@ -281,23 +276,18 @@ local vehshop = {
 		},
 	}
 }
-
 local fakecar = {model = '', car = nil}
-local vehshop_locations = {{entering = {-33.803,-1102.322,25.422}, inside = {-46.56327,-1097.382,25.99875, 120.1953}, outside = {-31.849,-1090.648,25.998,322.345}}}
+local vehshop_locations = {
+{entering = {-33.803,-1102.322,25.422}, inside = {-46.56327,-1097.382,25.99875, 120.1953}, outside = {-31.849,-1090.648,25.998,322.345}},
+}
+
 local vehshop_blips ={}
 local inrangeofvehshop = false
 local currentlocation = nil
 local boughtcar = false
-local vehicle_price = 0
-local backlock = false
-local firstspawn = 0
 
-
-
---[[Functions]]--
-
-function LocalPed()
-	return GetPlayerPed(-1)
+local function LocalPed()
+return GetPlayerPed(-1)
 end
 
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
@@ -312,11 +302,11 @@ function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
 	SetTextCentre(centre)
 	SetTextEntry("STRING")
 	AddTextComponentString(text)
-	DrawText(x , y)
+	DrawText(x , y)	
 end
 
 function IsPlayerInRangeOfVehshop()
-	return inrangeofvehshop
+return inrangeofvehshop
 end
 
 function ShowVehshopBlips(bool)
@@ -328,7 +318,7 @@ function ShowVehshopBlips(bool)
 			-- 60 58 137
 			SetBlipSprite(blip,326)
 			BeginTextCommandSetBlipName("STRING")
-			AddTextComponentString('Concessionnaire')
+			AddTextComponentString('Vehicle shop')
 			EndTextCommandSetBlipName(blip)
 			SetBlipAsShortRange(blip,true)
 			SetBlipAsMissionCreatorBlip(blip,true)
@@ -339,9 +329,9 @@ function ShowVehshopBlips(bool)
 				Citizen.Wait(0)
 				local inrange = false
 				for i,b in ipairs(vehshop_blips) do
-					DrawMarker(1,b.pos.entering[1],b.pos.entering[2],b.pos.entering[3],0,0,0,0,0,0,2.001,2.0001,0.5001,0,155,255,200,0,0,0,0)
-					if vehshop.opened == false and IsPedInAnyVehicle(LocalPed(), true) == false and  GetDistanceBetweenCoords(b.pos.entering[1],b.pos.entering[2],b.pos.entering[3],GetEntityCoords(LocalPed())) < 5 then		
-						drawTxt('Appuyer sur ~g~Entrée~s~ pour accéder au menu d\'achat',0,1,0.5,0.8,0.6,255,255,255,255)
+					if IsPlayerWantedLevelGreater(GetPlayerIndex(),0) == false and vehshop.opened == false and IsPedInAnyVehicle(LocalPed(), true) == false and  GetDistanceBetweenCoords(b.pos.entering[1],b.pos.entering[2],b.pos.entering[3],GetEntityCoords(LocalPed())) < 5 then
+						DrawMarker(1,b.pos.entering[1],b.pos.entering[2],b.pos.entering[3],0,0,0,0,0,0,2.001,2.0001,0.5001,0,155,255,200,0,0,0,0)
+						drawTxt('Press ~g~ENTER~s~ to buy ~b~vehicle',0,1,0.5,0.8,0.6,255,255,255,255)
 						currentlocation = b
 						inrange = true
 					end
@@ -361,21 +351,24 @@ function ShowVehshopBlips(bool)
 end
 
 function f(n)
-	return n + 0.0001
+return n + 0.0001
+end
+
+function LocalPed()
+return GetPlayerPed(-1)
 end
 
 function try(f, catch_f)
-	local status, exception = pcall(f)
-	if not status then
-		catch_f(exception)
-	end
+local status, exception = pcall(f)
+if not status then
+catch_f(exception)
 end
-
+end
 function firstToUpper(str)
     return (str:gsub("^%l", string.upper))
 end
-
-function OpenCreator()
+--local veh = nil
+function OpenCreator()		
 	boughtcar = false
 	local ped = LocalPed()
 	local pos = currentlocation.pos.inside
@@ -387,9 +380,21 @@ function OpenCreator()
 	vehshop.currentmenu = "main"
 	vehshop.opened = true
 	vehshop.selectedbutton = 0
+	--[[Citizen.CreateThread(function()
+		RequestModel(GetHashKey('t20'))
+		while not HasModelLoaded(GetHashKey('t20')) do
+			Citizen.Wait(0)
+		end
+		veh = CreateVehicle(GetHashKey('t20'),GetOffsetFromEntityInWorldCoords(ped,2.001,0,0),false,true)
+		SetModelAsNoLongerNeeded(GetHashKey('t20'))
+		SetEntityHeading(veh,pos[4])
+		FreezeEntityPosition(veh,true)
+		SetEntityCollision(veh,false,false)
+		SetEntityInvincible(veh,true)
+	end)]]
 end
-
-function CloseCreator(name, veh, price)
+local vehicle_price = 0
+function CloseCreator()
 	Citizen.CreateThread(function()
 		local ped = LocalPed()
 		if not boughtcar then
@@ -397,10 +402,7 @@ function CloseCreator(name, veh, price)
 			SetEntityCoords(ped,pos[1],pos[2],pos[3])
 			FreezeEntityPosition(ped,false)
 			SetEntityVisible(ped,true)
-		else			
-			local name = name	
-			local vehicle = veh
-			local price = price		
+		else
 			local veh = GetVehiclePedIsUsing(ped)
 			local model = GetEntityModel(veh)
 			local colors = table.pack(GetVehicleColours(veh))
@@ -409,7 +411,7 @@ function CloseCreator(name, veh, price)
 			local mods = {}
 			for i = 0,24 do
 				mods[i] = GetVehicleMod(veh,i)
-			end
+			end	
 			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
 			local pos = currentlocation.pos.outside
 
@@ -425,20 +427,22 @@ function CloseCreator(name, veh, price)
 				SetVehicleMod(personalvehicle,i,mod)
 			end
 			SetVehicleOnGroundProperly(personalvehicle)
-			local plate = GetVehicleNumberPlateText(personalvehicle)
 			SetVehicleHasBeenOwnedByPlayer(personalvehicle,true)
 			local id = NetworkGetNetworkIdFromEntity(personalvehicle)
 			SetNetworkIdCanMigrate(id, true)
 			Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
 			SetVehicleColours(personalvehicle,colors[1],colors[2])
 			SetVehicleExtraColours(personalvehicle,extra_colors[1],extra_colors[2])
+			--local blip = AddBlipForEntity(personalvehicle)
+			--SetBlipSprite(blip,326)
+			--BeginTextCommandSetBlipName("STRING")
+			--AddTextComponentString('Personal vehicle')
+			--EndTextCommandSetBlipName(blip)
+			--personalvehicle_blip = blip
 			TaskWarpPedIntoVehicle(GetPlayerPed(-1),personalvehicle,-1)
-			SetEntityVisible(ped,true)			
-			local primarycolor = colors[1]
-			local secondarycolor = colors[2]	
-			local pearlescentcolor = extra_colors[1]
-			local wheelcolor = extra_colors[2]
-			TriggerServerEvent('BuyForVeh', name, vehicle, price, plate, primarycolor, secondarycolor, pearlescentcolor, wheelcolor)
+			SetEntityVisible(ped,true)
+			TriggerEvent('BoughtPv',personalvehicle)
+			
 		end
 		vehshop.opened = false
 		vehshop.menu.from = 1
@@ -464,7 +468,7 @@ function drawMenuButton(button,x,y,selected)
 	else
 		DrawRect(x,y,menu.width,menu.height,0,0,0,150)
 	end
-	DrawText(x - menu.width/2 + 0.005, y - menu.height/2 + 0.0028)
+	DrawText(x - menu.width/2 + 0.005, y - menu.height/2 + 0.0028)	
 end
 
 function drawMenuInfo(text)
@@ -477,7 +481,7 @@ function drawMenuInfo(text)
 	SetTextEntry("STRING")
 	AddTextComponentString(text)
 	DrawRect(0.675, 0.95,0.65,0.050,0,0,0,150)
-	DrawText(0.365, 0.934)
+	DrawText(0.365, 0.934)	
 end
 
 function drawMenuRight(txt,x,y,selected)
@@ -494,11 +498,11 @@ function drawMenuRight(txt,x,y,selected)
 	SetTextCentre(0)
 	SetTextEntry("STRING")
 	AddTextComponentString(txt)
-	DrawText(x + menu.width/2 - 0.03, y - menu.height/2 + 0.0028)
+	DrawText(x + menu.width/2 - 0.03, y - menu.height/2 + 0.0028)	
 end
 
 function drawMenuTitle(txt,x,y)
-	local menu = vehshop.menu
+local menu = vehshop.menu
 	SetTextFont(2)
 	SetTextProportional(0)
 	SetTextScale(0.5, 0.5)
@@ -506,19 +510,17 @@ function drawMenuTitle(txt,x,y)
 	SetTextEntry("STRING")
 	AddTextComponentString(txt)
 	DrawRect(x,y,menu.width,menu.height,0,0,0,150)
-	DrawText(x - menu.width/2 + 0.005, y - menu.height/2 + 0.0028)
+	DrawText(x - menu.width/2 + 0.005, y - menu.height/2 + 0.0028)	
 end
-
 function tablelength(T)
   local count = 0
   for _ in pairs(T) do count = count + 1 end
   return count
 end
-
-function drawNotification(text)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawNotification(false, false)
+function Notify(text)
+SetNotificationTextEntry('STRING')
+AddTextComponentString(text)
+DrawNotification(false, false)
 end
 
 function DoesPlayerHaveVehicle(model,button,y,selected)
@@ -531,9 +533,112 @@ function DoesPlayerHaveVehicle(model,button,y,selected)
 		end
 end
 
-function stringstarts(String,Start)
-   return string.sub(String,1,string.len(Start))==Start
-end
+local backlock = false
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		if IsControlJustPressed(1,201) and IsPlayerInRangeOfVehshop() then
+			if vehshop.opened then
+				CloseCreator()
+			else
+				OpenCreator()
+			end
+		end
+		if vehshop.opened then
+			local ped = LocalPed()
+			local menu = vehshop.menu[vehshop.currentmenu]
+			drawTxt(vehshop.title,1,1,vehshop.menu.x,vehshop.menu.y,1.0, 255,255,255,255)
+			drawMenuTitle(menu.title, vehshop.menu.x,vehshop.menu.y + 0.08)
+			drawTxt(vehshop.selectedbutton.."/"..tablelength(menu.buttons),0,0,vehshop.menu.x + vehshop.menu.width/2 - 0.0385,vehshop.menu.y + 0.067,0.4, 255,255,255,255)
+			local y = vehshop.menu.y + 0.12
+			buttoncount = tablelength(menu.buttons)
+			local selected = false
+			
+			for i,button in pairs(menu.buttons) do
+				if i >= vehshop.menu.from and i <= vehshop.menu.to then
+					
+					if i == vehshop.selectedbutton then
+						selected = true
+					else
+						selected = false
+					end
+					drawMenuButton(button,vehshop.menu.x,y,selected)
+					if button.costs ~= nil then
+						if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
+							DoesPlayerHaveVehicle(button.model,button,y,selected)
+						else
+						drawMenuRight(button.costs.."$",vehshop.menu.x,y,selected)
+						end
+					end
+					y = y + 0.04
+					if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
+						if selected then
+							if fakecar.model ~= button.model then
+								if DoesEntityExist(fakecar.car) then
+									Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakecar.car))
+								end
+								local pos = currentlocation.pos.inside
+								local hash = GetHashKey(button.model)
+								RequestModel(hash)
+								while not HasModelLoaded(hash) do
+									Citizen.Wait(0)
+									drawTxt("~b~Loading...",0,1,0.5,0.5,1.5,255,255,255,255)
+									
+								end
+								local veh = CreateVehicle(hash,pos[1],pos[2],pos[3],pos[4],false,false)
+								while not DoesEntityExist(veh) do
+									Citizen.Wait(0)
+									drawTxt("~b~Loading...",0,1,0.5,0.5,1.5,255,255,255,255)
+								end
+								FreezeEntityPosition(veh,true)
+								SetEntityInvincible(veh,true)
+								SetVehicleDoorsLocked(veh,4)
+								--SetEntityCollision(veh,false,false)
+								TaskWarpPedIntoVehicle(LocalPed(),veh,-1)
+								for i = 0,24 do
+									SetVehicleModKit(veh,0)
+									RemoveVehicleMod(veh,i)
+								end
+								fakecar = { model = button.model, car = veh}
+							end
+						end
+					end
+					if selected and IsControlJustPressed(1,201) then
+						ButtonSelected(button)
+					end
+				end
+			end	
+		end
+		if vehshop.opened then
+			if IsControlJustPressed(1,202) then
+				Back()
+			end
+			if IsControlJustReleased(1,202) then
+				backlock = false
+			end
+			if IsControlJustPressed(1,188) then
+				if vehshop.selectedbutton > 1 then
+					vehshop.selectedbutton = vehshop.selectedbutton -1
+					if buttoncount > 10 and vehshop.selectedbutton < vehshop.menu.from then
+						vehshop.menu.from = vehshop.menu.from -1
+						vehshop.menu.to = vehshop.menu.to - 1
+					end
+				end
+			end
+			if IsControlJustPressed(1,187)then
+				if vehshop.selectedbutton < buttoncount then
+					vehshop.selectedbutton = vehshop.selectedbutton +1
+					if buttoncount > 10 and vehshop.selectedbutton > vehshop.menu.to then
+						vehshop.menu.to = vehshop.menu.to + 1
+						vehshop.menu.from = vehshop.menu.from + 1
+					end
+				end	
+			end
+		end
+		
+	end
+end)
+
 
 function round(num, idp)
   if idp and idp>0 then
@@ -542,7 +647,6 @@ function round(num, idp)
   end
   return math.floor(num + 0.5)
 end
-
 function ButtonSelected(button)
 	local ped = GetPlayerPed(-1)
 	local this = vehshop.currentmenu
@@ -576,9 +680,14 @@ function ButtonSelected(button)
 			OpenMenu('vans')
 		end
 	elseif this == "compacts" or this == "coupes" or this == "sedans" or this == "sports" or this == "sportsclassics" or this == "super" or this == "muscle" or this == "offroad" or this == "suvs" or this == "vans" or this == "industrial" or this == "cycles" or this == "motorcycles" then
-		TriggerServerEvent('CheckMoneyForVeh',button.name, button.model, button.costs)
+		TriggerServerEvent('CheckMoneyForVeh',button.model,button.costs)
 	end
 end
+RegisterNetEvent('FinishMoneyCheckForVeh')
+AddEventHandler('FinishMoneyCheckForVeh', function()
+	boughtcar = true
+	CloseCreator()
+end)
 
 function OpenMenu(menu)
 	fakecar = {model = '', car = nil}
@@ -595,8 +704,9 @@ function OpenMenu(menu)
 	vehshop.menu.from = 1
 	vehshop.menu.to = 10
 	vehshop.selectedbutton = 0
-	vehshop.currentmenu = menu
+	vehshop.currentmenu = menu	
 end
+
 
 function Back()
 	if backlock then
@@ -614,157 +724,27 @@ function Back()
 	else
 		OpenMenu(vehshop.lastmenu)
 	end
+	
 end
 
---[[Citizen]]--
+function stringstarts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		if IsControlJustPressed(1,201) and IsPlayerInRangeOfVehshop() then
-			if vehshop.opened then
-				CloseCreator()
-			else
-				OpenCreator()
-			end
-		end
-		if vehshop.opened then
-			local ped = LocalPed()
-			local menu = vehshop.menu[vehshop.currentmenu]
-			drawTxt(vehshop.title,1,1,vehshop.menu.x,vehshop.menu.y,1.0, 255,255,255,255)
-			drawMenuTitle(menu.title, vehshop.menu.x,vehshop.menu.y + 0.08)
-			drawTxt(vehshop.selectedbutton.."/"..tablelength(menu.buttons),0,0,vehshop.menu.x + vehshop.menu.width/2 - 0.0385,vehshop.menu.y + 0.067,0.4, 255,255,255,255)
-			local y = vehshop.menu.y + 0.12
-			buttoncount = tablelength(menu.buttons)
-			local selected = false
-
-			for i,button in pairs(menu.buttons) do
-				if i >= vehshop.menu.from and i <= vehshop.menu.to then
-
-					if i == vehshop.selectedbutton then
-						selected = true
-					else
-						selected = false
-					end
-					drawMenuButton(button,vehshop.menu.x,y,selected)
-					if button.costs ~= nil then
-						if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
-							DoesPlayerHaveVehicle(button.model,button,y,selected)
-						else
-						drawMenuRight(button.costs.."$",vehshop.menu.x,y,selected)
-						end
-					end
-					y = y + 0.04
-					if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
-						if selected then
-							if fakecar.model ~= button.model then
-								if DoesEntityExist(fakecar.car) then
-									Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakecar.car))
-								end
-								local pos = currentlocation.pos.inside
-								local hash = GetHashKey(button.model)
-								RequestModel(hash)
-								while not HasModelLoaded(hash) do
-									Citizen.Wait(0)
-									drawTxt("~b~Loading...",0,1,0.5,0.5,1.5,255,255,255,255)
-
-								end
-								local veh = CreateVehicle(hash,pos[1],pos[2],pos[3],pos[4],false,false)
-								while not DoesEntityExist(veh) do
-									Citizen.Wait(0)
-									drawTxt("~b~Loading...",0,1,0.5,0.5,1.5,255,255,255,255)
-								end
-								FreezeEntityPosition(veh,true)
-								SetEntityInvincible(veh,true)
-								SetVehicleDoorsLocked(veh,4)
-								--SetEntityCollision(veh,false,false)
-								TaskWarpPedIntoVehicle(LocalPed(),veh,-1)
-								for i = 0,24 do
-									SetVehicleModKit(veh,0)
-									RemoveVehicleMod(veh,i)
-								end
-								fakecar = { model = button.model, car = veh}
-							end
-						end
-					end
-					if selected and IsControlJustPressed(1,201) then
-						ButtonSelected(button)
-					end
-				end
-			end
-		end
-		if vehshop.opened then
-			if IsControlJustPressed(1,202) then
-				Back()
-			end
-			if IsControlJustReleased(1,202) then
-				backlock = false
-			end
-			if IsControlJustPressed(1,188) then
-				if vehshop.selectedbutton > 1 then
-					vehshop.selectedbutton = vehshop.selectedbutton -1
-					if buttoncount > 10 and vehshop.selectedbutton < vehshop.menu.from then
-						vehshop.menu.from = vehshop.menu.from -1
-						vehshop.menu.to = vehshop.menu.to - 1
-					end
-				end
-			end
-			if IsControlJustPressed(1,187)then
-				if vehshop.selectedbutton < buttoncount then
-					vehshop.selectedbutton = vehshop.selectedbutton +1
-					if buttoncount > 10 and vehshop.selectedbutton > vehshop.menu.to then
-						vehshop.menu.to = vehshop.menu.to + 1
-						vehshop.menu.from = vehshop.menu.from + 1
-					end
-				end
-			end
-		end
-
-	end
-end)
-
-AddEventHandler('FinishMoneyCheckForVeh', function(name, vehicle, price)	
-	local name = name
-	local vehicle = vehicle
-	local price = price
-	boughtcar = true
-	CloseCreator(name, vehicle, price)
-end)
-
+local firstspawn = 0
 AddEventHandler('playerSpawned', function(spawn)
 if firstspawn == 0 then
+	RemoveIpl('v_carshowroom')
+	RemoveIpl('shutter_open')
+	RemoveIpl('shutter_closed')
+	RemoveIpl('shr_int')
+	RemoveIpl('csr_inMission')
+	RequestIpl('v_carshowroom')
+	RequestIpl('shr_int')
+	--RequestIpl('csr_inMission')
+	RequestIpl('shutter_closed')
 	--326 car blip 227 225
 	ShowVehshopBlips(true)
 	firstspawn = 1
 end
-end)
-
-AddEventHandler('vehshop:spawnVehicle', function(v)
-	local car = GetHashKey(v)
-	local playerPed = GetPlayerPed(-1)
-	if playerPed and playerPed ~= -1 then
-		RequestModel(car)
-		while not HasModelLoaded(car) do
-				Citizen.Wait(0)
-		end
-		local playerCoords = GetEntityCoords(playerPed)
-		veh = CreateVehicle(car, playerCoords, 0.0, true, false)
-		TaskWarpPedIntoVehicle(playerPed, veh, -1)
-		SetEntityInvincible(veh, true)
-	end
-end)
-
-local firstspawn = 0
-AddEventHandler('playerSpawned', function(spawn)
-	if firstspawn == 0 then
-		RemoveIpl('v_carshowroom')
-		RemoveIpl('shutter_open')
-		RemoveIpl('shutter_closed')
-		RemoveIpl('shr_int')
-		RemoveIpl('csr_inMission')
-		RequestIpl('v_carshowroom')
-		RequestIpl('shr_int')
-		RequestIpl('shutter_closed')
-		firstspawn = 1
-	end
 end)
