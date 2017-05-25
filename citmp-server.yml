@@ -71,6 +71,7 @@ AutoStartResources:
     - divers
     - gb_foodshops
     - gb_needs
+    - lscustoms
     
     
 
