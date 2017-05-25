@@ -1,8 +1,8 @@
 
 local changeYourJobMeth = {
-  {name="Pole Emploi", colour=15, id=351, x=3522.75, y=3711.76, z=20.9918},
+  {name="Pole Emploi", colour=15, id=351, x=2379.07, y=3091.58, z=48.5732},
 }
-
+--{2379.07250976563, 3091.5810546875,  48.5732765197754, 343.555572509766}
 local jobs = {
 	{name="Dealer de Meth", id=11},
 }
