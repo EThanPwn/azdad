@@ -1,7 +1,7 @@
 mode = 'whitelist'
 
 steamIdsList = {
-  'steam:STEAMHEXID',
+  '76561198033754407',
   'STEAMID64',
 }
 

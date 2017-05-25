@@ -74,6 +74,7 @@ AutoStartResources:
     - lscustoms
     #- es_weaponstore
     - clothingshop
+    - whitelist
     
     
 
