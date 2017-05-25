@@ -6,7 +6,7 @@ local kmDriven = {}
 require "resources/essentialmode/lib/MySQL"
 
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_script_stats", "root", "1202")
+MySQL:open("127.0.0.1", "gta5_script_stats", "root", "18020603")
 
 function addMinutes()
 	SetTimeout(60000, function()

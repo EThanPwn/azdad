@@ -1,5 +1,5 @@
 require "resources/essentialmode/lib/MySQL"
-MySQL:open("localhost", "gta5_gamemode_essential", "root", "1202")
+MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
 RegisterServerEvent('cp:spawnplayer')
 AddEventHandler('cp:spawnplayer', function()
 	TriggerEvent('es:getPlayerFromId', source, function(user)

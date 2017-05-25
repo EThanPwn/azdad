@@ -2,7 +2,7 @@
 require "resources/essentialmode/lib/MySQL"
 
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_script_logs", "root", "1202")
+MySQL:open("127.0.0.1", "gta5_script_logs", "root", "18020603")
 
 AddEventHandler('es:chatMessage', function(source, msg, user)
 	local tstamp2 = os.date("*t", os.time())

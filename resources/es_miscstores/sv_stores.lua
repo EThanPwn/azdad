@@ -131,7 +131,7 @@ end
 
 require "resources/essentialmode/lib/MySQL"
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_script_weaponshop", "root", "1202")
+MySQL:open("127.0.0.1", "gta5_script_weaponshop", "root", "18020603")
 
 local weaponsOwned = {}
 

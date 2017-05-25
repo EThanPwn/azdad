@@ -10,7 +10,7 @@ local turfs = {
 require "resources/essentialmode/lib/MySQL"
 
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_script_turfs", "root", "1202")
+MySQL:open("127.0.0.1", "gta5_script_turfs", "root", "18020603")
 
 AddEventHandler("es:playerLoaded", function(source, user)
 	local executed_query = MySQL:executeQuery("SELECT * FROM turfs WHERE identifier = '@name'", {['@name'] = user.identifier})

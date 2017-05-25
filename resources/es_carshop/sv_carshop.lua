@@ -4,7 +4,7 @@ local plates = {}
 
 require "resources/essentialmode/lib/MySQL"
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_script_carshop", "root", "1202")
+MySQL:open("127.0.0.1", "gta5_script_carshop", "root", "18020603")
 
 AddEventHandler("es:playerLoaded", function(source, target)
 	local executed_query = MySQL:executeQuery("SELECT * FROM vehicles WHERE owner = '@name'", {['@name'] = target.identifier})

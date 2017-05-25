@@ -3,7 +3,7 @@ database = {
           host = "127.0.0.1",
           name = "gta5_gamemode_essential",
           username = "root",
-          password = "1202"
+          password = "18020603"
         }
 
 -- Configure the coordinates where the player gets spawned when he joins the server (temporarily disabled untill the next release).

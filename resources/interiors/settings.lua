@@ -4,7 +4,7 @@ host = "localhost",
 db = "game",
 inttable = "interiors",
 login = "root",
-pass = "1202"
+pass = "18020603"
 }
 --------- [ DO NOT TOUCH] ---------
 require "resources/interiors/mysql/MySQL" -- MySql.lua path

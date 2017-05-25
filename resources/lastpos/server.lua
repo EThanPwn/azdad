@@ -1,6 +1,6 @@
 require "resources/essentialmode/lib/MySQL"
 --Configuration de la connexion vers la DB MySQL
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "1202")
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
 
 --Intégration de la position dans MySQL
 RegisterServerEvent("project:savelastpos")
