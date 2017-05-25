@@ -73,7 +73,7 @@ AutoStartResources:
     #- gb_needs
     - lscustoms
     #- es_weaponstore
-    - shops
+    - clothingshop
     
     
 
