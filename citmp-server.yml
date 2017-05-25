@@ -75,7 +75,7 @@ AutoStartResources:
 RconPassword: Labite2
 
 # configure this, please
-Hostname: cdvk test ethan
+Hostname: cdvk test ethan1
 
 # don't change this, it'll cause your server to be unlisted
 Game: GTA5
