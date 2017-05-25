@@ -101,7 +101,7 @@ AddEventHandler('es_robberies:robStore', function(rob)
 							TriggerEvent('es:getPlayers', function(pl)
 								for k,v in pairs(pl) do
 									TriggerEvent('es_roleplay:getPlayerJob', k, function(job)
-											TriggerClientEvent('chatMessage', k, 'BrK', {255, 0, 0}, "Braquage en cours à ^2" .. store.prettyName)
+											TriggerClientEvent('chatMessage', k, 'OG', {255, 0, 0}, "Braquage en cours à ^2" .. store.prettyName)
 									end)
 								end
 							end)
