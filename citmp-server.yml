@@ -67,6 +67,11 @@ AutoStartResources:
     - personnal_menu
     - vehshop
     - garages
+    - indicators
+    - divers
+    - gb_foodshops
+    - gb_needs
+    - lscustoms
     
     
 
