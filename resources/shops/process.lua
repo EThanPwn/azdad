@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 require "resources/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
 
 
 RegisterServerEvent("shopcloths:saveItem")
