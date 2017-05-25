@@ -37,7 +37,7 @@ end,function(source, args, user)
 end)
 
 -- delv
-TriggerEvent('es:addGroupCommand', 'delv', 'mod', 3, function(source, args, user)
+TriggerEvent('es:addGroupCommand', 'akgb', 'mod', 3, function(source, args, user)
 	TriggerClientEvent( 'deleteVehicle', source )
 end, function(source, args, user)
 
