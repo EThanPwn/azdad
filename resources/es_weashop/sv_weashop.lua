@@ -2,7 +2,7 @@
 require "resources/essentialmode/lib/MySQL"
 MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
 
-local max_number_weapons = 6 --maximum number of weapons that the player can buy. Weapons given at spawn doesn't count.
+local max_number_weapons = 999999 --maximum number of weapons that the player can buy. Weapons given at spawn doesn't count.
 local cost_ratio = 100 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
 
 RegisterServerEvent('CheckMoneyForWea')
@@ -27,14 +27,14 @@ AddEventHandler('CheckMoneyForWea', function(weapon,price)
 				{['@username'] = player, ['@weapon'] = weapon, ['@cost'] = (price)/cost_ratio})
 				-- Trigger some client stuff
 				TriggerClientEvent('FinishMoneyCheckForWea',source)
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "MURDER TIME. FUN TIME!\n")
+				TriggerClientEvent("es_roleplay:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "MURDER TIME. FUN TIME!\n")
 			else
 				TriggerClientEvent('ToManyWeapons',source)
-				TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You have reached the weapon limit ! (max: "..max_number_weapons..")\n")
+				TriggerClientEvent("es_roleplay:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You have reached the weapon limit ! (max: "..max_number_weapons..")\n")
 			end
 		else
 			-- Inform the player that he needs more money
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You don't have enough cash !\n")
+			TriggerClientEvent("es_roleplay:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You don't have enough cash !\n")
 		end
 	end)
 end)
@@ -62,11 +62,11 @@ AddEventHandler("weaponshop:GiveWeaponsToPlayer", function(player)
 					TriggerClientEvent("giveWeapon", player, v.weapon_model, delay)
 					user:removeMoney((v.withdraw_cost))
 				else
-					TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You don't have enough cash !\n")
+					TriggerClientEvent("es_roleplay:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "You don't have enough cash !\n")
 					return
 				end
 			end
-			TriggerClientEvent("es_freeroam:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "Here are your weapons !\n")
+			TriggerClientEvent("es_roleplay:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "Here are your weapons !\n")
 		end
 	
 	end)
