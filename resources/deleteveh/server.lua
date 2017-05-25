@@ -1,4 +1,4 @@
--- Add an event handler for the 'chatMessage' event
+--[[ Add an event handler for the 'chatMessage' event
 AddEventHandler( 'chatMessage', function( source, n, msg )  
 
     msg = string.lower( msg )
