@@ -18,10 +18,10 @@ ACL.enablePlayerManagement = false
 
 -- The whitelist can handle IP's, Steam ID's and words
 ACL.whitelist = {
-	"steam:110000104615927"	--JackToshx
-	"steam:11000010691f003" --ChrisToshx
-	"steam:1100001119ca150" --Carry MacRoy
-	"steam:1100001190f80bd" --Bobby McRoy
+	"steam:110000104615927",	--JackToshx
+	"steam:11000010691f003", --ChrisToshx
+	"steam:1100001119ca150", --Carry MacRoy
+	"steam:1100001190f80bd", --Bobby McRoy
 	"steam:11000010a0d6624" --Ken Kenaki
 }
 
