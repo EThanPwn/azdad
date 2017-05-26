@@ -43,10 +43,10 @@ local changeYourJob = {
 local jobs = {
 	{name="Chomeur", id=1},
 	{name="Mineur", id=3},
-	{name="Chauffeur de taxi", id=4},
+--	{name="Chauffeur de taxi", id=4},
 	{name="Vigneron", id=5},
-	{name="Chauffeur poids lourd", id=6},
-	{name="Dépanneur", id=7},
+--	{name="Chauffeur poids lourd", id=6},
+--	{name="Dépanneur", id=7},
 	{name="Pêcheur", id=8},
 	{name="Bucheron", id=9},
 	{name="Joaillier", id=13},
