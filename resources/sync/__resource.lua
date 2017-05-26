@@ -8,12 +8,12 @@ server_scripts {
 	"server/OnCmd.lua",
 	"server/ACL.lua",
 	"server/ACLConfig.lua",
-	"server/additional-sync.lua"
+--	"server/additional-sync.lua"
 }
 
 client_scripts {
 	"common/ext.lua",
 	"common/vars.lua",
 	"client/config.lua",
-	"client/additional-sync.lua"
+--	"client/additional-sync.lua"
 }

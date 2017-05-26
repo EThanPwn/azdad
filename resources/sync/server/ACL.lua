@@ -60,7 +60,7 @@ function ACL:canConnect( netID, playerName )
 		end
 	end
 	
-	self.lastError = "This is a private server. Ask the administrator to be whitelisted."
+	self.lastError = "Tu n'es pas whitelisté, passe sur discord ( https://discord.gg/Gr8hs54 ) pour regler ça ;)."
 	return false
 end
 
