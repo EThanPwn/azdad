@@ -18,14 +18,11 @@ ACL.enablePlayerManagement = false
 
 -- The whitelist can handle IP's, Steam ID's and words
 ACL.whitelist = {
-	--"[CLANTAG]",				-- Allow everyone with this tag in their name to connect
-	--"MsQuerade",				-- Allow everyone with this name to connect
-	--"ip:1.1.1.1",				-- Allow this IP to connect
-	--"ip:2.2.2.2",				-- Allow this IP to connect
-	--"ip:3.3.3.3",				-- Allow this IP to connect
-	--"steam:1100001baadface",	-- Allow this Steam ID to connect
-	--"steam:11000011337babe",	-- Allow this Steam ID to connect
-	"steam:110000104615927"		-- Allow this Steam ID to connect
+	"steam:110000104615927"	--JackToshx
+	"steam:11000010691f003" --ChrisToshx
+	"steam:1100001119ca150" --Carry MacRoy
+	"steam:1100001190f80bd" --Bobby McRoy
+	"steam:11000010a0d6624" --Ken Kenaki
 }
 
 -- Handles only IP's and Steam ID's
