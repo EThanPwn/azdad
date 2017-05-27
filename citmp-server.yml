@@ -76,6 +76,7 @@ AutoStartResources:
     - clothingshop
     #- whitelist
     - sync
+    - skin-map
     
     
 
