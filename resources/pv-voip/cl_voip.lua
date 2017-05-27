@@ -1,7 +1,7 @@
 local voip = {}
-voip['normal'] = {name = 'normal', setting = 30.0}
+voip['normal'] = {name = 'normal', setting = 10.0}
 voip['chu'] = {name = 'chuchoter', setting = 3.0}
-voip['cri'] = {name = 'crier', setting = 50.0}
+voip['cri'] = {name = 'crier', setting = 25.0}
 
 AddEventHandler('onClientMapStart', function()
 	NetworkSetTalkerProximity(voip['normal'].setting)
