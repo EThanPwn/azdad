@@ -1,8 +1,11 @@
 players = {}
 host = nil
 local adverts = {
-	"Bienvenue sur le serveur One Génération !.",
-	"en cas de probleme vennez en parler disord à un admin . on ne repond pas norp par du norp "
+	"En cas de probleme vennez en parler sur discord à un admin. On ne repond pas norp par du norp ",
+	"Utiliser '/v' pour regler la portée de votre voix",
+	"Un /help est à disposition si vous ne trouvez pas une commande",
+	"Un bug? Une suggestion? N'hésitez pas a passer sur le discord ! (/discord pour le trouver) ",
+	"Bientôt le serveur passera en Whitelist ! Vous serez conviés sur le discord afin d'etre whitlisté"
 }
 local nextadvert = 1
 
