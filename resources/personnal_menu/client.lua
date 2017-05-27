@@ -385,7 +385,7 @@ function inventoryItemMenu(itemId)
     ClearMenu()
     options.menu_subtitle = "Details "
     --Menu.addButton("Donner", "give", itemId)
-    Menu.addButton("Utiliser", "use", itemId)
+    --Menu.addButton("Utiliser", "use", itemId)
 end
 
 --function inventoryGive(item)
