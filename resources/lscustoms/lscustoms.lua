@@ -453,7 +453,7 @@ local lsc = {
 			buttons = { 
 				{name = "Stock Tires", costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Custom Tires", costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Bulletproof Tires", costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
+				--{name = "Bulletproof Tires", costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "White Tire Smoke", color = {254,254,254}, costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Black Tire Smoke", color = {1,1,1}, costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Blue Tire Smoke", color = {0,150,255}, costs = 0, description = "", centre = 0, font = 0, scale = 0.4},
@@ -1011,7 +1011,7 @@ local lsc = {
 			
 		}
 	},
-	["armor"] = { 
+	--[[["armor"] = { 
 		title = "armor", 
 		name = "armor",
 		buttons = { 
@@ -1023,7 +1023,7 @@ local lsc = {
 			{name = "Armor Upgrade 100%",modtype = 16, mod = 4, costs = 0, description = "", centre = 0, font = 0, scale = 0.4}
 			
 		}
-	},
+	},]]
 	["brakes"] = { 
 		title = "brakes", 
 		name = "brakes",
@@ -1157,8 +1157,8 @@ function DriveInGarage()
 			for i = 0,16 do
 				if GetNumVehicleMods(veh,i) ~= nil and GetNumVehicleMods(veh,i) ~= false then
 						if i == 16 then
-							insrt(lsc.menu["main"].buttons, {name = "Armor", description = "", centre = 0, font = 0, scale = 0.4})
-						elseif i == 15 then
+							--insrt(lsc.menu["main"].buttons, {name = "Armor", description = "", centre = 0, font = 0, scale = 0.4})
+						--elseif i == 15 then
 							insrt(lsc.menu["main"].buttons, {name = "Suspension", description = "", centre = 0, font = 0, scale = 0.4})
 						elseif i == 13 then
 							insrt(lsc.menu["main"].buttons, {name = "Transmission", description = "", centre = 0, font = 0, scale = 0.4})
@@ -1674,7 +1674,7 @@ Citizen.CreateThread(function()
 									else
 										drawMenuCost(button,lsc.menu.x,y,selected)
 									end
-								elseif lsc.currentmenu == "chassis" or lsc.currentmenu == "armor" or lsc.currentmenu == "brakes" or lsc.currentmenu == "exhaust" or lsc.currentmenu == "frontbumper" or lsc.currentmenu == "rearbumper" or lsc.currentmenu == "engine" or lsc.currentmenu == "fenders" or lsc.currentmenu == "hood" or lsc.currentmenu == "transmission" or lsc.currentmenu == "suspension" or lsc.currentmenu == "spoiler" or lsc.currentmenu == "skirts" or lsc.currentmenu == "roof" or lsc.currentmenu == "rollcage" or lsc.currentmenu == "horn" or lsc.currentmenu == "grille" then
+								elseif lsc.currentmenu == "chassis" or lsc.currentmenu == --[["armor" or lsc.currentmenu ==]] "brakes" or lsc.currentmenu == "exhaust" or lsc.currentmenu == "frontbumper" or lsc.currentmenu == "rearbumper" or lsc.currentmenu == "engine" or lsc.currentmenu == "fenders" or lsc.currentmenu == "hood" or lsc.currentmenu == "transmission" or lsc.currentmenu == "suspension" or lsc.currentmenu == "spoiler" or lsc.currentmenu == "skirts" or lsc.currentmenu == "roof" or lsc.currentmenu == "rollcage" or lsc.currentmenu == "horn" or lsc.currentmenu == "grille" then
 									if button.mod == -1  then
 										if mods[button.modtype].mod == -1 then
 											drawMenuOwned(lsc.menu.x,y,selected)
@@ -1771,12 +1771,12 @@ Citizen.CreateThread(function()
 										else
 											drawMenuCost(button,lsc.menu.x,y,selected)
 										end
-									elseif button.name == "Bulletproof Tires" then
-										if GetVehicleTyresCanBurst(veh) == false then
-											drawMenuOwned(lsc.menu.x,y,selected)
-										else
-											drawMenuCost(button,lsc.menu.x,y,selected)	
-										end
+									--elseif button.name == "Bulletproof Tires" then
+										--if GetVehicleTyresCanBurst(veh) == false then
+											--drawMenuOwned(lsc.menu.x,y,selected)
+										--else
+											--drawMenuCost(button,lsc.menu.x,y,selected)	
+										--end
 									elseif string.find(button.name:lower(),'smoke') then
 										local col = table.pack(GetVehicleTyreSmokeColor(veh))
 										if col[1] == button.color[1] and col[2] == button.color[2] and col[3] == button.color[3] then
@@ -1903,9 +1903,9 @@ function ButtonSelected(button)
 	elseif lsc.currentmenu == "main" then
 		if button.name == "Respray" then
 			OpenMenu("respray")
-		elseif button.name == "Armor" then
-			SetVehicleModKit(car,0)
-			OpenMenu("armor")
+		--elseif button.name == "Armor" then
+			--SetVehicleModKit(car,0)
+			--OpenMenu("armor")
 		elseif button.name == "Brakes" then
 			SetVehicleModKit(car,0)
 			OpenMenu("brakes")
@@ -2051,7 +2051,7 @@ function ButtonSelected(button)
 		end 
 	elseif lsc.currentmenu == "plate" then
 		plateindex = button.plateindex
-	elseif lsc.currentmenu == "chassis" or lsc.currentmenu == "armor" or lsc.currentmenu == "brakes" or lsc.currentmenu == "frontbumper" or lsc.currentmenu == "rearbumper" or lsc.currentmenu == "engine" or lsc.currentmenu == "exhaust" or lsc.currentmenu == "hood" or lsc.currentmenu == "horn" or lsc.currentmenu == "rollcage" or lsc.currentmenu == "roof" or lsc.currentmenu == "skirts" or lsc.currentmenu == "spoiler" or lsc.currentmenu == "suspension" or lsc.currentmenu == "transmission" or lsc.currentmenu == "grille" or lsc.currentmenu == "horn" then
+	elseif lsc.currentmenu == "chassis" or lsc.currentmenu == --[["armor" or lsc.currentmenu ==]] "brakes" or lsc.currentmenu == "frontbumper" or lsc.currentmenu == "rearbumper" or lsc.currentmenu == "engine" or lsc.currentmenu == "exhaust" or lsc.currentmenu == "hood" or lsc.currentmenu == "horn" or lsc.currentmenu == "rollcage" or lsc.currentmenu == "roof" or lsc.currentmenu == "skirts" or lsc.currentmenu == "spoiler" or lsc.currentmenu == "suspension" or lsc.currentmenu == "transmission" or lsc.currentmenu == "grille" or lsc.currentmenu == "horn" then
 		mods[button.modtype].mod = button.mod
 		SetVehicleMod(car,button.modtype,button.mod)
 	elseif lsc.currentmenu == "fenders" then
@@ -2116,12 +2116,12 @@ function ButtonSelected(button)
 				SetVehicleModKit(car,0)
 				SetVehicleMod(car,24,mods[24].mod,true)
 			end
-		elseif button.name == "Bulletproof Tires" then
-			if GetVehicleTyresCanBurst(car) ~= false then
-				SetVehicleTyresCanBurst(car,false)
-			else
-				SetVehicleTyresCanBurst(car,true)
-			end
+		--elseif button.name == "Bulletproof Tires" then
+			--if GetVehicleTyresCanBurst(car) ~= false then
+				--SetVehicleTyresCanBurst(car,false)
+			--else
+				--SetVehicleTyresCanBurst(car,true)
+			--end
 		elseif string.find(button.name:lower(),'smoke')  then
 			SetVehicleModKit(car,0)
 			ToggleVehicleMod(car,20,true)
