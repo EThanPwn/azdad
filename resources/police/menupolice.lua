@@ -64,6 +64,8 @@ local menupolice = {
 				{name = "Possesion de Drogue (500€)", description = ''},
 				{name = "Agression (1000€)", description = ''},
 				{name = "Vol de vehicule (1500€)", description = ''},
+				{name = "Braquage Superette (2500€)", description = ''},
+				{name = "Braquage Banque (5000€)", description = ''},
 				{name = "Meurtre (4000€)", description = ''},
 				{name = "Meurtre sur agent (10000€)", description = ''},
 				{name = "Deal de weed (9000€)", description = ''},
@@ -136,6 +138,10 @@ function ButtonSelectedPolice(button)
 			Fines(1000)
 		elseif btn == "Vol de vehicule (1500€)" then
 			Fines(1500)
+		elseif btn == "Braquage Superette (2500€)" then
+			Fines(2500)
+		elseif btn == "Braquage Banque (5000€)" then
+			Fines(5000)
 		elseif btn == "Meurtre (4000€)" then
 			Fines(4000)
 		elseif btn == "Meurtre sur agent (10000€)" then
