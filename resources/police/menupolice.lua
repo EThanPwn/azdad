@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------------------------------------------------
 local menupolice = {
 	opened = false,
-	title = "Menu police",
+	title = "Cops Menu",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,
@@ -24,62 +24,66 @@ local menupolice = {
 			name = "main",
 			buttons = {
 				{name = "Animations", description = ""},
-				{name = "Citoyen", description = ""},
-				{name = "Appeler renfort(prochainement)", description = ""},
-				{name = "Radar (prochainement)", description = ""},
-				{name = "Fermer le menu", description = ""},
+				{name = "Citizen", description = ""},
+				{name = "Vehicle", description = ""},
+				{name = "Call for backup(SOON)", description = ""},
+				{name = "Radar Speed Detector(SOON)", description = ""},
+				{name = "Close Menu", description = ""},
 			}
 		},
 		["Animations"] = {
 			title = "ANIMATIONS",
 			name = "Animations",
 			buttons = {
-				{name = "Faire la circulation", description = ''},
-				{name = "Prendre des notes", description = ''},
+				{name = "Traffic Cop", description = ''},
+				{name = "Take notes", description = ''},
 				{name = "Stand By", description = ''},
 				{name = "Stand By 2", description = ''},
 			}
 		},
-		["Citoyen"] = {
+		["Citizen"] = {
 			title = "CITIZEN INTERACTIONS",
-			name = "Citoyen",
+			name = "Citizen",
 			buttons = {
-				{name = "Identité(prochainement)", description = ''},
-				{name = "Fouiller", description = ''},
-				{name = "Menottage", description = ''},
-				{name = "Mettre dans le véhicule", description = ''},
-				{name = "Sortir du véhicule", description = ''},
-				{name = "Amendes", description = ''},
+				{name = "ID Card(SOON)", description = ''},
+				{name = "Check", description = ''},
+				{name = "(Un)Cuff", description = ''},
+				{name = "Put in vehicle", description = ''},
+				{name = "Unseat", description = ''},
+				{name = "Fines", description = ''},
 			}
 		},
-		["Amendes"] = {
-			title = "Amendes",
-			name = "Amendes",
+		["Fines"] = {
+			title = "Fines",
+			name = "Fines",
 			buttons = {
-				{name = "Rappel à la loi (50€)", description = ''},
-				{name = "Infraction mineur (100€)", description = ''},
-				{name = "Refus d'optempérer (200€)", description = ''},
-				{name = "Infraction + DDF (250€)", description = ''},
-				{name = "Infraction Majeur (500€)", description = ''},
-				{name = "Possesion de Drogue (500€)", description = ''},
-				{name = "Agression (1000€)", description = ''},
-				{name = "Vol de vehicule (1500€)", description = ''},
-				{name = "Braquage Superette (2500€)", description = ''},
-				{name = "Braquage Banque (5000€)", description = ''},
-				{name = "Meurtre (4000€)", description = ''},
-				{name = "Meurtre sur agent (10000€)", description = ''},
-				{name = "Deal de weed (9000€)", description = ''},
-				{name = "Deal de crack (10000€)", description = ''},
-				{name = "Deal de coke (11000€)", description = ''},
-				{name = "Deal de Meth (12000€)", description = ''},
-				--[[{name = "$25000", description = ''},
+				{name = "$250", description = ''},
+				{name = "$500", description = ''},
+				{name = "$1000", description = ''},
+				{name = "$1500", description = ''},
+				{name = "$2000", description = ''},
+				{name = "$4000", description = ''},
+				{name = "$6000", description = ''},
+				{name = "$8000", description = ''},
+				{name = "$10000", description = ''},
+				{name = "$11000", description = ''},
+				{name = "$15000", description = ''},
+				{name = "$25000", description = ''},
 				{name = "$30000", description = ''},
 				{name = "$35000", description = ''},
 				{name = "$40000", description = ''},
 				{name = "$45000", description = ''},
 				{name = "$50000", description = ''},
 				{name = "$60000", description = ''},
-				{name = "$80000", description = ''},]]
+				{name = "$80000", description = ''},
+			}
+		},
+		["Vehicle"] = {
+			title = "VEHICLE INTERACTIONS",
+			name = "Vehicle",
+			buttons = {
+				{name = "Check Plate", description = ''},
+				{name = "Crochet", description = ''},
 			}
 		},
 	}
@@ -94,68 +98,61 @@ function ButtonSelectedPolice(button)
 	if this == "main" then
 		if btn == "Animations" then
 			OpenMenuPolice('Animations')
-		elseif btn == "Citoyen" then
-			OpenMenuPolice('Citoyen')
-		elseif btn == "Fermer le menu" then
+		elseif btn == "Citizen" then
+			OpenMenuPolice('Citizen')
+		elseif btn == "Vehicle" then
+			OpenMenuPolice('Vehicle')
+		elseif btn == "Close Menu" then
 			CloseMenuPolice()
 		end
 	elseif this == "Animations" then
-		if btn == "Faire la circulation" then
+		if btn == "Traffic Cop" then
 			Circulation()
-		elseif btn == "Prendre des notes" then
+		elseif btn == "Take notes" then
 			Note()
 		elseif btn == "Stand By" then
 			StandBy()
 		elseif btn == "Stand By 2" then
 			StandBy2()
 		end
-	elseif this == "Citoyen" then
-		if btn == "Amendes" then
-			OpenMenuPolice('Amendes')
-		elseif btn == "Fouiller" then
+	elseif this == "Citizen" then
+		if btn == "Fines" then
+			OpenMenuPolice('Fines')
+		elseif btn == "Check" then
 			Check()
-		elseif btn == "Menottage" then
+		elseif btn == "(Un)Cuff" then
 			Cuffed()
-		elseif btn == "Mettre dans le véhicule" then
+		elseif btn == "Put in vehicle" then
 			PutInVehicle()
-		elseif btn == "Sortir du véhicule" then
+		elseif btn == "Unseat" then
 			UnseatVehicle()
 		end
-	elseif this == "Amendes" then
-		if btn == "Rappel à la loi (50€)"then
-			Fines(50)
-		elseif btn == "Infraction mineur (100€)"then
-			Fines(100)
-		elseif btn == "Refus d'optempérer (200€)"then
-			Fines(200)
-		elseif btn == "Infraction + DDF (250€)"then
+	elseif this == "Vehicle" then
+		if btn == "Crochet"then
+			Crocheter()
+		elseif btn == "Check Plate" then
+			CheckPlate()
+		end
+	elseif this == "Fines" then
+		if btn == "$250"then
 			Fines(250)
-		elseif btn == "Infraction Majeur (500€)"then
+		elseif btn == "$500" then
 			Fines(500)
-		elseif btn == "Possesion de Drogue (500€)" then
-			Fines(500)
-		elseif btn == "Agression (1000€)" then
+		elseif btn == "$1000" then
 			Fines(1000)
-		elseif btn == "Vol de vehicule (1500€)" then
+		elseif btn == "$1500" then
 			Fines(1500)
-		elseif btn == "Braquage Superette (2500€)" then
-			Fines(2500)
-		elseif btn == "Braquage Banque (5000€)" then
-			Fines(5000)
-		elseif btn == "Meurtre (4000€)" then
+		elseif btn == "$2000" then
+			Fines(2000)
+		elseif btn == "$4000" then
 			Fines(4000)
-		elseif btn == "Meurtre sur agent (10000€)" then
+		elseif btn == "$6000" then
+			Fines(6000)
+		elseif btn == "$8000" then
+			Fines(8000)
+		elseif btn == "$10000" then
 			Fines(10000)
-		elseif btn == "Deal de weed (9000€)" then
-			Fines(9000)
-		elseif btn == "Deal de crack (10000€)" then
-			Fines(10000)
-		elseif btn == "Deal de coke (11000€)" then
-			Fines(11000)
-		elseif btn == "Deal de Meth (12000€)" then
-			Fines(12000)
-		
-		--[[elseif btn == "$11000" then
+		elseif btn == "$11000" then
 			Fines(11000)
 		elseif btn == "$15000" then
 			Fines(15000)
@@ -174,7 +171,7 @@ function ButtonSelectedPolice(button)
 		elseif btn == "$60000" then
 			Fines(60000)
 		elseif btn == "$80000" then
-			Fines(80000)]]
+			Fines(80000)
 		end
 	end
 end
@@ -302,11 +299,11 @@ function OpenMenuPolice(menu)
 	menupolice.lastmenu = menupolice.currentmenu
 	if menu == "Animations" then
 		menupolice.lastmenu = "main"
-	elseif menu == "Citoyen" then
+	elseif menu == "Citizen" then
 		menupolice.lastmenu = "main"
 	elseif menu == "Vehicle" then
 		menupolice.lastmenu = "main"
-	elseif menu == "Amendes" then
+	elseif menu == "Fines" then
 		menupolice.lastmenu = "main"
 	end
 	menupolice.menu.from = 1
@@ -428,7 +425,7 @@ function BackMenuPolice()
 	backlock = true
 	if menupolice.currentmenu == "main" then
 		CloseMenuPolice()
-	elseif menupolice.currentmenu == "Animations" or menupolice.currentmenu == "Citoyen" or menupolice.currentmenu == "Vehicle" or menupolice.currentmenu == "Amendes" then
+	elseif menupolice.currentmenu == "Animations" or menupolice.currentmenu == "Citizen" or menupolice.currentmenu == "Vehicle" or menupolice.currentmenu == "Fines" then
 		OpenMenuPolice(menupolice.lastmenu)
 	else
 		OpenMenuPolice(menupolice.lastmenu)

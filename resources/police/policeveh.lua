@@ -1,6 +1,6 @@
 local policeveh = {
 	opened = false,
-	title = "Garage de la police",
+	title = "Cop Garage",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,
@@ -20,12 +20,17 @@ local policeveh = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				--{name = "Peugeot Banalisée", costs = 0, description = {}, model = "fbi"},
-				{name = "Patrouille 1", costs = 0, description = {}, model = "police3"},
-				{name = "Patrouille 2", costs = 0, description = {}, model = "police2"},
-				{name = "Patrouille 3", costs = 0, description = {}, model = "police"},
-				{name = "Voiture banalisée", costs = 0, description = {}, model = "police4"},
-				{name = "Moto de police", costs = 0, description = {}, model = "policeb"},			
+				--{name = "Police Stanier", costs = 0, description = {}, model = "police"},
+				--{name = "Police Buffalo", costs = 0, description = {}, model = "police2"},
+				--{name = "Police Interceptor", costs = 0, description = {}, model = "police3"},
+				{name = "Cop Car", costs = 0, description = {}, model = "police4"},
+				--{name = "Police Rancher", costs = 0, description = {}, model = "policeold1"},
+				--{name = "Police Esperanto", costs = 0, description = {}, model = "policeold2"},
+				--{name = "Police Transport Van", costs = 0, description = {}, model = "policet"},
+				--{name = "FBI", costs = 0, description = {}, model = "fbi"},
+				--{name = "FBI2", costs = 0, description = {}, model = "fbi2"},
+				{name = "Cop Motorcycle", costs = 0, description = {}, model = "policeb"},
+			
 			}
 		},
 	}
@@ -355,13 +360,13 @@ Citizen.CreateThread(function()
 									RequestModel(hash)
 									while not HasModelLoaded(hash) do
 										Citizen.Wait(0)
-										drawTxt("~b~Chargement...",0,1,0.5,0.5,1.5,255,255,255,255)
+										drawTxt("~b~Loading...",0,1,0.5,0.5,1.5,255,255,255,255)
 
 									end
 									local veh = CreateVehicle(hash,plyCoords["x"], plyCoords["y"], plyCoords["z"],90.0,false,false)
 									while not DoesEntityExist(veh) do
 										Citizen.Wait(0)
-										drawTxt("~b~Chargement...",0,1,0.5,0.5,1.5,255,255,255,255)
+										drawTxt("~b~Loading...",0,1,0.5,0.5,1.5,255,255,255,255)
 									end
 									FreezeEntityPosition(veh,true)
 									SetEntityInvincible(veh,true)

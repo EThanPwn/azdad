@@ -10,7 +10,6 @@ client_scripts {
   'vestpolice.lua',
   'menupolice.lua',
   'policeveh.lua',
-  'helico.lua',
 }
 
 server_scripts {

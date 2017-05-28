@@ -9,26 +9,14 @@ local allServiceCops = {}
 local blipsCops = {}
 
 local takingService = {
-  --{x=639.698, y=1.06571, z=82.7864},
+  --{x=850.156677246094, y=-1283.92004394531, z=28.0047378540039},
   {x=457.956909179688, y=-992.72314453125, z=30.6895866394043}
-  --{x=371.335, y=-1609.12, z=29.2919},
-  --{x=-1109.08, y=-845.603, z=19.3169},
-  --{x=825.883, y=-1289.87, z=28.2407},
-  --{x=1853.14, y=3687.58, z=34.267},
-  --{x=-446.327, y=6014.09, z=31.7164},
-  --{x=127.689, y=-758.05, z=242.152}
+  --{x=1856.91320800781, y=3689.50073242188, z=34.2670783996582},
+  --{x=-450.063201904297, y=6016.5751953125, z=31.7163734436035}
 }
 
 local stationGarage = {
 	{x=452.115966796875, y=-1018.10681152344, z=28.4786586761475}
-	--{x=651.766, y=-12.6001, z=82.8436},
-	--{x=172.785, y=-688.186, z=33.1262},
-	--{x=379.018, y=-1627.8, z=27.7846},
-	--{x=-888.041, y=-2372.66, z=14.0244},
-	--{x=-1124.47, y=-840.902, z=13.4015},
-	--{x=856.259, y=-1279.71, z=26.5434},
-	--{x=1858.58, y=3678.21, z=33.7007},
-	--{x=-447.844, y=6050.41, z=31.3405}
 }
 
 AddEventHandler("playerSpawned", function()
@@ -74,9 +62,9 @@ AddEventHandler('police:getArrested', function()
 	if(isCop == false) then
 		handCuffed = not handCuffed
 		if(handCuffed) then
-			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es menotté.")
+			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "You are now cuff.")
 		else
-			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es libre !")
+			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Freedom !")
 		end
 	end
 end)
@@ -84,7 +72,7 @@ end)
 RegisterNetEvent('police:payFines')
 AddEventHandler('police:payFines', function(amount)
 	TriggerServerEvent('bank:withdrawAmende', amount)
-	TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu as payé $"..amount.." d'amende.")
+	TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "You paid a $"..amount.." fine.")
 end)
 
 RegisterNetEvent('police:dropIllegalItem')
@@ -169,7 +157,7 @@ function enableCopBlips()
 				Citizen.InvokeNative( 0x5FBCA48327B914DF, blip, true )
 			end
 			
-			Citizen.Trace("Nom : "..GetPlayerName(id))
+			Citizen.Trace("Name : "..GetPlayerName(id))
 			SetBlipNameToPlayerName( blip, id )
 			SetBlipScale( blip,  0.85 )
 			SetBlipAlpha( blip, 255 )
@@ -268,7 +256,7 @@ end
 
 function ServiceOff()
 	isInService = false
-	TriggerServerEvent("jobssystem:jobs", 1)
+	TriggerServerEvent("jobssystem:jobs", 7)
 	TriggerServerEvent("police:breakService")
 	
 	allServiceCops = {}
@@ -285,7 +273,7 @@ Citizen.CreateThread(function()
         if(isCop) then
 			if(isNearTakeService()) then
 			
-				DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~casier de police',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
+				DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~cops locker',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
 				if IsControlJustPressed(1,51) then
 					OpenMenuVest()
 				end
@@ -299,9 +287,9 @@ Citizen.CreateThread(function()
 			if(isInService) then
 				if(isNearStationGarage()) then
 					if(policevehicle ~= nil) then --existingVeh
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ton ~b~véhicule',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Press ~INPUT_CONTEXT~ to store ~b~your vehicle',0,1,0.5,0.8,0.6,255,255,255,255)
 					else
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~garage de police',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~cop garage',0,1,0.5,0.8,0.6,255,255,255,255)
 					end
 					
 					if IsControlJustPressed(1,51) then
@@ -358,9 +346,9 @@ Citizen.CreateThread(function()
 			
 				if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), 449.113,-981.084,43.691, true ) < 5 then
 					if(existingVeh ~= nil) then
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ~b~ton ~b~hélicoptère',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Press ~INPUT_CONTEXT~ to store ~b~your ~b~helicopter',0,1,0.5,0.8,0.6,255,255,255,255)
 					else
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour sortir un hélicoptère',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Press ~INPUT_CONTEXT~ to drive an helicopter out',0,1,0.5,0.8,0.6,255,255,255,255)
 					end
 					
 					if IsControlJustPressed(1,51)  then
