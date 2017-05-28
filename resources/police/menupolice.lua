@@ -53,9 +53,9 @@ local menupolice = {
 				{name = "Amendes", description = ''},
 			}
 		},
-		["Fines"] = {
-			title = "Fines",
-			name = "Fines",
+		["Amendes"] = {
+			title = "Amendes",
+			name = "Amendes",
 			buttons = {
 				{name = "Rappel à la loi (50€)", description = ''},
 				{name = "Infraction mineur (100€)", description = ''},
