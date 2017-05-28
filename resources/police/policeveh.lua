@@ -20,12 +20,16 @@ local policeveh = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				--{name = "Peugeot Banalisée", costs = 0, description = {}, model = "fbi"},
+				--{name = "Police Stanier", costs = 0, description = {}, model = "police"},
+				--{name = "Police Buffalo", costs = 0, description = {}, model = "police2"},
+				--{name = "Police Interceptor", costs = 0, description = {}, model = "police3"},
 				{name = "Patrouille 1", costs = 0, description = {}, model = "police3"},
 				{name = "Patrouille 2", costs = 0, description = {}, model = "police2"},
 				{name = "Patrouille 3", costs = 0, description = {}, model = "police"},
-				{name = "Voiture banalisée", costs = 0, description = {}, model = "police4"},
-				{name = "Moto de police", costs = 0, description = {}, model = "policeb"},			
+				{name = "Voiture banalisée(avec sirene)", costs = 0, description = {}, model = "police4"},
+				{name = "Voiture banalisée rapide(sans sirene)", costs = 0, description = {}, model = "voltic"},
+				{name = "Moto de police", costs = 0, description = {}, model = "policeb"},
+			
 			}
 		},
 	}

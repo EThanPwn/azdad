@@ -9,26 +9,14 @@ local allServiceCops = {}
 local blipsCops = {}
 
 local takingService = {
-  --{x=639.698, y=1.06571, z=82.7864},
+  --{x=850.156677246094, y=-1283.92004394531, z=28.0047378540039},
   {x=457.956909179688, y=-992.72314453125, z=30.6895866394043}
-  --{x=371.335, y=-1609.12, z=29.2919},
-  --{x=-1109.08, y=-845.603, z=19.3169},
-  --{x=825.883, y=-1289.87, z=28.2407},
-  --{x=1853.14, y=3687.58, z=34.267},
-  --{x=-446.327, y=6014.09, z=31.7164},
-  --{x=127.689, y=-758.05, z=242.152}
+  --{x=1856.91320800781, y=3689.50073242188, z=34.2670783996582},
+  --{x=-450.063201904297, y=6016.5751953125, z=31.7163734436035}
 }
 
 local stationGarage = {
 	{x=452.115966796875, y=-1018.10681152344, z=28.4786586761475}
-	--{x=651.766, y=-12.6001, z=82.8436},
-	--{x=172.785, y=-688.186, z=33.1262},
-	--{x=379.018, y=-1627.8, z=27.7846},
-	--{x=-888.041, y=-2372.66, z=14.0244},
-	--{x=-1124.47, y=-840.902, z=13.4015},
-	--{x=856.259, y=-1279.71, z=26.5434},
-	--{x=1858.58, y=3678.21, z=33.7007},
-	--{x=-447.844, y=6050.41, z=31.3405}
 }
 
 AddEventHandler("playerSpawned", function()
@@ -76,7 +64,7 @@ AddEventHandler('police:getArrested', function()
 		if(handCuffed) then
 			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es menotté.")
 		else
-			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es libre !")
+			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu as été démenotté !")
 		end
 	end
 end)
@@ -268,7 +256,7 @@ end
 
 function ServiceOff()
 	isInService = false
-	TriggerServerEvent("jobssystem:jobs", 1)
+	TriggerServerEvent("jobssystem:jobs", 7)
 	TriggerServerEvent("police:breakService")
 	
 	allServiceCops = {}
@@ -285,7 +273,7 @@ Citizen.CreateThread(function()
         if(isCop) then
 			if(isNearTakeService()) then
 			
-				DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~casier de police',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
+				DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~cops locker',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
 				if IsControlJustPressed(1,51) then
 					OpenMenuVest()
 				end

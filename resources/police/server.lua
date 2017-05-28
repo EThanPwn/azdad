@@ -34,7 +34,7 @@ function s_checkIsCop(identifier)
 end
 
 function checkInventory(target)
-	local strResult = GetPlayerName(target).." Possède : "
+	local strResult = GetPlayerName(target).." own : "
 	local identifier = ""
     TriggerEvent("es:getPlayerFromId", target, function(player)
 		identifier = player.identifier
@@ -78,7 +78,7 @@ end)
 AddEventHandler('es:playerDropped', function(player)
 		local isCop = s_checkIsCop(player.identifier)
 		if(isCop ~= "nil") then
-			TriggerEvent("jobssystem:disconnectReset", player, 1)
+			TriggerEvent("jobssystem:disconnectReset", player, 7)
 		end
 end)
 
@@ -125,39 +125,39 @@ AddEventHandler('police:checkingPlate', function(plate)
 	local result = MySQL:getResults(executed_query, { 'Nom' }, "identifier")
 	if (result[1]) then
 		for _, v in ipairs(result) do
-			TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "The vehicle #"..plate.." is the property of " .. v.Nom)
+			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Le vehicule imatriculé #"..plate.." appartient à " .. v.Nom)
 		end
 	else
-		TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "The vehicle #"..plate.." isn't register !")
+		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "le vehicule imatriculé #"..plate.." est déclaré volé !")
 	end
 end)
 
 RegisterServerEvent('police:confirmUnseat')
 AddEventHandler('police:confirmUnseat', function(t)
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, GetPlayerName(t).. " is out !")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, GetPlayerName(t).. " is out !")
 	TriggerClientEvent('police:unseatme', t)
 end)
 
 RegisterServerEvent('police:targetCheckInventory')
 AddEventHandler('police:targetCheckInventory', function(t)
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, checkInventory(t))
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, checkInventory(t))
 end)
 
 RegisterServerEvent('police:finesGranted')
 AddEventHandler('police:finesGranted', function(t, amount)
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, GetPlayerName(t).. " paid a $"..amount.." fines.")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, GetPlayerName(t).. " paid a $"..amount.." fines.")
 	TriggerClientEvent('police:payFines', t, amount)
 end)
 
 RegisterServerEvent('police:cuffGranted')
 AddEventHandler('police:cuffGranted', function(t)
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, GetPlayerName(t).. " toggle cuff (except if it's a cop :3 ) !")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, GetPlayerName(t).. " toggle cuff (except if it's a cop :3 ) !")
 	TriggerClientEvent('police:getArrested', t)
 end)
 
 RegisterServerEvent('police:forceEnterAsk')
 AddEventHandler('police:forceEnterAsk', function(t, v)
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, GetPlayerName(t).. " get to the car ! (if he's cuffed :) )")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, GetPlayerName(t).. " get to the car ! (if he's cuffed :) )")
 	TriggerClientEvent('police:forcedEnteringVeh', t, v)
 end)
 
@@ -179,41 +179,41 @@ end)
 -----------------------------------------------------------------------
 TriggerEvent('es:addGroupCommand', 'copadd', "admin", function(source, args, user)
      if(not args[2]) then
-		TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "Usage : /copadd [ID]")	
+		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /copadd [ID]")	
 	else
 		if(GetPlayerName(tonumber(args[2])) ~= nil)then
 			local player = tonumber(args[2])
 			TriggerEvent("es:getPlayerFromId", player, function(target)
 				addCop(target.identifier)
-				TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "Roger that !")
-				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "GOUVERNRMENT", false, "Congrats, you're now a cop !~w~.")
+				TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Roger that !")
+				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "Government", false, "Congrats, you're now a cop !~w~.")
 				TriggerClientEvent('police:nowCop', player)
 			end)
 		else
-			TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "No player with this ID !")
+			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "No player with this ID !")
 		end
 	end
 end, function(source, args, user) 
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "You haven't the permission to do that !")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "You haven't the permission to do that !")
 end)
 
 TriggerEvent('es:addGroupCommand', 'coprem', "admin", function(source, args, user) 
      if(not args[2]) then
-		TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "Usage : /coprem [ID]")	
+		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /coprem [ID]")	
 	else
 		if(GetPlayerName(tonumber(args[2])) ~= nil)then
 			local player = tonumber(args[2])
 			TriggerEvent("es:getPlayerFromId", player, function(target)
 				remCop(target.identifier)
-				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "GOUVERNRMENT", false, "You're no longer a cop !~w~.")
-				TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "Roger that !")
-				--TriggerClientEvent('chatMessage', player, 'GOUVERNRMENT', {255, 0, 0}, "You're no longer a cop !")
+				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "Government", false, "You're no longer a cop !~w~.")
+				TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Roger that !")
+				--TriggerClientEvent('chatMessage', player, 'GOVERNMENT', {255, 0, 0}, "You're no longer a cop !")
 				TriggerClientEvent('police:noLongerCop', player)
 			end)
 		else
-			TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "No player with this ID !")
+			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "No player with this ID !")
 		end
 	end
 end, function(source, args, user) 
-	TriggerClientEvent('chatMessage', source, 'GOUVERNRMENT', {255, 0, 0}, "You haven't the permission to do that !")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "You haven't the permission to do that !")
 end)
