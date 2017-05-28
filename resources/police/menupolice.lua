@@ -56,18 +56,21 @@ local menupolice = {
 			title = "Amendes",
 			name = "Amendes",
 			buttons = {
-				{name = "$250", description = ''},
-				{name = "$500", description = ''},
-				{name = "$1000", description = ''},
-				{name = "$1500", description = ''},
-				{name = "$2000", description = ''},
-				{name = "$4000", description = ''},
-				{name = "$6000", description = ''},
-				{name = "$8000", description = ''},
-				{name = "$10000", description = ''},
-				--[[{name = "$11000", description = ''},
-				{name = "$15000", description = ''},
-				{name = "$25000", description = ''},
+				{name = "Rappel à la loi (50€)", description = ''},
+				{name = "Infraction mineur (100€)", description = ''},
+				{name = "Refus d'optempérer (200€)", description = ''},
+				{name = "Infraction + DDF (250€)", description = ''},
+				{name = "Infraction Majeur (500€)", description = ''},
+				{name = "Possesion de Drogue (500€)", description = ''},
+				{name = "Agression (1000€)", description = ''},
+				{name = "Vol de vehicule (1500€)", description = ''},
+				{name = "Meutre (4000€)", description = ''},
+				{name = "Meutre sur agent (10000€)", description = ''},
+				{name = "Deal de weed (9000€)", description = ''},
+				{name = "Deal de crack (10000€)", description = ''},
+				{name = "Deal de coke (11000€)", description = ''},
+				{name = "Deal de Meth (12000€)", description = ''},
+				--[[{name = "$25000", description = ''},
 				{name = "$30000", description = ''},
 				{name = "$35000", description = ''},
 				{name = "$40000", description = ''},
@@ -117,24 +120,35 @@ function ButtonSelectedPolice(button)
 			UnseatVehicle()
 		end
 	elseif this == "Amendes" then
-		if btn == "$250"then
+		if btn == "Rappel à la loi (50€)"then
+			Fines(50)
+		elseif btn == "Infraction mineur (100€)"then
+			Fines(100)
+		elseif btn == "Refus d'optempérer (200€)"then
+			Fines(200)
+		elseif btn == "Infraction + DDF (250€)"then
 			Fines(250)
-		elseif btn == "$500" then
+		elseif btn == "Infraction Majeur (500€)"then
+			Fines(250)
+		elseif btn == "Possesion de Drogue (500€)" then
 			Fines(500)
-		elseif btn == "$1000" then
+		elseif btn == "Agression (1000€)" then
 			Fines(1000)
-		elseif btn == "$1500" then
+		elseif btn == "Vol de vehicule (1500€)" then
 			Fines(1500)
-		elseif btn == "$2000" then
-			Fines(2000)
-		elseif btn == "$4000" then
+		elseif btn == "Meutre (4000€)" then
 			Fines(4000)
-		elseif btn == "$6000" then
-			Fines(6000)
-		elseif btn == "$8000" then
-			Fines(8000)
-		elseif btn == "$10000" then
+		elseif btn == "Meutre sur agent (10000€)" then
 			Fines(10000)
+		elseif btn == "Deal de weed (9000€)" then
+			Fines(9000)
+		elseif btn == "Deal de crack (10000€)" then
+			Fines(10000)
+		elseif btn == "Deal de coke (11000€)" then
+			Fines(11000)
+		elseif btn == "Deal de Meth (12000€)" then
+			Fines(12000)
+		
 		--[[elseif btn == "$11000" then
 			Fines(11000)
 		elseif btn == "$15000" then
