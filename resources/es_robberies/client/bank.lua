@@ -5,19 +5,19 @@ local secondsRemaining = 0
 local banks = {
 	["fleeca"] = {
 		position = { ['x'] = 147.04908752441, ['y'] = -1044.9448242188, ['z'] = 29.36802482605 },
-		reward = 2000,
+		reward = 5000,
 		prettyName = "Fleeca Bank",
 		lastRob = 0
 	},
 	["fleeca2"] = {
 		position = { ['x'] = -2957.6674804688, ['y'] = 481.45776367188, ['z'] = 15.697026252747 },
-		reward = 2000,
+		reward = 5000,
 		prettyName = "Fleeca Bank 2",
 		lastRob = 0
 	},
 	["blainecounty"] = {
 		position = { ['x'] = -107.06505584717, ['y'] = 6474.8012695313, ['z'] = 31.62670135498 },
-		reward = 2000,
+		reward = 5000,
 		prettyName = "Blaine County Savings",
 		lastRob = 0
 	}
