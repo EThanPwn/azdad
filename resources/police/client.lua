@@ -256,7 +256,7 @@ end
 
 function ServiceOff()
 	isInService = false
-	TriggerServerEvent("jobssystem:jobs", 7)
+	TriggerServerEvent("jobssystem:jobs", 2)
 	TriggerServerEvent("police:breakService")
 	
 	allServiceCops = {}
