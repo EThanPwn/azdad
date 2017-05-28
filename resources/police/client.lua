@@ -62,9 +62,9 @@ AddEventHandler('police:getArrested', function()
 	if(isCop == false) then
 		handCuffed = not handCuffed
 		if(handCuffed) then
-			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "You are now cuff.")
+			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es menotté.")
 		else
-			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Freedom !")
+			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu as été démenotté !")
 		end
 	end
 end)
@@ -72,7 +72,7 @@ end)
 RegisterNetEvent('police:payFines')
 AddEventHandler('police:payFines', function(amount)
 	TriggerServerEvent('bank:withdrawAmende', amount)
-	TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "You paid a $"..amount.." fine.")
+	TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu as payé $"..amount.." d'amende.")
 end)
 
 RegisterNetEvent('police:dropIllegalItem')
@@ -157,7 +157,7 @@ function enableCopBlips()
 				Citizen.InvokeNative( 0x5FBCA48327B914DF, blip, true )
 			end
 			
-			Citizen.Trace("Name : "..GetPlayerName(id))
+			Citizen.Trace("Nom : "..GetPlayerName(id))
 			SetBlipNameToPlayerName( blip, id )
 			SetBlipScale( blip,  0.85 )
 			SetBlipAlpha( blip, 255 )
@@ -287,9 +287,9 @@ Citizen.CreateThread(function()
 			if(isInService) then
 				if(isNearStationGarage()) then
 					if(policevehicle ~= nil) then --existingVeh
-						DisplayHelpText('Press ~INPUT_CONTEXT~ to store ~b~your vehicle',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ton ~b~véhicule',0,1,0.5,0.8,0.6,255,255,255,255)
 					else
-						DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~cop garage',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~garage de police',0,1,0.5,0.8,0.6,255,255,255,255)
 					end
 					
 					if IsControlJustPressed(1,51) then
@@ -346,9 +346,9 @@ Citizen.CreateThread(function()
 			
 				if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), 449.113,-981.084,43.691, true ) < 5 then
 					if(existingVeh ~= nil) then
-						DisplayHelpText('Press ~INPUT_CONTEXT~ to store ~b~your ~b~helicopter',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ~b~ton ~b~hélicoptère',0,1,0.5,0.8,0.6,255,255,255,255)
 					else
-						DisplayHelpText('Press ~INPUT_CONTEXT~ to drive an helicopter out',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour sortir un hélicoptère',0,1,0.5,0.8,0.6,255,255,255,255)
 					end
 					
 					if IsControlJustPressed(1,51)  then

@@ -23,12 +23,12 @@ local vestpolice = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				{name = "Take your service", description = ""},
-				{name = "Break your service", description = ""},
-				{name = "Bulletproof jacket", description = ""},
-				{name = "Take offbulletproof jacket", description = ""},
-				{name = "High-visibility clothing", description = ""},
-				{name = "Take off High-visibility clothing", description = ""},
+				{name = "Prendre ton service", description = ""},
+				{name = "Arrêter ton service", description = ""},
+				{name = "Gilet pare-balles", description = ""},
+				{name = "Retirer Gilet pare-balles", description = ""},
+				{name = "Gilet fluo", description = ""},
+				{name = "Retirer Gilet fluo", description = ""},
 			}
 		},
 	}
@@ -43,16 +43,16 @@ function ButtonSelectedVest(button)
 	local this = vestpolice.currentmenu
 	local btn = button.name
 	if this == "main" then
-		if btn == "Take your service" then
+		if btn == "Prendre ton service" then
 			ServiceOn()                                                 -- En Service + Uniforme
 			giveUniforme()
-			drawNotification("You're now in ~g~service")
-			drawNotification("Press ~g~F5~w~ to open the ~b~cop menu")
-		elseif btn == "Break your service" then
+			drawNotification("Tu es en ~g~service")
+			drawNotification("Appuie sur ~g~F5~w~ pour ouvrir le ~b~menu police")
+		elseif btn == "Arrêter ton service" then
 			ServiceOff()
 			removeUniforme()                                            --Finir Service + Enleve Uniforme
-			drawNotification("You've ~r~done your service")
-		elseif btn == "Bulletproof jacket" then
+			drawNotification("Tu n'es plus en ~r~service")
+		elseif btn == "Gilet pare-balles" then
 			Citizen.CreateThread(function()
 				if(GetEntityModel(GetPlayerPed(-1)) == hashSkin) then
 					SetPedComponentVariation(GetPlayerPed(-1), 9, 4, 1, 2)  --Bulletproof jacket
@@ -60,11 +60,11 @@ function ButtonSelectedVest(button)
 					SetPedComponentVariation(GetPlayerPed(-1), 9, 6, 1, 2)
 				end
 			end)
-		elseif btn == "Take offbulletproof jacket" then
+		elseif btn == "Retirer Gilet pare-balles" then
 			Citizen.CreateThread(function()
 				SetPedComponentVariation(GetPlayerPed(-1), 9, 0, 1, 2)  --Remove Bulletproof jacket
 			end)
-		elseif btn == "High-visibility clothing" then
+		elseif btn == "Gilet fluo" then
 			Citizen.CreateThread(function()
 				if(GetEntityModel(GetPlayerPed(-1)) == hashSkin) then
 					SetPedComponentVariation(GetPlayerPed(-1), 8, 59, 0, 2) --High-visibility clothing
@@ -72,7 +72,7 @@ function ButtonSelectedVest(button)
 					SetPedComponentVariation(GetPlayerPed(-1), 8, 36, 0, 2)
 				end
 			end)
-		elseif btn == "Take off High-visibility clothing" then
+		elseif btn == "Retirer Gilet fluo" then
 			Citizen.CreateThread(function()
 				if(GetEntityModel(GetPlayerPed(-1)) == hashSkin) then
 					SetPedComponentVariation(GetPlayerPed(-1), 8, 58, 0, 2) --Remove High-visibility clothing + Remet la ceinture
@@ -112,10 +112,12 @@ function giveUniforme()
 		
 		end
 		
-		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PISTOL50"), 150, true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PISTOL50"), 48, true, true)
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_STUNGUN"), true, true)
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_NIGHTSTICK"), true, true)
-		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PUMPSHOTGUN"), 150, true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PUMPSHOTGUN"), 32, true, true)
+		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_SNIPERRIFLE"), 150, true, true)
 	end)
 end
 

@@ -125,10 +125,10 @@ AddEventHandler('police:checkingPlate', function(plate)
 	local result = MySQL:getResults(executed_query, { 'Nom' }, "identifier")
 	if (result[1]) then
 		for _, v in ipairs(result) do
-			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "The vehicle #"..plate.." is the property of " .. v.Nom)
+			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Le vehicule imatriculé #"..plate.." appartient à " .. v.Nom)
 		end
 	else
-		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "The vehicle #"..plate.." isn't register !")
+		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "le vehicule imatriculé #"..plate.." est déclaré volé !")
 	end
 end)
 
