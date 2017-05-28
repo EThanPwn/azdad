@@ -27,7 +27,7 @@ RegisterNetEvent('es_robberies:robbingStore')
 AddEventHandler('es_robberies:robbingStore', function(rob)
 	holdingup = true
 	store = rob
-	secondsRemaining = 120
+	secondsRemaining = 180
 end)
 
 RegisterNetEvent('es_robberies:robberyStoreCancelled')

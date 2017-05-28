@@ -95,7 +95,7 @@ AddEventHandler('es_robberies:robBank', function(rob)
 							end
 						end)
 
-						if(cops >= 0)then
+						if(cops >= 3)then
 
 							TriggerEvent('es:getPlayers', function(pl)
 								for k,v in pairs(pl) do
@@ -135,7 +135,7 @@ AddEventHandler('es_robberies:robBank', function(rob)
 								end
 							end)
 						else
-							TriggerClientEvent('chatMessage', source, "ROBBERY", {255, 0, 0}, "There are not enough police online. (Atleast 2 needed)")
+							TriggerClientEvent('chatMessage', source, "ROBBERY", {255, 0, 0}, "il n'y a pas assez de flic en ligne . (minimum 2)")
 						end
 					end
 				end
