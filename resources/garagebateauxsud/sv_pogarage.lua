@@ -1,7 +1,10 @@
 ---SCRIPT Mirardes-----
 
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 -- HELPER FUNCTIONS
 function nameJob(player)

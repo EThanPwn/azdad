@@ -1,7 +1,10 @@
 --METTRE DANS LE DOSSIER "vdk_inventory".
 
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 RegisterServerEvent("gabs:eatvdkitem")
 AddEventHandler("gabs:eatvdkitem", function(qty, id)

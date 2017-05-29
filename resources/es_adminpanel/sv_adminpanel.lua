@@ -1,8 +1,11 @@
 -- Loading MySQL Class
-require "resources/essentialmode/lib/MySQL"
+--require "resources/essentialmode/lib/MySQL"
 
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+--MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 -- Rcon commands
 AddEventHandler('rconCommand', function(commandName, args)

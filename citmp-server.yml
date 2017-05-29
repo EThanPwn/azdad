@@ -5,6 +5,7 @@ PreParseResources:
     - mapmanager
 
 AutoStartResources:
+    - gconfig
     - rabtor_simple_loadingscreen
     - chat
     - spawnmanager
@@ -75,9 +76,10 @@ AutoStartResources:
     #- es_weaponstore
     - clothingshop
     #- whitelist
-    - sync
+    #- sync
     - skin-map
     - tructest
+    
     
     
 

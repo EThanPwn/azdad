@@ -1,5 +1,8 @@
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "fivem", "")
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open("127.0.0.1", "gta5_gamemode_essential", "fivem", "")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 outfits = {"face","","hair","","pants","","shoes","","shirt","","","torso"}
 

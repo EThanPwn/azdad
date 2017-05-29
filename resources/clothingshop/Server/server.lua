@@ -2,10 +2,12 @@
 --                     Author: Xavier CHOPIN <www.github.com/xchopin>                --
 --                                 License: Apache 2.0                               --
 ---------------------------------------------------------------------------------------
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
-require "resources/essentialmode/lib/MySQL"
+--require "resources/essentialmode/lib/MySQL"
 local settings = require "resources/FiveM_ClothingShop/Server/settings"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+--MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
 local SQL_COLUMNS = {
     'skin',
     'face',

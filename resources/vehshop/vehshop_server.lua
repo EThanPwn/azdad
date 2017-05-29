@@ -1,6 +1,9 @@
 -- Loading MySQL Class
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 RegisterServerEvent('CheckMoneyForVeh')
 RegisterServerEvent('BuyForVeh')
@@ -26,9 +29,9 @@ AddEventHandler('CheckMoneyForVeh', function(name, vehicle, price)
         if (tonumber(user.money) >= tonumber(price)) then
           user:removeMoney((price))
           TriggerClientEvent('FinishMoneyCheckForVeh', source, name, vehicle, price)
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
+          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Bonne route!\n")
         else
-          TriggerClientEvent("es_freeroam:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
+          TriggerClientEvent("es_roleplay:notify", source, "CHAR_SIMEON", 1, "Simeon", false, "Fonds insuffisants!\n")
        end
       end
    else
