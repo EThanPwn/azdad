@@ -79,6 +79,7 @@ AutoStartResources:
     #- sync
     - skin-map
     - tructest
+    - es_afterStart #rentrage de voiture toujorus laisser en dernier
     
     
     
@@ -88,6 +89,7 @@ AutoStartResources:
 RconPassword: Labite2
 
 # configure this, please
+#Hostname: ^4FR^7/^1BE ^2| ^6ONE GENERATION ^2| ^3SERIOUS RP ^2| ^5ADMIN ACTIF ^2|^1FREEACCESS | (BETA 0.2)
 Hostname: cdvk test ethan1
 
 # don't change this, it'll cause your server to be unlisted
