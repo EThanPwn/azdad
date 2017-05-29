@@ -76,7 +76,7 @@ AutoStartResources:
     #- es_weaponstore
     - clothingshop
     #- whitelist
-    - sync
+    #- sync
     - skin-map
     - tructest
     
