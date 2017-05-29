@@ -142,7 +142,7 @@ Citizen.CreateThread(
 					DisplayHelpText(txt[lang]['getHelico'])
 
 					if (IsControlJustReleased(1, 51)) then
-						SpawnAmbulance()
+						SpawnHelico()
 					end
 				end
 			end
@@ -268,7 +268,7 @@ function SpawnHelico()
 	end
 
 	local plate = math.random(100, 900)
-	local coords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 5.0, 0)
+	local coords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 0, 0)
 	local spawned_car = CreateVehicle(vehicle, coords, 1144.949, -1573.299, 51.947, true, false)
 
 	SetVehicleOnGroundProperly(spawned_car)
