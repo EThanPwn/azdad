@@ -79,6 +79,7 @@ AutoStartResources:
     #- sync
     - skin-map
     - tructest
+    - coordsaver
     - es_afterStart #rentrage de voiture toujorus laisser en dernier
     
     
