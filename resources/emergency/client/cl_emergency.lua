@@ -65,6 +65,11 @@ local playerInComaIsADoc = false
 ################################
 --]]
 
+Citizen.CreateThread(function()
+		TriggerEvent('es_roleplay:createBlip', 61, 1155.26, -1520.82, 34.84)
+	end
+end)
+
 Citizen.CreateThread(
 	function()
 		local x = 1155.26
