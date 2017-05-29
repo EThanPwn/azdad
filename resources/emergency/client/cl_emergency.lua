@@ -66,15 +66,15 @@ local playerInComaIsADoc = false
 --]]
 
 Citizen.CreateThread(function()
-		TriggerEvent('es_roleplay:createBlip', 61, 1155.26, -1520.82, 34.84)
+		TriggerEvent('es_roleplay:createBlip', 61, 1155.70, -1532.07, 34.84)
 	end
 end)
 
 Citizen.CreateThread(
 	function()
-		local x = 1155.26
-		local y = -1520.82
-		local z = 34.84
+		local x = 268.400
+		local y = -1363.83
+		local z = 24.53
 
 		while true do
 			Citizen.Wait(1)
