@@ -1,6 +1,9 @@
-require "resources/essentialmode/lib/MySQL"
+--require "resources/essentialmode/lib/MySQL"
 -- MySQL:open("IP", "databasname", "user", "password")
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+--MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 RegisterServerEvent("mm:spawn")
 AddEventHandler("mm:spawn", function()

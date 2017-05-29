@@ -5,9 +5,11 @@
 -- Time: 12:53
 -- To change this template use File | Settings | File Templates.
 --
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open("127.0.0.1", "gta5_gamemode_essential", "root", "18020603")
 
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 RegisterServerEvent("shopcloths:saveItem")
 AddEventHandler("shopcloths:saveItem", function(item)

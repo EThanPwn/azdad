@@ -1,5 +1,8 @@
-require "resources/essentialmode/lib/MySQL"
-MySQL:open(database.host, database.name, database.username, database.password)
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open(database.host, database.name, database.username, database.password)
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 RegisterServerEvent("jobs:getJobs")
 
