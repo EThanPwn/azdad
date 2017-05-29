@@ -26,6 +26,7 @@ local txt = {
 		['getService'] = 'Appuyez sur ~g~E~s~ pour prendre votre service',
 		['dropService'] = 'Appuyez sur ~g~E~s~ pour terminer votre service',
 		['getAmbulance'] = 'Appuyez sur ~g~E~s~ pour obtenir un véhicule',
+		['getHelico'] = 'Appuyez sur ~g~E~s~ pour obtenir un hélicoptère',
 		['callTaken'] = 'L\'appel a été pris par ~b~',
 		['emergency'] = '<b>~r~URGENCE~s~ <br><br>~b~Raison~s~: </b>',
 		['takeCall'] = '<b>Appuyez sur ~g~Y~s~ pour prendre l\'appel</b>',
@@ -64,11 +65,16 @@ local playerInComaIsADoc = false
 ################################
 --]]
 
+Citizen.CreateThread(function()
+		TriggerEvent('es_roleplay:createBlip', 61, 1155.70, -1532.07, 34.84)
+	end
+end)
+
 Citizen.CreateThread(
 	function()
-		local x = 1155.26
-		local y = -1520.82
-		local z = 34.84
+		local x = 268.400
+		local y = -1363.83
+		local z = 24.53
 
 		while true do
 			Citizen.Wait(1)
@@ -114,6 +120,34 @@ Citizen.CreateThread(
 
 					if (IsControlJustReleased(1, 51)) then
 						SpawnAmbulance()
+					end
+				end
+			end
+		end
+end)
+
+-- gethelico
+
+Citizen.CreateThread(
+	function()
+		local x = 1144.94
+		local y = -1573.29
+		local z = 51.9474
+
+		while true do
+			Citizen.Wait(1)
+
+			local playerPos = GetEntityCoords(GetPlayerPed(-1), true)
+
+			if (Vdist(playerPos.x, playerPos.y, playerPos.z, x, y, z) < 100.0) and isInService and jobId == 15 then
+				-- Service car
+				DrawMarker(1, x, y, z - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 1.5001, 255, 165, 0,165, 0, 0, 0,0)
+
+				if (Vdist(playerPos.x, playerPos.y, playerPos.z, x, y, z) < 2.0) then
+					DisplayHelpText(txt[lang]['getHelico'])
+
+					if (IsControlJustReleased(1, 51)) then
+						SpawnHelico()
 					end
 				end
 			end
@@ -216,6 +250,31 @@ function SpawnAmbulance()
 	local plate = math.random(100, 900)
 	local coords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 5.0, 0)
 	local spawned_car = CreateVehicle(vehicle, coords, 431.436, - 996.786, 25.1887, true, false)
+
+	SetVehicleOnGroundProperly(spawned_car)
+	SetVehicleNumberPlateText(spawned_car, "MEDIC")
+	SetPedIntoVehicle(myPed, spawned_car, - 1)
+	SetModelAsNoLongerNeeded(vehicle)
+	Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(spawned_car))
+end
+
+--hélico
+
+function SpawnHelico()
+	Citizen.Wait(0)
+	local myPed = GetPlayerPed(-1)
+	local player = PlayerId()
+	local vehicle = GetHashKey('frogger')
+
+	RequestModel(vehicle)
+
+	while not HasModelLoaded(vehicle) do
+		Wait(1)
+	end
+
+	local plate = math.random(100, 900)
+	local coords = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 0, 0)
+	local spawned_car = CreateVehicle(vehicle, coords, 1144.949, -1573.299, 51.947, true, false)
 
 	SetVehicleOnGroundProperly(spawned_car)
 	SetVehicleNumberPlateText(spawned_car, "MEDIC")
