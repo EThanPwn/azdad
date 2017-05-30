@@ -3,7 +3,7 @@ require "resources/gconfig/gconfig"
 
 local max_number_weapons = 9999999 --maximum number of weapons that the player can buy. Weapons given at spawn doesn't count.
 -- local cost_ratio = 100 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
-local cost_ratio = 100000 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
+local cost_ratio = 1000000000000000 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
 
 RegisterServerEvent('CheckMoneyForWea')
 AddEventHandler('CheckMoneyForWea', function(weapon,price)
