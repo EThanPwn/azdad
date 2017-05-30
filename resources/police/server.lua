@@ -48,7 +48,8 @@ function checkInventory(target)
 				if(v.quantity ~= 0) then
 					strResult = strResult .. v.quantity .. " de " .. v.libelle .. ", "
 				end
-				if(v.isIllegal == "True") then
+				print("DEBUG" .. v.isIllegal)
+				if(v.isIllegal == "1") then
 					TriggerClientEvent('police:dropIllegalItem', target, v.item_id)
 				end
 			end
