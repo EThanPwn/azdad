@@ -80,6 +80,7 @@ AutoStartResources:
     - skin-map
     - tructest
     - coordsaver
+    - carte_ident
     - es_afterStart #rentrage de voiture toujorus laisser en dernier
     
     
