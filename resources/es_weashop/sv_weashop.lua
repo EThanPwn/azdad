@@ -3,7 +3,7 @@ require "resources/gconfig/gconfig"
 
 local max_number_weapons = 9999999 --maximum number of weapons that the player can buy. Weapons given at spawn doesn't count.
 -- local cost_ratio = 100 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
-local cost_ratio = 1 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
+--local cost_ratio = 1 --Ratio for withdrawing the weapons. This is price/cost_ratio = cost.
 
 RegisterServerEvent('CheckMoneyForWea')
 AddEventHandler('CheckMoneyForWea', function(weapon,price)
@@ -24,7 +24,7 @@ AddEventHandler('CheckMoneyForWea', function(weapon,price)
 				-- Pay the shop (price)
 				user:removeMoney((price))
 				MySQL:executeQuery("INSERT INTO user_weapons (identifier,weapon_model,withdraw_cost) VALUES ('@username','@weapon','@cost')",
-				{['@username'] = player, ['@weapon'] = weapon, ['@cost'] = (price)/cost_ratio})
+				{['@username'] = player, ['@weapon'] = weapon})--, ['@cost'] = (price)/cost_ratio})
 				-- Trigger some client stuff
 				TriggerClientEvent('FinishMoneyCheckForWea',source)
 				TriggerClientEvent("es_rolepay:notify", source, "CHAR_MP_ROBERTO", 1, "Roberto", false, "MURDER TIME. FUN TIME!\n")
