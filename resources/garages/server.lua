@@ -173,7 +173,7 @@ AddEventHandler('garages:SelVeh', function(plate)
     if(result)then
       for k,v in ipairs(result)do
         price = v.vehicle_price
-      local price = price / 1.5      
+      local price = price / 2      
       user:addMoney((price))
       end
     end
