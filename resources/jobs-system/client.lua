@@ -92,6 +92,8 @@ end
 
 function changeJob(id)
   TriggerServerEvent("jobssystem:jobs", id)
+  Menu.hidden = not Menu.hidden
+  Menu.renderGUI()
 end
 
 ---------------------------------- CITIZEN ----------------------------------
@@ -122,11 +124,11 @@ Citizen.CreateThread(function()
     Citizen.Wait(0)
     if (IsNearJobs() == true) then
       drawTxt('Appuyer sur ~g~H~s~ pour accéder au menu des métiers',0,1,0.5,0.8,0.6,255,255,255,255)
-    if (IsControlJustPressed(1,Keys["H"]) and IsNearJobs() == true) then
+		if (IsControlJustPressed(1,Keys["H"]) and IsNearJobs() == true) then
       menuJobs()
       Menu.hidden = not Menu.hidden 
-    end
-  end
+		end
+	end
     Menu.renderGUI()
   end
 end)

@@ -23,6 +23,7 @@ uSettings.chatTags = {
 uSettings.firstSpawned = function(source)
 	TriggerClientEvent('chatMessage', source, 'One Génération', {255, 0, 0}, "Bienvenu à toi ^2" .. GetPlayerName(source) .. "^0!")
 	TriggerClientEvent('chatMessage', source, 'One Génération', {255, 0, 0}, "Pour voir le discord tape ^2/discord")
+	TriggerClientEvent('chatMessage', source, 'One Génération', {255, 0, 0}, "Pour régler ta voix ^2/v chu, /v cri ou /v normal")
 	TriggerClientEvent('chatMessage', source, 'One Génération', {255, 0, 0}, "Si tu as besoin d'aide fais ^2/help")
 	--TriggerClientEvent('chatMessage', source, 'AREA', {255, 0, 0}, "Point de spawn actuel: ^2" .. game.currentArea.name)
 end
