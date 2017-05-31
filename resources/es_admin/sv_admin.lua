@@ -40,6 +40,13 @@ end,function(source, args, user)
     TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Qu'est-ce que t'as essayé là ? SAGOUIN !")
 end)
 
+-- car 
+TriggerEvent('es:addGroupCommand', 'ecar',"owner",  function(source, args, user)
+    TriggerClientEvent('es_admin:spawnVeh', source, args[2])
+end,function(source, args, user)
+    TriggerClientEvent('chatMessage', source, "SYSTEM", {255, 0, 0}, "Qu'est-ce que t'as essayé là ? SAGOUIN !")
+end)
+
 -- delv
 TriggerEvent('es:addGroupCommand', 'akgb', 3, function(source, args, user)
 	TriggerClientEvent( 'deleteVehicle', source )
