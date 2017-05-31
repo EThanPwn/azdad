@@ -92,6 +92,8 @@ end
 
 function changeJob(id)
   TriggerServerEvent("jobssystem:jobs", id)
+  Menu.hidden = not Menu.hidden
+  Menu.renderGUI()
 end
 
 ---------------------------------- CITIZEN ----------------------------------
