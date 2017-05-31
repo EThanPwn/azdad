@@ -19,6 +19,23 @@ AddEventHandler('es_admin:spawnVehicle', function(v)
 	end
 end)
 
+RegisterNetEvent('es_admin:spawnVeh')
+AddEventHandler('es_admin:spawnVeh', function(v)
+	local carid = GetHashKey(v)
+	local playerPed = GetPlayerPed(-1)
+	if playerPed and playerPed ~= -1 then
+		RequestModel(carid)
+		while not HasModelLoaded(carid) do
+				Citizen.Wait(0)
+		end
+		local playerCoords = GetEntityCoords(playerPed)
+
+		veh = CreateVehicle(carid, playerCoords, 0.0, true, false)
+		TaskWarpPedIntoVehicle(playerPed, veh, -1)
+		SetEntityInvincible(veh, false)
+	end
+end)
+
 local id = Citizen.InvokeNative(
 	0xBFEFE3321A3F5015, 
 	GetPlayerPed(-1), 
