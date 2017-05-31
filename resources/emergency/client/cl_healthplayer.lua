@@ -26,12 +26,12 @@ local txt = {
 		['inComa'] = '~r~Vous êtes dans le coma',
 		['accident'] = 'Un accident s\'est produit',
 		['murder'] = 'Tentative de meurtre',
-		['ambIsComming'] = 'Une ~b~ambulance~s~ est en route !',
+		['ambIsComming'] = 'Les ~b~secours~s~ sont en route !',
 		['res'] = 'Vous avez été réanimé',
 		['ko'] = 'Vous êtes KO !',
-		['callAmb'] = 'Appuyez sur ~g~E~s~ pour appeler une ambulance',
+		['callAmb'] = 'Appuyez sur ~g~E~s~ pour appeler les secours',
 		['respawn'] = 'Appuyez sur ~r~X~s~ pour respawn',
-		['youCallAmb'] = 'Vous avez appelé une ~b~ambulance~s~'
+		['youCallAmb'] = 'Vous avez appelé les ~b~secours~s~'
   },
 
 	['en'] = {

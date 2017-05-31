@@ -284,7 +284,7 @@ function StartEmergency(x, y, z, sourcePlayerInComa)
 	SetBlipSprite(BLIP_EMERGENCY, 2)
 	SetNewWaypoint(x, y)
 	SetBlipRoute(BLIP_EMERGENCY,  true)
-	SetBlipRouteColour( BLIP_EMERGENCY,  1 )
+	--SetBlipRouteColour( BLIP_EMERGENCY,  1 )
 
 	SendNotification(txt[lang]['gps'])
 
