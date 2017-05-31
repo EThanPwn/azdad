@@ -75,7 +75,7 @@ function IsNearJobs()
   for _, item in pairs(changeYourJob) do
     local distance = GetDistanceBetweenCoords(item.x, item.y, item.z,  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
     if(distance <= 10) then
-      return true
+      return false
     end
   end
 end
@@ -122,7 +122,7 @@ end)
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
-    if (IsNearJobs() == true) and GetDistanceBetweenCoords(changeYourJob[4],changeYourJob[5],changeYourJob[6],GetEntityCoords(LocalPed())) < 5 then
+    if (IsNearJobs() == true) then
       drawTxt('Appuyer sur ~g~H~s~ pour accéder au menu des métiers',0,1,0.5,0.8,0.6,255,255,255,255)
 		if (IsControlJustPressed(1,Keys["H"]) and IsNearJobs() == true) then
       menuJobs()
