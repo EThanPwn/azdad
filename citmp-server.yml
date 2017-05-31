@@ -1,5 +1,5 @@
 
-ListenPort: 30122
+ListenPort: 30120
 
 PreParseResources:
     - mapmanager
