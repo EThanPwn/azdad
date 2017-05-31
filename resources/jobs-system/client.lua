@@ -74,7 +74,7 @@ function IsNearJobs()
   local plyCoords = GetEntityCoords(ply, 0)
   for _, item in pairs(changeYourJob) do
     local distance = GetDistanceBetweenCoords(item.x, item.y, item.z,  plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
-    if(distance < 5) then
+    if(distance <= 10) then
       return true
     end
   end
