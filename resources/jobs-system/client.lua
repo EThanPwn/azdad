@@ -96,6 +96,7 @@ function changeJob(id)
   Menu.renderGUI()
 end
 
+function JobMenu:close()self.currentmenu="main"self.open=false end
 ---------------------------------- CITIZEN ----------------------------------
 
 Citizen.CreateThread(function()
@@ -127,6 +128,9 @@ Citizen.CreateThread(function()
     if (IsControlJustPressed(1,Keys["H"]) and IsNearJobs() == true) then
       menuJobs()
       Menu.hidden = not Menu.hidden 
+    end
+	else
+            skinMenu:close()
     end
   end
     Menu.renderGUI()
