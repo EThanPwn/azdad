@@ -96,7 +96,7 @@ function changeJob(id)
   Menu.renderGUI()
 end
 
-function JobMenu:close()self.currentmenu="main"self.open=false end
+function jobMenu:close()self.currentmenu="main"self.open=false end
 ---------------------------------- CITIZEN ----------------------------------
 
 Citizen.CreateThread(function()
@@ -130,7 +130,7 @@ Citizen.CreateThread(function()
       Menu.hidden = not Menu.hidden 
     end
 	else
-            skinMenu:close()
+            jobMenu:close()
     end
   end
     Menu.renderGUI()
