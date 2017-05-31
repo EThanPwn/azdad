@@ -2,7 +2,11 @@
 
 -- Blacklisted vehicle models
 carblacklist = {
-	"RHINO"
+	"RHINO",
+	"LAZER",
+	"HYDRA",
+	"SAVAGE",
+	"BUZZARD"
 }
 
 -- CODE --
