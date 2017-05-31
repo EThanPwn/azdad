@@ -3,8 +3,10 @@
 -- Blacklisted vehicle models
 carblacklist = {
 	"RHINO",
-	"lazer",
-	"hydra"
+	"LAZER",
+	"HYDRA",
+	"SAVAGE",
+	"BUZZARD"
 }
 
 -- CODE --
@@ -23,7 +25,7 @@ Citizen.CreateThread(function()
 				if isCarBlacklisted(playerCarName) then
 					_DeleteEntity(playerCar)
 					SetEntityHealth(GetPlayerPed(-1), 0)
-					--sendForbiddenMessage("This vehicle is blacklisted!")
+					sendForbiddenMessage("This vehicle is blacklisted!")
 				end
 			end
 		end
