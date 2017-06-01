@@ -250,13 +250,13 @@ end
 
 function ServiceOn()
 	isInService = true
-	TriggerServerEvent("jobssystem:jobs", 2)
+	TriggerServerEvent("jobssystem:jobs", 16)
 	TriggerServerEvent("taxi:takeService")
 end
 
 function ServiceOff()
 	isInService = false
-	TriggerServerEvent("jobssystem:jobs", 2)
+	TriggerServerEvent("jobssystem:jobs", 1)
 	TriggerServerEvent("taxi:breakService")
 	
 	allServiceCops = {}
