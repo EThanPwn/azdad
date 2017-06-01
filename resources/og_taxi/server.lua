@@ -181,7 +181,7 @@ end)
 -----------------------------------------------------------------------
 ---------------------COMMANDE ADMIN AJOUT / SUPP COP-------------------
 -----------------------------------------------------------------------
-TriggerEvent('es:addGroupCommand', 'copadd', "admin", function(source, args, user)
+TriggerEvent('es:addGroupCommand', 'taxiadd', "admin", function(source, args, user)
      if(not args[2]) then
 		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /copadd [ID]")	
 	else
@@ -201,7 +201,7 @@ end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "You haven't the permission to do that !")
 end)
 
-TriggerEvent('es:addGroupCommand', 'coprem', "admin", function(source, args, user) 
+TriggerEvent('es:addGroupCommand', 'taxirem', "admin", function(source, args, user) 
      if(not args[2]) then
 		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /coprem [ID]")	
 	else
