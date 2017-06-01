@@ -7,15 +7,15 @@ require "resources/gconfig/gconfig"
 local inServiceF1s = {}
 
 function addF1(identifier)
-	MySQL:executeQuery("INSERT INTO f1 (`identifier`) VALUES ('@identifier')", { ['@identifier'] = identifier})
+	MySQL:executeQuery("INSERT INTO faction1 (`identifier`) VALUES ('@identifier')", { ['@identifier'] = identifier})
 end
 
 function remF1(identifier)
-	MySQL:executeQuery("DELETE FROM f1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
+	MySQL:executeQuery("DELETE FROM faction1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 end
 
 function checkIsF1(identifier)
-	local query = MySQL:executeQuery("SELECT * FROM f1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
+	local query = MySQL:executeQuery("SELECT * FROM faction1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 	local result = MySQL:getResults(query, {'rank'}, "identifier")
 	
 	if(not result[1]) then
@@ -26,7 +26,7 @@ function checkIsF1(identifier)
 end
 
 function s_checkIsF1(identifier)
-	local query = MySQL:executeQuery("SELECT * FROM f1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
+	local query = MySQL:executeQuery("SELECT * FROM faction1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 	local result = MySQL:getResults(query, {'rank'}, "identifier")
 	
 	if(not result[1]) then
