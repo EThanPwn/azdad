@@ -8,11 +8,11 @@ dependency 'essentialmode'
 client_scripts {
   'client.lua',
   'vestF1.lua',
-  'F1veh.lua',
+  'F1veh.lua'
 }
 
 server_scripts {
-  'server.lua',
+  'server.lua'
 }
 
 export 'getIsInService'
