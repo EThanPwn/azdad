@@ -15,7 +15,7 @@ function remF1(identifier)
 end
 
 function checkIsF1(identifier)
-	local query = MySQL:executeQuery("SELECT * FROM F1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
+	local query = MySQL:executeQuery("SELECT * FROM f1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 	local result = MySQL:getResults(query, {'rank'}, "identifier")
 	
 	if(not result[1]) then
@@ -26,7 +26,7 @@ function checkIsF1(identifier)
 end
 
 function s_checkIsF1(identifier)
-	local query = MySQL:executeQuery("SELECT * FROM F1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
+	local query = MySQL:executeQuery("SELECT * FROM f1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 	local result = MySQL:getResults(query, {'rank'}, "identifier")
 	
 	if(not result[1]) then
@@ -108,7 +108,7 @@ end)
 -----------------------------------------------------------------------
 TriggerEvent('es:addGroupCommand', 'taxiadd', "admin", function(source, args, user)
      if(not args[2]) then
-		TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "Usage : /f1add [ID]")	
+		TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "Usage : /taxiadd [ID]")	
 	else
 		if(GetPlayerName(tonumber(args[2])) ~= nil)then
 			local player = tonumber(args[2])
@@ -128,7 +128,7 @@ end)
 
 TriggerEvent('es:addGroupCommand', 'taxirem', "admin", function(source, args, user) 
      if(not args[2]) then
-		TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "Usage : /f1rem [ID]")	
+		TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "Usage : /taxirem [ID]")	
 	else
 		if(GetPlayerName(tonumber(args[2])) ~= nil)then
 			local player = tonumber(args[2])
