@@ -103,7 +103,7 @@ end)
 -----------------------------------------------------------------------
 ---------------------COMMANDE ADMIN AJOUT / SUPP F1-------------------
 -----------------------------------------------------------------------
-TriggerEvent('es:addGroupCommand', 'f1add', "admin", function(source, args, user)
+TriggerEvent('es:addGroupCommand', 'taxiadd', "admin", function(source, args, user)
      if(not args[2]) then
 		TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "Usage : /f1add [ID]")	
 	else
@@ -123,7 +123,7 @@ end, function(source, args, user)
 	TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "You haven't the permission to do that !")
 end)
 
-TriggerEvent('es:addGroupCommand', 'f1rem', "admin", function(source, args, user) 
+TriggerEvent('es:addGroupCommand', 'taxirem', "admin", function(source, args, user) 
      if(not args[2]) then
 		TriggerClientEvent('chatMessage', source, 'Faction', {255, 0, 0}, "Usage : /f1rem [ID]")	
 	else
