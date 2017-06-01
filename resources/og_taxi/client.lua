@@ -1,49 +1,52 @@
-local isF1 = false
+local isCop = false
 local isInService = false
 local rank = "inconnu"
 local checkpoints = {}
 local existingVeh = nil
---local handCuffed = false
+local handCuffed = false
 local isAlreadyDead = false
-local allServiceF1s = {}
-local blipsF1s = {}
+local allServiceCops = {}
+local blipsCops = {}
 
 local takingService = {
-	{896.780456542969,-143.167205810547,76.8529281616211}
+  --{x=850.156677246094, y=-1283.92004394531, z=28.0047378540039},
+  {x=457.956909179688, y=-992.72314453125, z=30.6895866394043}
+  --{x=1856.91320800781, y=3689.50073242188, z=34.2670783996582},
+  --{x=-450.063201904297, y=6016.5751953125, z=31.7163734436035}
 }
 
 local stationGarage = {
-	{902.248168945313,-144.348770141602,76.6087875366211}
+	{x=452.115966796875, y=-1018.10681152344, z=28.4786586761475}
 }
 
 AddEventHandler("playerSpawned", function()
-	TriggerServerEvent("faction1:checkIsF1")
+	TriggerServerEvent("taxi:checkIsCop")
 end)
 
-RegisterNetEvent('faction1:receiveIsF1')
-AddEventHandler('faction1:receiveIsF1', function(result)
+RegisterNetEvent('taxi:receiveIsCop')
+AddEventHandler('taxi:receiveIsCop', function(result)
 	if(result == "inconnu") then
-		isF1 = false
+		isCop = false
 	else
-		isF1 = true
+		isCop = true
 		rank = result
 	end
 end)
 
-RegisterNetEvent('faction1:nowF1')
-AddEventHandler('faction1:nowF1', function()
-	isF1 = true
+RegisterNetEvent('taxi:nowCop')
+AddEventHandler('taxi:nowCop', function()
+	isCop = true
 end)
 
-RegisterNetEvent('faction1:noLongerF1')
-AddEventHandler('faction1:noLongerF1', function()
-	isF1 = false
+RegisterNetEvent('taxi:noLongerCop')
+AddEventHandler('taxi:noLongerCop', function()
+	isCop = false
 	isInService = false
 	
 	local playerPed = GetPlayerPed(-1)
 						
-	--TriggerServerEvent("skin_customization:SpawnPlayer")
-	--RemoveAllPedWeapons(playerPed)
+	TriggerServerEvent("skin_customization:SpawnPlayer")
+	RemoveAllPedWeapons(playerPed)
 	
 	if(existingVeh ~= nil) then
 		SetEntityAsMissionEntity(existingVeh, true, true)
@@ -54,44 +57,81 @@ AddEventHandler('faction1:noLongerF1', function()
 	ServiceOff()
 end)
 
---[[RegisterNetEvent('faction1:getArrested')
-AddEventHandler('faction1:getArrested', function()
-	if(isF1 == false) then
+RegisterNetEvent('taxi:getArrested')
+AddEventHandler('taxi:getArrested', function()
+	if(isCop == false) then
 		handCuffed = not handCuffed
 		if(handCuffed) then
 			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es menotté.")
 		else
-			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es libre !")
+			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu as été démenotté !")
 		end
 	end
-end)]]
-
-RegisterNetEvent('faction1:resultAllF1sInService')
-AddEventHandler('faction1:resultAllF1sInService', function(array)
-	allServiceF1s = array
-	enableF1Blips()
 end)
 
-function enableF1Blips()
+RegisterNetEvent('taxi:payFines')
+AddEventHandler('taxi:payFines', function(amount)
+	TriggerServerEvent('bank:withdrawAmende', amount)
+	TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu as payé $"..amount.." d'amende.")
+end)
 
-	for k, existingBlip in pairs(blipsF1s) do
+RegisterNetEvent('taxi:dropIllegalItem')
+AddEventHandler('taxi:dropIllegalItem', function(id)
+	TriggerEvent("player:looseItem", tonumber(id), exports.vdk_inventory:getQuantity(id))
+end)
+
+RegisterNetEvent('taxi:unseatme')
+AddEventHandler('taxi:unseatme', function(t)
+	local ped = GetPlayerPed(t)        
+	ClearPedTasksImmediately(ped)
+	plyPos = GetEntityCoords(GetPlayerPed(-1),  true)
+	local xnew = plyPos.x+2
+	local ynew = plyPos.y+2
+   
+	SetEntityCoords(GetPlayerPed(-1), xnew, ynew, plyPos.z)
+end)
+
+RegisterNetEvent('taxi:forcedEnteringVeh')
+AddEventHandler('taxi:forcedEnteringVeh', function(veh)
+	if(handCuffed) then
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local entityWorld = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 20.0, 0.0)
+
+		local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, GetPlayerPed(-1), 0)
+		local a, b, c, d, vehicleHandle = GetRaycastResult(rayHandle)
+
+		if vehicleHandle ~= nil then
+			SetPedIntoVehicle(GetPlayerPed(-1), vehicleHandle, 1)
+		end
+	end
+end)
+
+RegisterNetEvent('taxi:resultAllCopsInService')
+AddEventHandler('taxi:resultAllCopsInService', function(array)
+	allServiceCops = array
+	enableCopBlips()
+end)
+
+function enableCopBlips()
+
+	for k, existingBlip in pairs(blipsCops) do
         RemoveBlip(existingBlip)
     end
-	blipsF1s = {}
+	blipsCops = {}
 	
-	local localIdF1s = {}
+	local localIdCops = {}
 	for id = 0, 64 do
 		if(NetworkIsPlayerActive(id) and GetPlayerPed(id) ~= GetPlayerPed(-1)) then
-			for i,c in pairs(allServiceF1s) do
+			for i,c in pairs(allServiceCops) do
 				if(i == GetPlayerServerId(id)) then
-					localIdF1s[id] = c
+					localIdCops[id] = c
 					break
 				end
 			end
 		end
 	end
 	
-	for id, c in pairs(localIdF1s) do
+	for id, c in pairs(localIdCops) do
 		local ped = GetPlayerPed(id)
 		local blip = GetBlipFromEntity(ped)
 		
@@ -106,7 +146,7 @@ function enableF1Blips()
 			SetBlipScale( blip,  0.85 )
 			SetBlipAlpha( blip, 255 )
 			
-			table.insert(blipsF1s, blip)
+			table.insert(blipsCops, blip)
 		else
 			
 			blipSprite = GetBlipSprite( blip )
@@ -122,7 +162,7 @@ function enableF1Blips()
 			SetBlipScale( blip,  0.85 )
 			SetBlipAlpha( blip, 255 )
 			
-			table.insert(blipsF1s, blip)
+			table.insert(blipsCops, blip)
 		end
 	end
 end
@@ -211,52 +251,52 @@ end
 function ServiceOn()
 	isInService = true
 	TriggerServerEvent("jobssystem:jobs", 2)
-	TriggerServerEvent("faction1:takeService")
+	TriggerServerEvent("taxi:takeService")
 end
 
 function ServiceOff()
 	isInService = false
-	TriggerServerEvent("jobssystem:jobs", 1)
-	TriggerServerEvent("faction1:breakService")
+	TriggerServerEvent("jobssystem:jobs", 2)
+	TriggerServerEvent("taxi:breakService")
 	
-	allServiceF1s = {}
+	allServiceCops = {}
 	
-	for k, existingBlip in pairs(blipsF1s) do
+	for k, existingBlip in pairs(blipsCops) do
         RemoveBlip(existingBlip)
     end
-	blipsF1s = {}
+	blipsCops = {}
 end
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if(isF1) then
+        if(isCop) then
 			if(isNearTakeService()) then
 			
-				DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~casier de XXX',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
+				DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~cops locker',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
 				if IsControlJustPressed(1,51) then
 					OpenMenuVest()
 				end
 			end
 			if(isInService) then
 				if IsControlJustPressed(1,166) then 
-					OpenF1Menu()
+					OpentaxiMenu()
 				end
 			end
 			
 			if(isInService) then
 				if(isNearStationGarage()) then
-					if(F1vehicle ~= nil) then --existingVeh
+					if(taxivehicle ~= nil) then --existingVeh
 						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ton ~b~véhicule',0,1,0.5,0.8,0.6,255,255,255,255)
 					else
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~garage de XXX',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ouvrir le ~b~garage de taxi',0,1,0.5,0.8,0.6,255,255,255,255)
 					end
 					
 					if IsControlJustPressed(1,51) then
-						if(F1vehicle ~= nil) then
-							SetEntityAsMissionEntity(F1vehicle, true, true)
-							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(F1vehicle))
-							F1vehicle = nil
+						if(taxivehicle ~= nil) then
+							SetEntityAsMissionEntity(taxivehicle, true, true)
+							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(taxivehicle))
+							taxivehicle = nil
 						else
 							OpenVeh()
 						end
@@ -265,18 +305,32 @@ Citizen.CreateThread(function()
 				
 				
 			end
+		else
+			if (handCuffed == true) then
+			  RequestAnimDict('mp_arresting')
+
+			  while not HasAnimDictLoaded('mp_arresting') do
+				Citizen.Wait(0)
+			  end
+
+			  local myPed = PlayerPedId()
+			  local animation = 'idle'
+			  local flags = 16
+
+			  TaskPlayAnim(myPed, 'mp_arresting', animation, 8.0, -8, -1, flags, 0, 0, 0, 0)
+			end
 		end
     end
 end)
 ---------------------------------------------------------------------------------------
 -------------------------------SPAWN HELI AND CHECK DEATH------------------------------
 ---------------------------------------------------------------------------------------
---[[local alreadyDead = false
+local alreadyDead = false
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if(isF1) then
+        if(isCop) then
 			if(isInService) then
 			
 				if(IsPlayerDead(PlayerId())) then
@@ -322,4 +376,4 @@ Citizen.CreateThread(function()
 			end
 		end
     end
-end)]]
+end)

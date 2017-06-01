@@ -7,12 +7,14 @@ dependency 'essentialmode'
 -- General
 client_scripts {
   'client.lua',
-  'vestF1.lua',
-  'F1veh.lua'
+  --'vestpolice.lua',
+  --'menupolice.lua',
+  'taxiveh.lua',
+  --'helico.lua',
 }
 
 server_scripts {
-  'server.lua'
+  'server.lua',
 }
 
 export 'getIsInService'

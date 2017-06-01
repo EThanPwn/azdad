@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------Cop Locker---------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-local vestF1 = {
+local vestpolice = {
 	opened = false,
-	title = "F1 Locker",
+	title = "Cop Locker",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,
@@ -25,10 +25,10 @@ local vestF1 = {
 			buttons = {
 				{name = "Prendre ton service", description = ""},
 				{name = "Arrêter ton service", description = ""},
-				--{name = "Gilet pare-balles", description = ""},
-				--{name = "Retirer Gilet pare-balles", description = ""},
-				--{name = "Gilet fluo", description = ""},
-				--{name = "Retirer Gilet fluo", description = ""},
+				{name = "Gilet pare-balles", description = ""},
+				{name = "Retirer Gilet pare-balles", description = ""},
+				{name = "Gilet fluo", description = ""},
+				{name = "Retirer Gilet fluo", description = ""},
 			}
 		},
 	}
@@ -40,19 +40,19 @@ local hashSkin = GetHashKey("mp_m_freemode_01")
 -------------------------------------------------
 function ButtonSelectedVest(button)
 	local ped = GetPlayerPed(-1)
-	local this = vestF1.currentmenu
+	local this = vestpolice.currentmenu
 	local btn = button.name
 	if this == "main" then
 		if btn == "Prendre ton service" then
 			ServiceOn()                                                 -- En Service + Uniforme
 			giveUniforme()
 			drawNotification("Tu es en ~g~service")
-			drawNotification("Appuie sur ~g~F5~w~ pour ouvrir le ~b~menu XXX")
+			drawNotification("Appuie sur ~g~F5~w~ pour ouvrir le ~b~menu police")
 		elseif btn == "Arrêter ton service" then
 			ServiceOff()
 			removeUniforme()                                            --Finir Service + Enleve Uniforme
 			drawNotification("Tu n'es plus en ~r~service")
-		--[[elseif btn == "Gilet pare-balles" then
+		elseif btn == "Gilet pare-balles" then
 			Citizen.CreateThread(function()
 				if(GetEntityModel(GetPlayerPed(-1)) == hashSkin) then
 					SetPedComponentVariation(GetPlayerPed(-1), 9, 4, 1, 2)  --Bulletproof jacket
@@ -79,7 +79,7 @@ function ButtonSelectedVest(button)
 				else
 					SetPedComponentVariation(GetPlayerPed(-1), 8, 35, 0, 2)
 				end
-			end)]]
+			end)
 		end
 	end
 end
@@ -112,11 +112,11 @@ function giveUniforme()
 		
 		end
 		
-		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PISTOL50"), 48, true, true)
-		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_STUNGUN"), true, true)
-		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_NIGHTSTICK"), true, true)
-		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), true, true)
-		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PUMPSHOTGUN"), 32, true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PISTOL50"), 48, true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_STUNGUN"), true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_NIGHTSTICK"), true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), true, true)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_PUMPSHOTGUN"), 32, true, true)
 		--GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_SNIPERRIFLE"), 150, true, true)
 	end)
 end
@@ -131,10 +131,10 @@ end
 ----------------CONFIG OPEN MENU-----------------
 -------------------------------------------------
 function OpenVestMenu(menu)
-	vestF1.menu.from = 1
-	vestF1.menu.to = 10
-	vestF1.selectedbutton = 0
-	vestF1.currentmenu = menu
+	vestpolice.menu.from = 1
+	vestpolice.menu.to = 10
+	vestpolice.selectedbutton = 0
+	vestpolice.currentmenu = menu
 end
 -------------------------------------------------
 ------------------DRAW NOTIFY--------------------
@@ -156,7 +156,7 @@ end
 ------------------DRAW TITLE MENU----------------
 -------------------------------------------------
 function drawMenuTitle(txt,x,y)
-local menu = vestF1.menu
+local menu = vestpolice.menu
 	SetTextFont(2)
 	SetTextProportional(0)
 	SetTextScale(0.5, 0.5)
@@ -170,7 +170,7 @@ end
 ------------------DRAW MENU BOUTON---------------
 -------------------------------------------------
 function drawMenuButton(button,x,y,selected)
-	local menu = vestF1.menu
+	local menu = vestpolice.menu
 	SetTextFont(menu.font)
 	SetTextProportional(0)
 	SetTextScale(menu.scale, menu.scale)
@@ -193,7 +193,7 @@ end
 ------------------DRAW MENU INFO-----------------
 -------------------------------------------------
 function drawMenuInfo(text)
-	local menu = vestF1.menu
+	local menu = vestpolice.menu
 	SetTextFont(menu.font)
 	SetTextProportional(0)
 	SetTextScale(0.45, 0.45)
@@ -208,7 +208,7 @@ end
 ----------------DRAW MENU DROIT------------------
 -------------------------------------------------
 function drawMenuRight(txt,x,y,selected)
-	local menu = vestF1.menu
+	local menu = vestpolice.menu
 	SetTextFont(menu.font)
 	SetTextProportional(0)
 	SetTextScale(menu.scale, menu.scale)
@@ -248,7 +248,7 @@ function BackVest()
 		return
 	end
 	backlock = true
-	if vestF1.currentmenu == "main" then
+	if vestpolice.currentmenu == "main" then
 		CloseMenuVest()
 	end
 end
@@ -294,17 +294,17 @@ end
 ----------------FONCTION OPEN--------------------
 -------------------------------------------------
 function OpenMenuVest()
-	vestF1.currentmenu = "main"
-	vestF1.opened = true
-	vestF1.selectedbutton = 0
+	vestpolice.currentmenu = "main"
+	vestpolice.opened = true
+	vestpolice.selectedbutton = 0
 end
 -------------------------------------------------
 ----------------FONCTION CLOSE-------------------
 -------------------------------------------------
 function CloseMenuVest()
-		vestF1.opened = false
-		vestF1.menu.from = 1
-		vestF1.menu.to = 10
+		vestpolice.opened = false
+		vestpolice.menu.from = 1
+		vestpolice.menu.to = 10
 end
 -------------------------------------------------
 ----------------FONCTION OPEN MENU---------------
@@ -314,31 +314,31 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		if GetDistanceBetweenCoords(457.956, -992.723, 30.689,GetEntityCoords(GetPlayerPed(-1))) > 2 then
-			if vestF1.opened then
+			if vestpolice.opened then
 				CloseMenuVest()
 			end
 		end
-		if vestF1.opened then
+		if vestpolice.opened then
 			local ped = LocalPed()
-			local menu = vestF1.menu[vestF1.currentmenu]
-			drawTxt(vestF1.title,1,1,vestF1.menu.x,vestF1.menu.y,1.0, 255,255,255,255)
-			drawMenuTitle(menu.title, vestF1.menu.x,vestF1.menu.y + 0.08)
-			drawTxt(vestF1.selectedbutton.."/"..tablelength(menu.buttons),0,0,vestF1.menu.x + vestF1.menu.width/2 - 0.0385,vestF1.menu.y + 0.067,0.4, 255,255,255,255)
-			local y = vestF1.menu.y + 0.12
+			local menu = vestpolice.menu[vestpolice.currentmenu]
+			drawTxt(vestpolice.title,1,1,vestpolice.menu.x,vestpolice.menu.y,1.0, 255,255,255,255)
+			drawMenuTitle(menu.title, vestpolice.menu.x,vestpolice.menu.y + 0.08)
+			drawTxt(vestpolice.selectedbutton.."/"..tablelength(menu.buttons),0,0,vestpolice.menu.x + vestpolice.menu.width/2 - 0.0385,vestpolice.menu.y + 0.067,0.4, 255,255,255,255)
+			local y = vestpolice.menu.y + 0.12
 			buttoncount = tablelength(menu.buttons)
 			local selected = false
 
 			for i,button in pairs(menu.buttons) do
-				if i >= vestF1.menu.from and i <= vestF1.menu.to then
+				if i >= vestpolice.menu.from and i <= vestpolice.menu.to then
 
-					if i == vestF1.selectedbutton then
+					if i == vestpolice.selectedbutton then
 						selected = true
 					else
 						selected = false
 					end
-					drawMenuButton(button,vestF1.menu.x,y,selected)
+					drawMenuButton(button,vestpolice.menu.x,y,selected)
 					if button.distance ~= nil then
-						drawMenuRight(button.distance.."m",vestF1.menu.x,y,selected)
+						drawMenuRight(button.distance.."m",vestpolice.menu.x,y,selected)
 					end
 					y = y + 0.04
 					if selected and IsControlJustPressed(1,201) then
@@ -347,7 +347,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
-		if vestF1.opened then
+		if vestpolice.opened then
 			if IsControlJustPressed(1,202) then
 				BackVest()
 			end
@@ -355,20 +355,20 @@ Citizen.CreateThread(function()
 				backlock = false
 			end
 			if IsControlJustPressed(1,188) then
-				if vestF1.selectedbutton > 1 then
-					vestF1.selectedbutton = vestF1.selectedbutton -1
-					if buttoncount > 10 and vestF1.selectedbutton < vestF1.menu.from then
-						vestF1.menu.from = vestF1.menu.from -1
-						vestF1.menu.to = vestF1.menu.to - 1
+				if vestpolice.selectedbutton > 1 then
+					vestpolice.selectedbutton = vestpolice.selectedbutton -1
+					if buttoncount > 10 and vestpolice.selectedbutton < vestpolice.menu.from then
+						vestpolice.menu.from = vestpolice.menu.from -1
+						vestpolice.menu.to = vestpolice.menu.to - 1
 					end
 				end
 			end
 			if IsControlJustPressed(1,187)then
-				if vestF1.selectedbutton < buttoncount then
-					vestF1.selectedbutton = vestF1.selectedbutton +1
-					if buttoncount > 10 and vestF1.selectedbutton > vestF1.menu.to then
-						vestF1.menu.to = vestF1.menu.to + 1
-						vestF1.menu.from = vestF1.menu.from + 1
+				if vestpolice.selectedbutton < buttoncount then
+					vestpolice.selectedbutton = vestpolice.selectedbutton +1
+					if buttoncount > 10 and vestpolice.selectedbutton > vestpolice.menu.to then
+						vestpolice.menu.to = vestpolice.menu.to + 1
+						vestpolice.menu.from = vestpolice.menu.from + 1
 					end
 				end
 			end

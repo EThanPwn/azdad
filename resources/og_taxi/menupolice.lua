@@ -25,6 +25,7 @@ local menupolice = {
 			buttons = {
 				{name = "Animations", description = ""},
 				{name = "Citoyen", description = ""},
+				{name = "Vehicule", description = ""},
 				{name = "Appeler renfort(prochainement)", description = ""},
 				{name = "Radar (prochainement)", description = ""},
 				{name = "Fermer le menu", description = ""},
@@ -56,25 +57,30 @@ local menupolice = {
 			title = "Amendes",
 			name = "Amendes",
 			buttons = {
-				{name = "$250", description = ''},
-				{name = "$500", description = ''},
-				{name = "$1000", description = ''},
-				{name = "$1500", description = ''},
-				{name = "$2000", description = ''},
-				{name = "$4000", description = ''},
-				{name = "$6000", description = ''},
-				{name = "$8000", description = ''},
-				{name = "$10000", description = ''},
-				--[[{name = "$11000", description = ''},
-				{name = "$15000", description = ''},
-				{name = "$25000", description = ''},
-				{name = "$30000", description = ''},
-				{name = "$35000", description = ''},
-				{name = "$40000", description = ''},
-				{name = "$45000", description = ''},
-				{name = "$50000", description = ''},
-				{name = "$60000", description = ''},
-				{name = "$80000", description = ''},]]
+				{name = "Rappel à la loi (50€)", description = ''},
+				{name = "Infraction mineur (100€)", description = ''},
+				{name = "Refus d'optempérer (200€)", description = ''},
+				{name = "Infraction + DDF (250€)", description = ''},
+				{name = "Infraction Majeur (500€)", description = ''},
+				{name = "Possesion de Drogue (500€)", description = ''},
+				{name = "Agression (1000€)", description = ''},
+				{name = "Vol de vehicule (1500€)", description = ''},
+				{name = "Braquage Superette (2500€)", description = ''},
+				{name = "Braquage Banque (5000€)", description = ''},
+				{name = "Meurtre (4000€)", description = ''},
+				{name = "Meurtre sur agent (10000€)", description = ''},
+				{name = "Deal de weed (9000€)", description = ''},
+				{name = "Deal de crack (10000€)", description = ''},
+				{name = "Deal de coke (11000€)", description = ''},
+				{name = "Deal de Meth (12000€)", description = ''},
+			}
+		},
+		["Vehicule"] = {
+			title = "VEHICULE INTERACTIONS",
+			name = "Vehicule",
+			buttons = {
+				{name = "Vérifier la plaque", description = ''},
+				{name = "Crochet", description = ''},
 			}
 		},
 	}
@@ -91,6 +97,8 @@ function ButtonSelectedPolice(button)
 			OpenMenuPolice('Animations')
 		elseif btn == "Citoyen" then
 			OpenMenuPolice('Citoyen')
+		elseif btn == "Vehicule" then
+			OpenMenuPolice('Vehicule')
 		elseif btn == "Fermer le menu" then
 			CloseMenuPolice()
 		end
@@ -116,45 +124,45 @@ function ButtonSelectedPolice(button)
 		elseif btn == "Sortir du véhicule" then
 			UnseatVehicle()
 		end
+	elseif this == "Vehicule" then
+		if btn == "Crochet"then
+			Crocheter()
+		elseif btn == "Vérifier la plaque" then
+			CheckPlate()
+		end
 	elseif this == "Amendes" then
-		if btn == "$250"then
+		if btn == "Rappel à la loi (50€)"then
+			Fines(50)
+		elseif btn == "Infraction mineur (100€)"then
+			Fines(100)
+		elseif btn == "Refus d'optempérer (200€)"then
+			Fines(200)
+		elseif btn == "Infraction + DDF (250€)"then
 			Fines(250)
-		elseif btn == "$500" then
+		elseif btn == "Infraction Majeur (500€)"then
 			Fines(500)
-		elseif btn == "$1000" then
+		elseif btn == "Possesion de Drogue (500€)" then
+			Fines(500)
+		elseif btn == "Agression (1000€)" then
 			Fines(1000)
-		elseif btn == "$1500" then
+		elseif btn == "Vol de vehicule (1500€)" then
 			Fines(1500)
-		elseif btn == "$2000" then
-			Fines(2000)
-		elseif btn == "$4000" then
+		elseif btn == "Braquage Superette (2500€)" then
+			Fines(2500)
+		elseif btn == "Braquage Banque (5000€)" then
+			Fines(5000)
+		elseif btn == "Meurtre (4000€)" then
 			Fines(4000)
-		elseif btn == "$6000" then
-			Fines(6000)
-		elseif btn == "$8000" then
-			Fines(8000)
-		elseif btn == "$10000" then
+		elseif btn == "Meurtre sur agent (10000€)" then
 			Fines(10000)
-		--[[elseif btn == "$11000" then
+		elseif btn == "Deal de weed (9000€)" then
+			Fines(9000)
+		elseif btn == "Deal de crack (10000€)" then
+			Fines(10000)
+		elseif btn == "Deal de coke (11000€)" then
 			Fines(11000)
-		elseif btn == "$15000" then
-			Fines(15000)
-		elseif btn == "$25000" then
-			Fines(25000)
-		elseif btn == "$30000" then
-			Fines(30000)
-		elseif btn == "$35000" then
-			Fines(35000)
-		elseif btn == "$40000" then
-			Fines(40000)
-		elseif btn == "$45000" then
-			Fines(45000)
-		elseif btn == "$50000" then
-			Fines(50000)
-		elseif btn == "$60000" then
-			Fines(60000)
-		elseif btn == "$80000" then
-			Fines(80000)]]
+		elseif btn == "Deal de Meth (12000€)" then
+			Fines(12000)
 		end
 	end
 end
@@ -167,7 +175,7 @@ function Circulation()
         Citizen.Wait(60000)
         ClearPedTasksImmediately(GetPlayerPed(-1))
     end)
-	drawNotification("~g~You're a circulation cop.")
+	drawNotification("~g~Tu fais la circulation.")
 end
 
 function Note()
@@ -176,7 +184,7 @@ function Note()
         Citizen.Wait(20000)
         ClearPedTasksImmediately(GetPlayerPed(-1))
     end) 
-	drawNotification("~g~You're taking notes.")
+	drawNotification("~g~Tu prends taking notes.")
 end
 
 function StandBy()
@@ -185,7 +193,7 @@ function StandBy()
         Citizen.Wait(20000)
         ClearPedTasksImmediately(GetPlayerPed(-1))
     end)
-	drawNotification("~g~You're in Stand By.")
+	drawNotification("~g~Tu es en Stand By.")
 end
 
 function StandBy2()
@@ -194,7 +202,7 @@ function StandBy2()
         Citizen.Wait(20000)
         ClearPedTasksImmediately(GetPlayerPed(-1))
     end)
-	drawNotification("~g~You're in Stand By.")
+	drawNotification("~g~Tu es en Stand By.")
 end
 
 -------------------------------------------------
@@ -205,7 +213,7 @@ function Check()
 	if(distance ~= -1 and distance < 3) then
 		TriggerServerEvent("police:targetCheckInventory", GetPlayerServerId(t))
 	else
-		TriggerEvent('chatMessage', 'GOVERNMENT', {255, 0, 0}, "No player near you !")
+		TriggerEvent('chatMessage', 'GOVERNMENT', {255, 0, 0}, "Il n'y a Personne pres de vous !")
 	end
 end
 
@@ -214,7 +222,7 @@ function Cuffed()
 	if(distance ~= -1 and distance < 3) then
 		TriggerServerEvent("police:cuffGranted", GetPlayerServerId(t))
 	else
-		TriggerEvent('chatMessage', 'GOVERNMENT', {255, 0, 0}, "No player near you (maybe get closer) !")
+		TriggerEvent('chatMessage', 'GOVERNMENT', {255, 0, 0}, "Il n'y a Personne pres de vous (Approchez-vous) !")
 	end
 end
 
@@ -224,7 +232,7 @@ function PutInVehicle()
 		local v = GetVehiclePedIsIn(GetPlayerPed(-1), true)
 		TriggerServerEvent("police:forceEnterAsk", GetPlayerServerId(t), v)
 	else
-		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "No player near you (maybe get closer) !")
+		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Il n'y a Personne pres de vous (Approchez-vous) !")
 	end
 end
 
@@ -233,7 +241,7 @@ function UnseatVehicle()
 	if(distance ~= -1 and distance < 3) then
 		TriggerServerEvent("police:confirmUnseat", GetPlayerServerId(t))
 	else
-		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "No player near you (maybe get closer) !")
+		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Il n'y a Personne pres de vous (Approchez-vous) !")
 	end
 end
 
@@ -242,7 +250,7 @@ function Fines(amount)
 	if(distance ~= -1 and distance < 3) then
 		TriggerServerEvent("police:finesGranted", GetPlayerServerId(t), amount)
 	else
-		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "No player near you (maybe get closer) !")
+		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Il n'y a Personne pres de vous (Approchez-vous) !")
 	end
 end
 
@@ -259,7 +267,7 @@ function Crocheter()
 	Citizen.Wait(20000)
     SetVehicleDoorsLocked(veh, 1)
 	ClearPedTasksImmediately(GetPlayerPed(-1))
-	drawNotification("The vehicle is now ~g~open~w~.")
+	drawNotification("Le vehicule est maintenant ~g~ouvert~w~.")
 	end)
 end
 
@@ -272,7 +280,7 @@ function CheckPlate()
 	if(DoesEntityExist(vehicleHandle)) then
 		TriggerServerEvent("police:checkingPlate", GetVehicleNumberPlateText(vehicleHandle))
 	else
-		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "No vehicle near you (maybe get closer) !")
+		TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "pas de vehicule pres de vous (Approchez-vous) !")
 	end
 end
 -------------------------------------------------
@@ -284,7 +292,7 @@ function OpenMenuPolice(menu)
 		menupolice.lastmenu = "main"
 	elseif menu == "Citoyen" then
 		menupolice.lastmenu = "main"
-	elseif menu == "Vehicle" then
+	elseif menu == "Vehicule" then
 		menupolice.lastmenu = "main"
 	elseif menu == "Amendes" then
 		menupolice.lastmenu = "main"
@@ -408,7 +416,7 @@ function BackMenuPolice()
 	backlock = true
 	if menupolice.currentmenu == "main" then
 		CloseMenuPolice()
-	elseif menupolice.currentmenu == "Animations" or menupolice.currentmenu == "Citoyen" or menupolice.currentmenu == "Vehicle" or menupolice.currentmenu == "Amendes" then
+	elseif menupolice.currentmenu == "Animations" or menupolice.currentmenu == "Citoyen" or menupolice.currentmenu == "Vehicule" or menupolice.currentmenu == "Amendes" then
 		OpenMenuPolice(menupolice.lastmenu)
 	else
 		OpenMenuPolice(menupolice.lastmenu)

@@ -1,6 +1,6 @@
-local F1veh = {
+local taxiveh = {
 	opened = false,
-	title = "Garage de Taxi",
+	title = "Garage de la taxi",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,
@@ -20,12 +20,16 @@ local F1veh = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				--{name = "Peugeot Banalisée", costs = 0, description = {}, model = "fbi"},
-				{name = "Taxi", costs = 0, description = {}, model = "police3"},
+				--{name = "taxi Stanier", costs = 0, description = {}, model = "police"},
+				--{name = "Police Buffalo", costs = 0, description = {}, model = "police2"},
+				--{name = "Police Interceptor", costs = 0, description = {}, model = "police3"},
+				{name = "taxi", costs = 0, description = {}, model = "police3"},
 				--{name = "Patrouille 2", costs = 0, description = {}, model = "police2"},
 				--{name = "Patrouille 3", costs = 0, description = {}, model = "police"},
-				--{name = "Voiture banalisée", costs = 0, description = {}, model = "police4"},
-				--{name = "Moto de police", costs = 0, description = {}, model = "policeb"},			
+				--{name = "Voiture banalisée(avec sirene)", costs = 0, description = {}, model = "police4"},
+				--{name = "Voiture banalisée rapide(sans sirene)", costs = 0, description = {}, model = "voltic"},
+				--{name = "Moto de police", costs = 0, description = {}, model = "policeb"},
+			
 			}
 		},
 	}
@@ -43,16 +47,16 @@ end
 -------------------------------------------------
 function ButtonSelected(button)
 	local ped = GetPlayerPed(-1)
-	local this = F1veh.currentmenu
+	local this = taxiveh.currentmenu
 	if this == "main" then
-		TriggerServerEvent('CheckF1Veh',button.model)
+		TriggerServerEvent('CheckTaxiVeh',button.model)
 	end
 end
 -------------------------------------------------
 ------------------FINISH AND CLOSE---------------
 -------------------------------------------------
-RegisterNetEvent('FinishF1CheckForVeh')
-AddEventHandler('FinishF1CheckForVeh', function()
+RegisterNetEvent('FinishTaxiCheckForVeh')
+AddEventHandler('FinishTaxiCheckForVeh', function()
 	boughtcar = true
 	CloseVeh()
 end)
@@ -63,7 +67,7 @@ function DoesPlayerHaveVehicle(model,button,y,selected)
 		local t = false
 		--TODO:check if player own car
 		if t then
-			drawMenuRight("OWNED",F1veh.menu.x,y,selected)
+			drawMenuRight("OWNED",taxiveh.menu.x,y,selected)
 		end
 end
 -------------------------------------------------
@@ -71,14 +75,14 @@ end
 -------------------------------------------------
 function OpenMenuVeh(menu)
 	fakecar = {model = '', car = nil}
-	F1veh.lastmenu = F1veh.currentmenu
+	taxiveh.lastmenu = taxiveh.currentmenu
 	if menu == "main" then
-		F1veh.lastmenu = "main"
+		taxiveh.lastmenu = "main"
 	end
-	F1veh.menu.from = 1
-	F1veh.menu.to = 10
-	F1veh.selectedbutton = 0
-	F1veh.currentmenu = menu
+	taxiveh.menu.from = 1
+	taxiveh.menu.to = 10
+	taxiveh.selectedbutton = 0
+	taxiveh.currentmenu = menu
 end
 -------------------------------------------------
 ------------------DRAW NOTIFY--------------------
@@ -92,7 +96,7 @@ end
 ------------------DRAW TITLE MENU----------------
 -------------------------------------------------
 function drawMenuTitle(txt,x,y)
-local menu = F1veh.menu
+local menu = taxiveh.menu
 	SetTextFont(2)
 	SetTextProportional(0)
 	SetTextScale(0.5, 0.5)
@@ -106,7 +110,7 @@ end
 ------------------DRAW MENU BOUTON---------------
 -------------------------------------------------
 function drawMenuButton(button,x,y,selected)
-	local menu = F1veh.menu
+	local menu = taxiveh.menu
 	SetTextFont(menu.font)
 	SetTextProportional(0)
 	SetTextScale(menu.scale, menu.scale)
@@ -129,7 +133,7 @@ end
 ------------------DRAW MENU INFO-----------------
 -------------------------------------------------
 function drawMenuInfo(text)
-	local menu = F1veh.menu
+	local menu = taxiveh.menu
 	SetTextFont(menu.font)
 	SetTextProportional(0)
 	SetTextScale(0.45, 0.45)
@@ -144,7 +148,7 @@ end
 ----------------DRAW MENU DROIT------------------
 -------------------------------------------------
 function drawMenuRight(txt,x,y,selected)
-	local menu = F1veh.menu
+	local menu = taxiveh.menu
 	SetTextFont(menu.font)
 	SetTextProportional(0)
 	SetTextScale(menu.scale, menu.scale)
@@ -184,7 +188,7 @@ function Back()
 		return
 	end
 	backlock = true
-	if F1veh.currentmenu == "main" then
+	if taxiveh.currentmenu == "main" then
 		CloseVeh()
 	elseif vehshop.currentmenu == "main" then
 		if DoesEntityExist(fakecar.car) then
@@ -192,7 +196,7 @@ function Back()
 		end
 		fakecar = {model = '', car = nil}
 	else
-		OpenMenuVeh(F1veh.lastmenu)
+		OpenMenuVeh(taxiveh.lastmenu)
 	end
 end
 -------------------------------------------------
@@ -245,9 +249,9 @@ function OpenVeh() --OpenCreator
 	local g = Citizen.InvokeNative(0xC906A7DAB05C8D2B,pos[1],pos[2],pos[3],Citizen.PointerValueFloat(),0)
 	SetEntityCoords(ped,pos[1],pos[2],g)
 	SetEntityHeading(ped,pos[4])
-	F1veh.currentmenu = "main"
-	F1veh.opened = true
-	F1veh.selectedbutton = 0
+	taxiveh.currentmenu = "main"
+	taxiveh.opened = true
+	taxiveh.selectedbutton = 0
 end
 -------------------------------------------------
 ----------------FONCTION CLOSE-------------------
@@ -276,26 +280,26 @@ function CloseVeh() -- Close Creator
 			while not HasModelLoaded(model) do
 				Citizen.Wait(0)
 			end
-			F1vehicle = CreateVehicle(model, plyCoords["x"], plyCoords["y"], plyCoords["z"],90.0,true,false)
+			taxivehicle = CreateVehicle(model, plyCoords["x"], plyCoords["y"], plyCoords["z"],90.0,true,false)
 			SetModelAsNoLongerNeeded(model)
 			--[[for i,mod in pairs(mods) do
-				SetVehicleModKit(F1vehicle,0)
-				SetVehicleMod(F1vehicle,i,mod)
+				SetVehicleModKit(taxivehicle,0)
+				SetVehicleMod(taxivehicle,i,mod)
 			end]]
 			
-			SetVehicleMod(F1vehicle, 11, 2)
-			SetVehicleMod(F1vehicle, 12, 2)
-			SetVehicleMod(F1vehicle, 13, 2)
-			SetVehicleEnginePowerMultiplier(F1vehicle, 35.0)
+			SetVehicleMod(taxivehicle, 11, 2)
+			SetVehicleMod(taxivehicle, 12, 2)
+			SetVehicleMod(taxivehicle, 13, 2)
+			SetVehicleEnginePowerMultiplier(taxivehicle, 35.0)
 			
-			SetVehicleOnGroundProperly(F1vehicle)
-			SetVehicleHasBeenOwnedByPlayer(F1vehicle,true)
-			local id = NetworkGetNetworkIdFromEntity(F1vehicle)
+			SetVehicleOnGroundProperly(taxivehicle)
+			SetVehicleHasBeenOwnedByPlayer(taxivehicle,true)
+			local id = NetworkGetNetworkIdFromEntity(taxivehicle)
 			SetNetworkIdCanMigrate(id, true)
-			Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(F1vehicle))
-			SetVehicleColours(F1vehicle,colors[1],colors[2])
-			SetVehicleExtraColours(F1vehicle,extra_colors[1],extra_colors[2])
-			TaskWarpPedIntoVehicle(GetPlayerPed(-1),F1vehicle,-1)
+			Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(taxivehicle))
+			SetVehicleColours(taxivehicle,colors[1],colors[2])
+			SetVehicleExtraColours(taxivehicle,extra_colors[1],extra_colors[2])
+			TaskWarpPedIntoVehicle(GetPlayerPed(-1),taxivehicle,-1)
 			SetEntityVisible(ped,true)
 			
 			if DoesEntityExist(fakecar.car) then
@@ -303,9 +307,9 @@ function CloseVeh() -- Close Creator
 			end
 		end
 		
-		F1veh.opened = false
-		F1veh.menu.from = 1
-		F1veh.menu.to = 10
+		taxiveh.opened = false
+		taxiveh.menu.from = 1
+		taxiveh.menu.to = 10
 	end)
 end
 -------------------------------------------------
@@ -316,34 +320,34 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		if GetDistanceBetweenCoords(452.115, -1018.106, 28.478,GetEntityCoords(GetPlayerPed(-1))) > 5 then
-			if F1veh.opened then
+			if taxiveh.opened then
 				CloseVeh()
 			end
 		end
-		if F1veh.opened then
+		if taxiveh.opened then
 			local ped = LocalPed()
-			local menu = F1veh.menu[F1veh.currentmenu]
-			drawTxt(F1veh.title,1,1,F1veh.menu.x,F1veh.menu.y,1.0, 255,255,255,255)
-			drawMenuTitle(menu.title, F1veh.menu.x,F1veh.menu.y + 0.08)
-			drawTxt(F1veh.selectedbutton.."/"..tablelength(menu.buttons),0,0,F1veh.menu.x + F1veh.menu.width/2 - 0.0385,F1veh.menu.y + 0.067,0.4, 255,255,255,255)
-			local y = F1veh.menu.y + 0.12
+			local menu = taxiveh.menu[taxiveh.currentmenu]
+			drawTxt(taxiveh.title,1,1,taxiveh.menu.x,taxiveh.menu.y,1.0, 255,255,255,255)
+			drawMenuTitle(menu.title, taxiveh.menu.x,taxiveh.menu.y + 0.08)
+			drawTxt(taxiveh.selectedbutton.."/"..tablelength(menu.buttons),0,0,taxiveh.menu.x + taxiveh.menu.width/2 - 0.0385,taxiveh.menu.y + 0.067,0.4, 255,255,255,255)
+			local y = taxiveh.menu.y + 0.12
 			buttoncount = tablelength(menu.buttons)
 			local selected = false
 
 			for i,button in pairs(menu.buttons) do
-				if i >= F1veh.menu.from and i <= F1veh.menu.to then
+				if i >= taxiveh.menu.from and i <= taxiveh.menu.to then
 
-					if i == F1veh.selectedbutton then
+					if i == taxiveh.selectedbutton then
 						selected = true
 					else
 						selected = false
 					end
-					drawMenuButton(button,F1veh.menu.x,y,selected)
+					drawMenuButton(button,taxiveh.menu.x,y,selected)
 					--if button.distance ~= nil then
-						--drawMenuRight(button.distance.."m",F1veh.menu.x,y,selected)
+						--drawMenuRight(button.distance.."m",taxiveh.menu.x,y,selected)
 					--end
 					y = y + 0.04
-					if F1veh.currentmenu == "main" then
+					if taxiveh.currentmenu == "main" then
 						if selected then
 								if fakecar.model ~= button.model then
 									if DoesEntityExist(fakecar.car) then
@@ -382,7 +386,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
-		if F1veh.opened then
+		if taxiveh.opened then
 			if IsControlJustPressed(1,202) then
 				Back()
 			end
@@ -390,20 +394,20 @@ Citizen.CreateThread(function()
 				backlock = false
 			end
 			if IsControlJustPressed(1,188) then
-				if F1veh.selectedbutton > 1 then
-					F1veh.selectedbutton = F1veh.selectedbutton -1
-					if buttoncount > 10 and F1veh.selectedbutton < F1veh.menu.from then
-						F1veh.menu.from = F1veh.menu.from -1
-						F1veh.menu.to = F1veh.menu.to - 1
+				if taxiveh.selectedbutton > 1 then
+					taxiveh.selectedbutton = taxiveh.selectedbutton -1
+					if buttoncount > 10 and taxiveh.selectedbutton < taxiveh.menu.from then
+						taxiveh.menu.from = taxiveh.menu.from -1
+						taxiveh.menu.to = taxiveh.menu.to - 1
 					end
 				end
 			end
 			if IsControlJustPressed(1,187)then
-				if F1veh.selectedbutton < buttoncount then
-					F1veh.selectedbutton = F1veh.selectedbutton +1
-					if buttoncount > 10 and F1veh.selectedbutton > F1veh.menu.to then
-						F1veh.menu.to = F1veh.menu.to + 1
-						F1veh.menu.from = F1veh.menu.from + 1
+				if taxiveh.selectedbutton < buttoncount then
+					taxiveh.selectedbutton = taxiveh.selectedbutton +1
+					if buttoncount > 10 and taxiveh.selectedbutton > taxiveh.menu.to then
+						taxiveh.menu.to = taxiveh.menu.to + 1
+						taxiveh.menu.from = taxiveh.menu.from + 1
 					end
 				end
 			end
@@ -414,8 +418,8 @@ end)
 ---------------------------------------------------
 ------------------EVENT SPAWN VEH------------------
 ---------------------------------------------------
-RegisterNetEvent('F1veh:spawnVehicle')
-AddEventHandler('F1veh:spawnVehicle', function(v)
+RegisterNetEvent('taxiveh:spawnVehicle')
+AddEventHandler('taxiveh:spawnVehicle', function(v)
 	local car = GetHashKey(v)
 	local playerPed = GetPlayerPed(-1)
 	if playerPed and playerPed ~= -1 then
