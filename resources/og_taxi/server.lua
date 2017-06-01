@@ -4,28 +4,28 @@
 -- nouvelle config globale ! 
 require "resources/gconfig/gconfig"
 
-local inServiceCops = {}
+local inServiceTaxis = {}
 
-function addCop(identifier)
+function addTaxi(identifier)
 	MySQL:executeQuery("INSERT INTO taxi (`identifier`) VALUES ('@identifier')", { ['@identifier'] = identifier})
 end
 
-function remCop(identifier)
+function remTaxi(identifier)
 	MySQL:executeQuery("DELETE FROM taxi WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 end
 
-function checkIsCop(identifier)
+function checkIsTaxi(identifier)
 	local query = MySQL:executeQuery("SELECT * FROM taxi WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 	local result = MySQL:getResults(query, {'rank'}, "identifier")
 	
 	if(not result[1]) then
-		TriggerClientEvent('taxi:receiveIsCop', source, "inconnu")
+		TriggerClientEvent('taxi:receiveIsTaxi', source, "inconnu")
 	else
-		TriggerClientEvent('taxi:receiveIsCop', source, result[1].rank)
+		TriggerClientEvent('taxi:receiveIsTaxi', source, result[1].rank)
 	end
 end
 
-function s_checkIsCop(identifier)
+function s_checkIsTaxi(identifier)
 	local query = MySQL:executeQuery("SELECT * FROM taxi WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 	local result = MySQL:getResults(query, {'rank'}, "identifier")
 	
@@ -70,38 +70,38 @@ function checkInventory(target)
 end
 
 AddEventHandler('playerDropped', function()
-	if(inServiceCops[source]) then
-		inServiceCops[source] = nil
+	if(inServiceTaxis[source]) then
+		inServiceTaxis[source] = nil
 		
-		for i, c in pairs(inServiceCops) do
-			TriggerClientEvent("taxi:resultAllCopsInService", i, inServiceCops)
+		for i, c in pairs(inServiceTaxis) do
+			TriggerClientEvent("taxi:resultAllTaxisInService", i, inServiceTaxis)
 		end
 	end
 end)
 
 AddEventHandler('es:playerDropped', function(player)
-		local isCop = s_checkIsCop(player.identifier)
-		if(isCop ~= "nil") then
+		local isTaxi = s_checkIsTaxi(player.identifier)
+		if(isTaxi ~= "nil") then
 			TriggerEvent("jobssystem:disconnectReset", player, 7)
 		end
 end)
 
-RegisterServerEvent('taxi:checkIsCop')
-AddEventHandler('taxi:checkIsCop', function()
+RegisterServerEvent('taxi:checkIsTaxi')
+AddEventHandler('taxi:checkIsTaxi', function()
 	TriggerEvent("es:getPlayerFromId", source, function(user)
 		local identifier = user.identifier
-		checkIsCop(identifier)
+		checkIsTaxi(identifier)
 	end)
 end)
 
 RegisterServerEvent('taxi:takeService')
 AddEventHandler('taxi:takeService', function()
 
-	if(not inServiceCops[source]) then
-		inServiceCops[source] = GetPlayerName(source)
+	if(not inServiceTaxis[source]) then
+		inServiceTaxis[source] = GetPlayerName(source)
 		
-		for i, c in pairs(inServiceCops) do
-			TriggerClientEvent("taxi:resultAllCopsInService", i, inServiceCops)
+		for i, c in pairs(inServiceTaxis) do
+			TriggerClientEvent("taxi:resultAllTaxisInService", i, inServiceTaxis)
 		end
 	end
 end)
@@ -109,18 +109,18 @@ end)
 RegisterServerEvent('taxi:breakService')
 AddEventHandler('taxi:breakService', function()
 
-	if(inServiceCops[source]) then
-		inServiceCops[source] = nil
+	if(inServiceTaxis[source]) then
+		inServiceTaxis[source] = nil
 		
-		for i, c in pairs(inServiceCops) do
-			TriggerClientEvent("taxi:resultAllCopsInService", i, inServiceCops)
+		for i, c in pairs(inServiceTaxis) do
+			TriggerClientEvent("taxi:resultAllTaxisInService", i, inServiceTaxis)
 		end
 	end
 end)
 
-RegisterServerEvent('taxi:getAllCopsInService')
-AddEventHandler('taxi:getAllCopsInService', function()
-	TriggerClientEvent("taxi:resultAllCopsInService", source, inServiceCops)
+RegisterServerEvent('taxi:getAllTaxisInService')
+AddEventHandler('taxi:getAllTaxisInService', function()
+	TriggerClientEvent("taxi:resultAllTaxisInService", source, inServiceTaxis)
 end)
 
 RegisterServerEvent('taxi:checkingPlate')
@@ -155,7 +155,7 @@ end)
 
 RegisterServerEvent('taxi:cuffGranted')
 AddEventHandler('taxi:cuffGranted', function(t)
-	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, GetPlayerName(t).. " toggle cuff (except if it's a cop :3 ) !")
+	TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, GetPlayerName(t).. " toggle cuff (except if it's a Taxi :3 ) !")
 	TriggerClientEvent('taxi:getArrested', t)
 end)
 
@@ -179,19 +179,19 @@ AddEventHandler('CheckTaxiVeh', function(vehicle)
 end)
 
 -----------------------------------------------------------------------
----------------------COMMANDE ADMIN AJOUT / SUPP COP-------------------
+---------------------COMMANDE ADMIN AJOUT / SUPP Taxi-------------------
 -----------------------------------------------------------------------
 TriggerEvent('es:addGroupCommand', 'taxiadd', "admin", function(source, args, user)
      if(not args[2]) then
-		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /copadd [ID]")	
+		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /Taxiadd [ID]")	
 	else
 		if(GetPlayerName(tonumber(args[2])) ~= nil)then
 			local player = tonumber(args[2])
 			TriggerEvent("es:getPlayerFromId", player, function(target)
-				addCop(target.identifier)
+				addTaxi(target.identifier)
 				TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Roger that !")
-				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "Government", false, "Congrats, you're now a cop !~w~.")
-				TriggerClientEvent('taxi:nowCop', player)
+				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "Government", false, "Congrats, you're now a Taxi !~w~.")
+				TriggerClientEvent('taxi:nowTaxi', player)
 			end)
 		else
 			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "No player with this ID !")
@@ -203,16 +203,16 @@ end)
 
 TriggerEvent('es:addGroupCommand', 'taxirem', "admin", function(source, args, user) 
      if(not args[2]) then
-		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /coprem [ID]")	
+		TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Usage : /Taxirem [ID]")	
 	else
 		if(GetPlayerName(tonumber(args[2])) ~= nil)then
 			local player = tonumber(args[2])
 			TriggerEvent("es:getPlayerFromId", player, function(target)
-				remCop(target.identifier)
-				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "Government", false, "You're no longer a cop !~w~.")
+				remTaxi(target.identifier)
+				TriggerClientEvent("es_freeroam:notify", player, "CHAR_ANDREAS", 1, "Government", false, "You're no longer a Taxi !~w~.")
 				TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "Roger that !")
-				--TriggerClientEvent('chatMessage', player, 'GOVERNMENT', {255, 0, 0}, "You're no longer a cop !")
-				TriggerClientEvent('taxi:noLongerCop', player)
+				--TriggerClientEvent('chatMessage', player, 'GOVERNMENT', {255, 0, 0}, "You're no longer a Taxi !")
+				TriggerClientEvent('taxi:noLongerTaxi', player)
 			end)
 		else
 			TriggerClientEvent('chatMessage', source, 'GOVERNMENT', {255, 0, 0}, "No player with this ID !")

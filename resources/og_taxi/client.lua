@@ -1,12 +1,12 @@
-local isCop = false
+local isTaxi = false
 local isInService = false
 local rank = "inconnu"
 local checkpoints = {}
 local existingVeh = nil
 local handCuffed = false
 local isAlreadyDead = false
-local allServiceCops = {}
-local blipsCops = {}
+local allServiceTaxis = {}
+local blipsTaxis = {}
 
 local takingService = {
 	{895.313415527344,-179.498260498047,74.7002792358398}
@@ -17,27 +17,27 @@ local stationGarage = {
 }
 
 AddEventHandler("playerSpawned", function()
-	TriggerServerEvent("taxi:checkIsCop")
+	TriggerServerEvent("taxi:checkIsTaxi")
 end)
 
-RegisterNetEvent('taxi:receiveIsCop')
-AddEventHandler('taxi:receiveIsCop', function(result)
+RegisterNetEvent('taxi:receiveIsTaxi')
+AddEventHandler('taxi:receiveIsTaxi', function(result)
 	if(result == "inconnu") then
-		isCop = false
+		isTaxi = false
 	else
-		isCop = true
+		isTaxi = true
 		rank = result
 	end
 end)
 
-RegisterNetEvent('taxi:nowCop')
-AddEventHandler('taxi:nowCop', function()
-	isCop = true
+RegisterNetEvent('taxi:nowTaxi')
+AddEventHandler('taxi:nowTaxi', function()
+	isTaxi = true
 end)
 
-RegisterNetEvent('taxi:noLongerCop')
-AddEventHandler('taxi:noLongerCop', function()
-	isCop = false
+RegisterNetEvent('taxi:noLongerTaxi')
+AddEventHandler('taxi:noLongerTaxi', function()
+	isTaxi = false
 	isInService = false
 	
 	local playerPed = GetPlayerPed(-1)
@@ -56,7 +56,7 @@ end)
 
 RegisterNetEvent('taxi:getArrested')
 AddEventHandler('taxi:getArrested', function()
-	if(isCop == false) then
+	if(isTaxi == false) then
 		handCuffed = not handCuffed
 		if(handCuffed) then
 			TriggerEvent('chatMessage', 'SYSTEM', {255, 0, 0}, "Tu es menotté.")
@@ -103,32 +103,32 @@ AddEventHandler('taxi:forcedEnteringVeh', function(veh)
 	end
 end)
 
-RegisterNetEvent('taxi:resultAllCopsInService')
-AddEventHandler('taxi:resultAllCopsInService', function(array)
-	allServiceCops = array
-	enableCopBlips()
+RegisterNetEvent('taxi:resultAllTaxisInService')
+AddEventHandler('taxi:resultAllTaxisInService', function(array)
+	allServiceTaxis = array
+	enableTaxiBlips()
 end)
 
-function enableCopBlips()
+function enableTaxiBlips()
 
-	for k, existingBlip in pairs(blipsCops) do
+	for k, existingBlip in pairs(blipsTaxis) do
         RemoveBlip(existingBlip)
     end
-	blipsCops = {}
+	blipsTaxis = {}
 	
-	local localIdCops = {}
+	local localIdTaxis = {}
 	for id = 0, 64 do
 		if(NetworkIsPlayerActive(id) and GetPlayerPed(id) ~= GetPlayerPed(-1)) then
-			for i,c in pairs(allServiceCops) do
+			for i,c in pairs(allServiceTaxis) do
 				if(i == GetPlayerServerId(id)) then
-					localIdCops[id] = c
+					localIdTaxis[id] = c
 					break
 				end
 			end
 		end
 	end
 	
-	for id, c in pairs(localIdCops) do
+	for id, c in pairs(localIdTaxis) do
 		local ped = GetPlayerPed(id)
 		local blip = GetBlipFromEntity(ped)
 		
@@ -143,7 +143,7 @@ function enableCopBlips()
 			SetBlipScale( blip,  0.85 )
 			SetBlipAlpha( blip, 255 )
 			
-			table.insert(blipsCops, blip)
+			table.insert(blipsTaxis, blip)
 		else
 			
 			blipSprite = GetBlipSprite( blip )
@@ -159,7 +159,7 @@ function enableCopBlips()
 			SetBlipScale( blip,  0.85 )
 			SetBlipAlpha( blip, 255 )
 			
-			table.insert(blipsCops, blip)
+			table.insert(blipsTaxis, blip)
 		end
 	end
 end
@@ -256,21 +256,21 @@ function ServiceOff()
 	TriggerServerEvent("jobssystem:jobs", 1)
 	TriggerServerEvent("taxi:breakService")
 	
-	allServiceCops = {}
+	allServiceTaxis = {}
 	
-	for k, existingBlip in pairs(blipsCops) do
+	for k, existingBlip in pairs(blipsTaxis) do
         RemoveBlip(existingBlip)
     end
-	blipsCops = {}
+	blipsTaxis = {}
 end
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if(isCop) then
+        if(isTaxi) then
 			if(isNearTakeService()) then
 			
-				DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~cops locker',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
+				DisplayHelpText('Press ~INPUT_CONTEXT~ to open the ~b~Taxis locker',0,1,0.5,0.8,0.6,255,255,255,255) -- ~g~E~s~
 				if IsControlJustPressed(1,51) then
 					OpenMenuVest()
 				end
@@ -327,7 +327,7 @@ local alreadyDead = false
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if(isCop) then
+        if(isTaxi) then
 			if(isInService) then
 			
 				if(IsPlayerDead(PlayerId())) then
@@ -343,9 +343,9 @@ Citizen.CreateThread(function()
 			
 				if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), 449.113,-981.084,43.691, true ) < 5 then
 					if(existingVeh ~= nil) then
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ~b~ton ~b~hélicoptère',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour ranger ~b~ton ~b~héliTaxitère',0,1,0.5,0.8,0.6,255,255,255,255)
 					else
-						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour sortir un hélicoptère',0,1,0.5,0.8,0.6,255,255,255,255)
+						DisplayHelpText('Appuie sur ~INPUT_CONTEXT~ pour sortir un héliTaxitère',0,1,0.5,0.8,0.6,255,255,255,255)
 					end
 					
 					if IsControlJustPressed(1,51)  then
