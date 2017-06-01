@@ -80,7 +80,7 @@ AutoStartResources:
     - skin-map
     - tructest
     - coordsaver
-    - faction1
+    - og_taxi
     - es_afterStart #rentrage de voiture toujorus laisser en dernier
     
     
