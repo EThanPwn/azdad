@@ -9,7 +9,7 @@ local allServiceF1s = {}
 local blipsF1s = {}
 
 local takingService = {
-	{895.313415527344,-179.498260498047,74.7002792358398},
+	{895.313415527344,-179.498260498047,74.7002792358398}
 }
 
 local stationGarage = {

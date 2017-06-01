@@ -1,6 +1,6 @@
 local F1veh = {
 	opened = false,
-	title = "Garage de XXX",
+	title = "Garage de Taxi",
 	currentmenu = "main",
 	lastmenu = nil,
 	currentpos = nil,
