@@ -99,7 +99,7 @@ AddEventHandler('CheckFaction1Veh', function(vehicle)
 
 			TriggerClientEvent('FinishF1CheckForVeh',source)
 			-- Spawn F1 vehicle
-			TriggerClientEvent('F1veh:spawnVehicle', source, vehicle)
+			TriggerClientEvent('faction1veh:spawnVehicle', source, vehicle)
 	end)
 end)
 

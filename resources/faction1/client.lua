@@ -9,19 +9,19 @@ local allServiceF1s = {}
 local blipsF1s = {}
 
 local takingService = {
-	{895.313415527344,-179.498260498047,74.7002792358398}
+	{896.780456542969,-143.167205810547,76.8529281616211}
 }
 
 local stationGarage = {
-	{916.350646972656,-162.645233154297,74.7103042602539}
+	{902.248168945313,-144.348770141602,76.6087875366211}
 }
 
 AddEventHandler("playerSpawned", function()
 	TriggerServerEvent("F1:checkIsF1")
 end)
 
-RegisterNetEvent('F1:receiveIsF1')
-AddEventHandler('F1:receiveIsF1', function(result)
+RegisterNetEvent('faction1:receiveIsF1')
+AddEventHandler('faction1:receiveIsF1', function(result)
 	if(result == "inconnu") then
 		isF1 = false
 	else
@@ -30,13 +30,13 @@ AddEventHandler('F1:receiveIsF1', function(result)
 	end
 end)
 
-RegisterNetEvent('F1:nowF1')
-AddEventHandler('F1:nowF1', function()
+RegisterNetEvent('faction1:nowF1')
+AddEventHandler('faction1:nowF1', function()
 	isF1 = true
 end)
 
-RegisterNetEvent('F1:noLongerF1')
-AddEventHandler('F1:noLongerF1', function()
+RegisterNetEvent('faction1:noLongerF1')
+AddEventHandler('faction1:noLongerF1', function()
 	isF1 = false
 	isInService = false
 	
@@ -54,8 +54,8 @@ AddEventHandler('F1:noLongerF1', function()
 	ServiceOff()
 end)
 
---[[RegisterNetEvent('F1:getArrested')
-AddEventHandler('F1:getArrested', function()
+--[[RegisterNetEvent('faction1:getArrested')
+AddEventHandler('faction1:getArrested', function()
 	if(isF1 == false) then
 		handCuffed = not handCuffed
 		if(handCuffed) then
@@ -66,8 +66,8 @@ AddEventHandler('F1:getArrested', function()
 	end
 end)]]
 
-RegisterNetEvent('F1:resultAllF1sInService')
-AddEventHandler('F1:resultAllF1sInService', function(array)
+RegisterNetEvent('faction1:resultAllF1sInService')
+AddEventHandler('faction1:resultAllF1sInService', function(array)
 	allServiceF1s = array
 	enableF1Blips()
 end)
