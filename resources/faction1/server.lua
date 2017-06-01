@@ -1,14 +1,17 @@
-require "resources/essentialmode/lib/MySQL"
-MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
+--require "resources/essentialmode/lib/MySQL"
+--MySQL:open("localhost", "gta5_gamemode_essential", "root", "18020603")
+
+-- nouvelle config globale ! 
+require "resources/gconfig/gconfig"
 
 local inServiceF1s = {}
 
 function addF1(identifier)
-	MySQL:executeQuery("INSERT INTO F1 (`identifier`) VALUES ('@identifier')", { ['@identifier'] = identifier})
+	MySQL:executeQuery("INSERT INTO f1 (`identifier`) VALUES ('@identifier')", { ['@identifier'] = identifier})
 end
 
 function remF1(identifier)
-	MySQL:executeQuery("DELETE FROM F1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
+	MySQL:executeQuery("DELETE FROM f1 WHERE identifier = '@identifier'", { ['@identifier'] = identifier})
 end
 
 function checkIsF1(identifier)
